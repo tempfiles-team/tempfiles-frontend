@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import 'react-toastify/dist/ReactToastify.css';
+import { MainPage } from './pages';
 
-export default App;
+export const App: React.FC = () => (
+  <Routes>
+    <Route
+      path=""
+      element={
+        <>
+          <div style={{ textAlign: 'center' }}>
+            <div className="MainLogoText">TEMPFILES</div>
+            <div className="MainLogoSubText">간단한 파일 공유 서비스</div>
+          </div>
+          <div style={{ margin: '0 auto' }}>
+            <ToastContainer />
+            <Outlet />
+          </div>
+        </>
+      }
+    >
+      <Route index element={<MainPage />} />
+    </Route>
+  </Routes>
+);

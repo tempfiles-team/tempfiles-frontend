@@ -1,0 +1,121 @@
+{
+    "extends": ["prettier"],
+    "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "import"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-unused-vars": ["error"],
+      "arrow-body-style": ["error", "as-needed"],
+      "global-require": "off",
+      "import/export": "off",
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "jsx": "never",
+          "ts": "never",
+          "tsx": "never"
+        }
+      ],
+      "import/no-cycle": "off",
+      "import/no-unresolved": "error",
+      "import/order": [
+        "error",
+        {
+          "groups": ["builtin", "external", "internal"],
+          "pathGroups": [
+            {
+              "pattern": "react[*]",
+              "group": "external",
+              "position": "before"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": ["react"],
+          "newlines-between": "always",
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": true
+          }
+        }
+      ],
+      "import/prefer-default-export": "off",
+      "no-use-before-define": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ],
+      "react-hooks/exhaustive-deps": "warn",
+      "react/function-component-definition": [
+        "error",
+        {
+          "namedComponents": "arrow-function",
+          "unnamedComponents": "arrow-function"
+        }
+      ],
+      "react-hooks/rules-of-hooks": "error",
+      "react/jsx-filename-extension": [
+        "warn",
+        {
+          "extensions": [".tsx", ".jsx"]
+        }
+      ],
+      "react/jsx-props-no-spreading": "off",
+      "react/prop-types": "off",
+      "react/require-default-props": "off"
+    },
+    "settings": {
+      "import/parsers": {
+        "@typescript-eslint/parser": [".ts", ".tsx"]
+      },
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        },
+        "typescript": {
+          "alwaysTryTypes": true,
+          "project": "./tsconfig.json"
+        }
+      }
+    },
+    "ignorePatterns": ["commitlint.config.js", "craco.config.js"],
+    "env": {
+      "browser": true
+    }
+  }
+  
+  // {
+  //     "root": true,
+  //     "env": {
+  //         "browser": true,
+  //         "es6": true
+  //     },
+  //     "extends": [
+  //         "plugin:@typescript-eslint/recommended",
+  //          // typescript 표준 규칙 모음
+  //         "plugin:import/errors",
+  //         "plugin:import/warnings",
+  //         "plugin:import/typescript",
+  //         // import 관련 규칙 모음
+  
+  //         "plugin:prettier/recommended",
+  //         "prettier/@typescript-eslint",
+  //         "prettier/react"
+  //          // prettier 관련 규칙 모음
+  //     ],
+  //     "parserOptions": {
+  //         "ecmaVersion": 2018,
+  //         "project": ["./tsconfig.json"]
+  //         // tsconfig 파일의 경로를 참조 해줍니다.
+  //         // 기준은 root 입니다.
+  //     },
+  //     "rules": {
+  //             // 추가하고 싶은 rule을 더 추가해줍니다.
+  //         }
+  // }
