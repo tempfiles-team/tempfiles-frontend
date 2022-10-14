@@ -3,7 +3,8 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
-import { MainPage } from './pages';
+import { Navbar } from './components';
+import { MainPage, SuccessPage } from './pages';
 
 export const App: React.FC = () => (
   <Routes>
@@ -18,11 +19,13 @@ export const App: React.FC = () => (
           <div style={{ margin: '0 auto' }}>
             <ToastContainer />
             <Outlet />
+            <Navbar />
           </div>
         </>
       }
     >
       <Route index element={<MainPage />} />
+      <Route path="success" element={<SuccessPage />} />
     </Route>
   </Routes>
 );
