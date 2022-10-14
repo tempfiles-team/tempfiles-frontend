@@ -9,7 +9,7 @@ export const UpLoadButton = styled.input`
   font-size: 2rem;
   font-weight: 900;
   background-color: var(--color-background-secondary);
-  margin-top: 50px;
+  margin-top: 30px;
   color: var(--color-text-secondary);
   text-align: center;
 `;
