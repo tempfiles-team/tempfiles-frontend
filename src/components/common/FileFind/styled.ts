@@ -4,7 +4,7 @@ export const FileFindContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
+  margin-top: 20px;
 `;
 
 export const FileFindTextBox = styled.div`
