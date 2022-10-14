@@ -9,5 +9,5 @@ export const PasswordInput = styled.input`
   padding-left: 12px;
   font-size: 1.8rem;
   font-weight: 700;
-  margin-top: 30px;
+  margin-top: 20px;
 `;
