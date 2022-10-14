@@ -35,11 +35,11 @@ export const globalStyle = css`
   .MainLogoText {
     font-size: 6rem;
     font-weight: 900;
-    margin: 20px;
+    margin: 18px;
   }
   .MainLogoSubText {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 50px;
+    margin-bottom: 35px;
   }
 `;
