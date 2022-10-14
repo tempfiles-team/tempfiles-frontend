@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { Navbar } from './components';
-import { MainPage, SuccessPage } from './pages';
+import { MainPage, SuccessPage, DownloadPage } from './pages';
 
 export const App: React.FC = () => (
   <Routes>
@@ -26,6 +26,7 @@ export const App: React.FC = () => (
     >
       <Route index element={<MainPage />} />
       <Route path="success" element={<SuccessPage />} />
+      <Route path="download" element={<DownloadPage />} />
     </Route>
   </Routes>
 );
