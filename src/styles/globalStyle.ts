@@ -18,6 +18,9 @@ export const globalStyle = css`
     --color-border: #757bab;
     --color-background-secondary: var(--color-border);
     --color-background-tertiary: #2e2836;
+
+    --color-button-primary: var(--color-border);
+    --color-button-secondary: #aa75ab;
   }
   html {
     font-size: 10px;
