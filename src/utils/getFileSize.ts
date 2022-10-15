@@ -1,9 +1,11 @@
 export const getFileSize = (size: number) => {
-  const byteUnits = ['KB', 'MB', 'GB', 'TB'];
-  for (let i = 0; i < byteUnits.length; i++) {
-    size = Math.floor(size / 1024);
+  const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  let l = 0,
+    n = parseInt(String(size), 10) || 0;
 
-    if (size < 1024) return size + byteUnits[i];
+  while (n >= 1024 && ++l) {
+    n = n / 1024;
   }
-  return '0';
+
+  return n.toFixed(n < 10 && l > 0 ? 1 : 0) + ' ' + units[l];
 };
