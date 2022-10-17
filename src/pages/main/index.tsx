@@ -50,10 +50,6 @@ export const MainPage: React.FC = () => {
       })
         .then((res) => {
           console.log(res);
-          toast.success('업로드 성공!', {
-            autoClose: 3000,
-            position: toast.POSITION.BOTTOM_RIGHT,
-          });
           navigate('/success');
         })
         .catch((err) => {
