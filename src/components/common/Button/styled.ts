@@ -10,6 +10,7 @@ export const ButtonContainer = styled.input<{ bgColor: string }>`
   height: 6rem;
   border: 0;
   color: var(--color-text-primary);
+  margin: 0px 10px 0px 10px;
 `;
 
 ButtonContainer.defaultProps = { type: 'button' };
