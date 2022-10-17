@@ -1,8 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { bindActionCreators } from 'redux';
 
 import { CheckBox, PasswordInput, UpLoadButton, FileFind } from '../../components';
+import { actionCreators } from '../../state';
 import { getFileSize } from '../../utils';
 import * as S from './styled';
 
@@ -12,8 +16,19 @@ export const MainPage: React.FC = () => {
   const [passwordBoolean, setPasswordBoolean] = useState(false);
   const [fileProps, setFileProps] = useState({ name: '', size: '', fileType: '', files: '' });
 
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const { SetSusccesFileProps } = bindActionCreators(actionCreators, dispatch);
+
   const handleChangeFile = (event: any) => {
     setFileProps({
+      name: event.target.files[0].name.split('.')[0],
+      size: getFileSize(event.target.files[0].size),
+      fileType: event.target.files[0].name.split('.')[1],
+      files: event.target.files[0],
+    });
+    SetSusccesFileProps({
       name: event.target.files[0].name.split('.')[0],
       size: getFileSize(event.target.files[0].size),
       fileType: event.target.files[0].name.split('.')[1],
@@ -22,30 +37,38 @@ export const MainPage: React.FC = () => {
   };
 
   const UpLoad = async () => {
-    const formdata = new FormData();
-    formdata.append('file', fileProps.files);
-    await axios({
-      method: 'post',
-      url: 'https://tfb.minpeter.cf/upload',
-      data: formdata,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        toast.success('업로드 성공!', {
-          autoClose: 3000,
-          position: toast.POSITION.BOTTOM_RIGHT,
-        });
+    if (fileProps.files != '') {
+      const formdata = new FormData();
+      formdata.append('file', fileProps.files);
+      await axios({
+        method: 'post',
+        url: 'https://tfb.minpeter.cf/upload',
+        data: formdata,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       })
-      .catch((err) => {
-        console.log(err);
-        toast.error('업로드 실패..', {
-          autoClose: 3000,
-          position: toast.POSITION.BOTTOM_RIGHT,
+        .then((res) => {
+          console.log(res);
+          toast.success('업로드 성공!', {
+            autoClose: 3000,
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
+          navigate('/success');
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error('업로드 실패..', {
+            autoClose: 3000,
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
         });
+    } else {
+      toast.error('파일을 선택해주세요!', {
+        autoClose: 3000,
+        position: toast.POSITION.BOTTOM_RIGHT,
       });
+    }
   };
 
   return (
