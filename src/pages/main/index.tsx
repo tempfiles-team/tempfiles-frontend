@@ -14,7 +14,7 @@ export const MainPage: React.FC = () => {
   const [retentionPeriod, setRetentionPeriod] = useState(false);
   const [downloadCount, setDownloadCount] = useState(false);
   const [passwordBoolean, setPasswordBoolean] = useState(false);
-  const [fileProps, setFileProps] = useState({ name: '', size: '', fileType: '', files: '' });
+  const [fileProps, setFileProps] = useState({ name: '', size: '', fileType: '' });
 
   const navigate = useNavigate();
 
@@ -26,20 +26,13 @@ export const MainPage: React.FC = () => {
       name: event.target.files[0].name.split('.')[0],
       size: getFileSize(event.target.files[0].size),
       fileType: event.target.files[0].name.split('.')[1],
-      files: event.target.files[0],
-    });
-    SetSusccesFileProps({
-      name: event.target.files[0].name.split('.')[0],
-      size: getFileSize(event.target.files[0].size),
-      fileType: event.target.files[0].name.split('.')[1],
-      files: event.target.files[0],
     });
   };
 
   const UpLoad = async () => {
-    if (fileProps.files != '') {
+    if (fileProps.name != '' && fileProps.size != '') {
       const formdata = new FormData();
-      formdata.append('file', fileProps.files);
+      formdata.append('file', fileProps.name);
       await axios({
         method: 'post',
         url: 'https://tfb.minpeter.cf/upload',
@@ -48,8 +41,18 @@ export const MainPage: React.FC = () => {
           'Content-Type': 'multipart/form-data',
         },
       })
-        .then((res) => {
+        .then(async (res) => {
           console.log(res);
+          toast.success('업로드 성공!', {
+            autoClose: 3000,
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
+          SetSusccesFileProps({
+            name: res.data.filename,
+            size: getFileSize(res.data.size),
+            fileType: res.data.filename.split('.')[1],
+            files: '',
+          });
           navigate('/success');
         })
         .catch((err) => {

@@ -12,10 +12,6 @@ export const SuccessPage: React.FC = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (FileProps.name != null && FileProps.size != null) {
-      toast.success('업로드 성공!', {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
-      });
     } else {
       navigate('/');
     }
