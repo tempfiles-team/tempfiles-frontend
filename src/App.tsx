@@ -15,13 +15,22 @@ export const App: React.FC = () => (
         path=""
         element={
           <>
-            <div style={{ textAlign: 'center' }}>
-              <div className="MainLogoText">TEMPFILES</div>
-              <div className="MainLogoSubText">간단한 파일 공유 서비스</div>
-            </div>
-            <div style={{ margin: '0 auto' }}>
+            <div
+              style={{
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
               <ToastContainer />
-              <Outlet />
+              <div>
+                <div style={{ textAlign: 'center' }}>
+                  <div className="MainLogoText">TEMPFILES</div>
+                  <div className="MainLogoSubText">간단한 파일 공유 서비스</div>
+                </div>
+                <Outlet />
+              </div>
               <Navbar />
             </div>
           </>
