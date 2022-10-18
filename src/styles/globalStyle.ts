@@ -34,6 +34,7 @@ export const globalStyle = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
   .MainLogoText {
     font-size: 6rem;
