@@ -5,4 +5,9 @@ interface SusccesFileProps {
   props: any;
 }
 
-export type Action = SusccesFileProps;
+interface DeleteFileProps {
+  type: ActionType.DeleteFileName;
+  name: string;
+}
+
+export type Action = SusccesFileProps | DeleteFileProps;
