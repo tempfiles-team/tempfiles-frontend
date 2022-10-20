@@ -24,7 +24,7 @@ export const SuccessPage: React.FC = () => {
         <S.SuccessPageFilePropsText>
           URL : {`https://tfb.minpeter.cf/dl/${FileProps.name}`}
         </S.SuccessPageFilePropsText>
-        <S.SuccessPageFilePropsText> Expire at : {} </S.SuccessPageFilePropsText>
+        <S.SuccessPageFilePropsText> Expire at : {FileProps.expiresAt} </S.SuccessPageFilePropsText>
       </S.SuccessPageFilePropsSection>
       <S.SuccessPageButtonSection>
         <Button
@@ -38,7 +38,17 @@ export const SuccessPage: React.FC = () => {
           bgColor="var(--color-button-primary)"
           label="링크 복사"
         />
-        <Button click={() => {}} bgColor="var(--color-button-primary)" label="파일 삭제" />
+        <Button
+          click={() => {
+            navigator.clipboard.writeText(`${FileProps.deleteUrl}`);
+            toast.success('준비 중인 기능입니다 :)', {
+              autoClose: 1000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          }}
+          bgColor="var(--color-button-primary)"
+          label="파일 삭제"
+        />
       </S.SuccessPageButtonSection>
     </S.SuccessPageContainer>
   );

@@ -56,8 +56,9 @@ export const MainPage: React.FC = () => {
           SetSusccesFileProps({
             name: res.data.filename,
             size: getFileSize(res.data.size),
-            fileType: res.data.filename.split('.')[1],
-            files: '',
+            fileType: res.data.filetype,
+            expiresAt: res.data.expires,
+            deleteUrl: res.data.delete_url,
           });
           navigate('/success');
         })
