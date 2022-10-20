@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 // https://meyerweb.com/eric/tools/css/reset/
 export const reset = css`
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Trispace&display=swap');
+
   html,
   body,
   div,
@@ -86,9 +88,14 @@ export const reset = css`
     padding: 0;
     border: 0;
     font-size: 100%;
-    font: inherit;
+    font: 'Trispace', 'Noto Sans KR', sans-serif;
     vertical-align: baseline;
   }
+
+  * {
+    font-family: 'Trispace', 'Noto Sans KR', sans-serif;
+  }
+
   /* HTML5 display-role reset for older browsers */
   article,
   aside,

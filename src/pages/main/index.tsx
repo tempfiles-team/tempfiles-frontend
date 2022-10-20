@@ -14,7 +14,12 @@ export const MainPage: React.FC = () => {
   const [retentionPeriod, setRetentionPeriod] = useState(false);
   const [downloadCount, setDownloadCount] = useState(false);
   const [passwordBoolean, setPasswordBoolean] = useState(false);
-  const [fileProps, setFileProps] = useState({ name: '', size: '', fileType: '', fileData: '' });
+  const [fileProps, setFileProps] = useState({
+    name: '',
+    size: '',
+    fileType: '',
+    fileData: '',
+  });
 
   const navigate = useNavigate();
 
@@ -25,7 +30,7 @@ export const MainPage: React.FC = () => {
     setFileProps({
       name: event.target.files[0].name,
       size: getFileSize(event.target.files[0].size),
-      fileType: event.target.files[0].name.split('.')[1],
+      fileType: event.target.files[0].type,
       fileData: event.target.files[0],
     });
   };
@@ -51,8 +56,9 @@ export const MainPage: React.FC = () => {
           SetSusccesFileProps({
             name: res.data.filename,
             size: getFileSize(res.data.size),
-            fileType: res.data.filename.split('.')[1],
-            files: '',
+            fileType: res.data.filetype,
+            expiresAt: res.data.expires,
+            deleteUrl: res.data.delete_url,
           });
           navigate('/success');
         })
