@@ -14,12 +14,7 @@ export const MainPage: React.FC = () => {
   const [retentionPeriod, setRetentionPeriod] = useState(false);
   const [downloadCount, setDownloadCount] = useState(false);
   const [passwordBoolean, setPasswordBoolean] = useState(false);
-  const [fileProps, setFileProps] = useState({
-    name: '',
-    size: '',
-    fileType: '',
-    fileData: '',
-  });
+  const [fileProps, setFileProps] = useState({ name: '', size: '', fileType: '', fileData: '' });
 
   const navigate = useNavigate();
 
