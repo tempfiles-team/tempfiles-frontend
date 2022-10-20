@@ -9,3 +9,10 @@ export const SetSusccesFileProps = (props: any) => (dispatch: Dispatch<Action>) 
     props: props,
   });
 };
+
+export const SetDeleteFileName = (name: string) => (dispatch: Dispatch<Action>) => {
+  dispatch({
+    type: ActionType.DeleteFileName,
+    name: name,
+  });
+};
