@@ -24,6 +24,7 @@ export const DeletePage: React.FC = () => {
     })
       .then((res) => {
         console.log(res);
+        navigate('/');
         toast.success('삭제 완료', {
           autoClose: 3000,
           position: toast.POSITION.BOTTOM_RIGHT,
