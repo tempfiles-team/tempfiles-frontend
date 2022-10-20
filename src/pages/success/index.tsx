@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { Button } from '../../components';
+import { useDeletePageNavigator } from '../../hooks';
 import { RootState } from '../../state/reducers';
 import * as S from './styled';
 
 export const SuccessPage: React.FC = () => {
   const FileProps: any = useSelector((state: RootState) => state.SuccessFileProps);
+  const [move] = useDeletePageNavigator(FileProps.name);
   const navigate = useNavigate();
   useEffect(() => {
     if (FileProps.name != null && FileProps.size != null) {
@@ -38,7 +40,7 @@ export const SuccessPage: React.FC = () => {
           bgColor="var(--color-button-primary)"
           label="링크 복사"
         />
-        <Button click={() => {}} bgColor="var(--color-button-primary)" label="파일 삭제" />
+        <Button click={move} bgColor="var(--color-button-primary)" label="파일 삭제" />
       </S.SuccessPageButtonSection>
     </S.SuccessPageContainer>
   );
