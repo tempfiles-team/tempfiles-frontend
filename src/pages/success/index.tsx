@@ -42,7 +42,7 @@ export const SuccessPage: React.FC = () => {
         />
         <Button
           click={() => {
-            move;
+            move();
           }}
           bgColor="var(--color-button-primary)"
           label="파일 삭제"
