@@ -9,6 +9,7 @@ export const globalStyle = css`
     --color-background: #282a3a;
     --color-text-primary: #ffffff;
     --color-text-secondary: #25262e;
+    --color-text-placeholder: #757575;
 
     --color-check-true-background: #2ab514;
     --color-check-true-icon: var(--color-text-primary);
