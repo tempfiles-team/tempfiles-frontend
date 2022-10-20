@@ -9,10 +9,14 @@ type FileFindProps = {
 
 export const FileFind: React.FC<FileFindProps> = ({ handleChangeFile, fileProps }) => (
   <S.FileFindContainer>
-    <S.FileFindTextBox>
-      파일이름: {fileProps.name} {fileProps.size != '' ? '/ size:' : ''} {fileProps.size}{' '}
-      {fileProps.size != '' ? '/ filetype:' : ''} {fileProps.fileType}
-    </S.FileFindTextBox>
+    {fileProps.name != '' && fileProps.size != '' && fileProps.fileType != '' ? (
+      <S.FileFindTextBox>
+        {'이름:' + fileProps.name + ' / 크기:' + fileProps.size + ' / 타입:' + fileProps.fileType}
+      </S.FileFindTextBox>
+    ) : (
+      <S.FileFindTextBox>업로드 할 파일을 선택해주세요....</S.FileFindTextBox>
+    )}
+
     <S.FileFindButton htmlFor="file">찾아보기</S.FileFindButton>
     <input type={'file'} id="file" style={{ display: 'none' }} onChange={handleChangeFile} />
   </S.FileFindContainer>
