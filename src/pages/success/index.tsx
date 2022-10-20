@@ -42,11 +42,7 @@ export const SuccessPage: React.FC = () => {
         />
         <Button
           click={() => {
-            navigator.clipboard.writeText(`${FileProps.deleteUrl}`);
-            toast.success('준비 중인 기능입니다 :)', {
-              autoClose: 1000,
-              position: toast.POSITION.BOTTOM_RIGHT,
-            });
+            move;
           }}
           bgColor="var(--color-button-primary)"
           label="파일 삭제"
