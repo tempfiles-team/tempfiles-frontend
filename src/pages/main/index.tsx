@@ -14,7 +14,7 @@ export const MainPage: React.FC = () => {
   const [retentionPeriod, setRetentionPeriod] = useState(false);
   const [downloadCount, setDownloadCount] = useState(false);
   const [passwordBoolean, setPasswordBoolean] = useState(false);
-  const [fileProps, setFileProps] = useState({ name: '', size: '', fileType: '' });
+  const [fileProps, setFileProps] = useState({ name: '', size: '', fileType: '', fileData: '' });
 
   const navigate = useNavigate();
 
@@ -23,16 +23,17 @@ export const MainPage: React.FC = () => {
 
   const handleChangeFile = (event: any) => {
     setFileProps({
-      name: event.target.files[0].name.split('.')[0],
+      name: event.target.files[0].name,
       size: getFileSize(event.target.files[0].size),
       fileType: event.target.files[0].name.split('.')[1],
+      fileData: event.target.files[0],
     });
   };
 
   const UpLoad = async () => {
     if (fileProps.name != '' && fileProps.size != '') {
       const formdata = new FormData();
-      formdata.append('file', fileProps.name);
+      formdata.append('file', fileProps.fileData);
       await axios({
         method: 'post',
         url: 'https://tfb.minpeter.cf/upload',
