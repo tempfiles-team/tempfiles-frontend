@@ -29,6 +29,7 @@ export const globalStyle = css`
   body {
     background: var(--color-background);
     color: var(--color-text-primary);
+    letter-spacing: -0.05rem;
     font-size: 1.6rem;
     height: 100vh;
     display: flex;
