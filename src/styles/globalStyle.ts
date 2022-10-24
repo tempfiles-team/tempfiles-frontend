@@ -41,10 +41,12 @@ export const globalStyle = css`
     font-size: 6rem;
     font-weight: 900;
     margin: 18px;
+    color: var(--color-text-primary);
   }
   .MainLogoSubText {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 35px;
+    color: var(--color-text-primary);
   }
 `;
