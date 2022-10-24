@@ -25,7 +25,10 @@ export const MainPage: React.FC = () => {
     setFileProps({
       name: event.target.files[0].name,
       size: getFileSize(event.target.files[0].size),
-      fileType: event.target.files[0].type,
+      fileType:
+        event.target.files[0].type === ''
+          ? `unknown/${event.target.files[0].name.split('.')[1]}`
+          : event.target.files[0].type,
       fileData: event.target.files[0],
     });
   };
