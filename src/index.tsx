@@ -9,7 +9,7 @@ import { globalStyle } from './styles';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <BrowserRouter basename={'https://ananjaemin.github.io/tempfiles'}>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Global styles={globalStyle} />
     <App />
   </BrowserRouter>,
