@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes, Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -25,10 +25,10 @@ export const App: React.FC = () => (
             >
               <ToastContainer />
               <div>
-                <div style={{ textAlign: 'center' }}>
+                <Link to="" style={{ textAlign: 'center', textDecoration: 'none' }}>
                   <div className="MainLogoText">TEMPFILES</div>
                   <div className="MainLogoSubText">간단한 파일 공유 서비스</div>
-                </div>
+                </Link>
                 <Outlet />
               </div>
               <Navbar />
