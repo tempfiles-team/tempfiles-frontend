@@ -26,9 +26,7 @@ export const MainPage: React.FC = () => {
       name: event.target.files[0].name,
       size: getFileSize(event.target.files[0].size),
       fileType:
-        event.target.files[0].type === ''
-          ? `unknown/${event.target.files[0].name.split('.')[1]}`
-          : event.target.files[0].type,
+        event.target.files[0].type === '' ? 'application/actet-stream' : event.target.files[0].type,
       fileData: event.target.files[0],
     });
   };
