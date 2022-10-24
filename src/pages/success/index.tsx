@@ -29,6 +29,9 @@ export const SuccessPage: React.FC = () => {
         <S.SuccessPageFilePropsText> Expire at : {FileProps.expiresAt} </S.SuccessPageFilePropsText>
       </S.SuccessPageFilePropsSection>
       <S.SuccessPageButtonSection>
+        <a href={`https://tfb.minpeter.cf/dl/${FileProps.name}`}>
+          <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
+        </a>
         <Button
           click={() => {
             navigator.clipboard.writeText(`https://tfb.minpeter.cf/dl/${FileProps.name}`);
