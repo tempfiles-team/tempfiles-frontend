@@ -1,2 +1,2 @@
 export * from './getFileSize';
-export * from './getShotFileName';
+export * from './getShortFileName';
