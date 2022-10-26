@@ -11,6 +11,8 @@ export const globalStyle = css`
     --color-text-secondary: #25262e;
     --color-text-placeholder: #757575;
 
+    --color-backgorund-progressbar: #2d2d2d;
+
     --color-check-true-background: #2ab514;
     --color-check-true-icon: var(--color-text-primary);
     --color-check-false-background: var(--color-text-primary);
