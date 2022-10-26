@@ -6,10 +6,10 @@ export const globalStyle = css`
   ${reset}
 
   :root {
-    --color-background: #282a3a;
     --color-text-primary: #ffffff;
     --color-text-secondary: #25262e;
     --color-text-placeholder: #757575;
+    --color-text-filelistbox: #8f95e0;
 
     --color-backgorund-progressbar: #2d2d2d;
 
@@ -19,8 +19,10 @@ export const globalStyle = css`
     --color-check-false-icon: #c0c0c0;
 
     --color-border: #757bab;
+    --color-background: #282a3a;
     --color-background-secondary: var(--color-border);
     --color-background-tertiary: #2e2836;
+    --color-backgorund-filelistbox: #373d4a;
 
     --color-button-primary: var(--color-border);
     --color-button-secondary: #aa75ab;
@@ -44,6 +46,7 @@ export const globalStyle = css`
     font-size: 6rem;
     font-weight: 900;
     margin: 18px;
+    margin-top: 50px;
     color: var(--color-text-primary);
   }
   .MainLogoSubText {
