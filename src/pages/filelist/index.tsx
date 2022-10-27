@@ -16,7 +16,9 @@ export const FileListPage: React.FC = () => {
     })
       .then((res) => {
         setFileList(res.data.list);
-        setLoading(true); //loading 확인하고싶으면 false로 바꿔주세요.
+        setTimeout(() => {
+          setLoading(true); //loading 확인하고싶으면 false로 바꿔주세요.
+        }, 2000);
       })
       .catch((err) => {
         console.log(err);

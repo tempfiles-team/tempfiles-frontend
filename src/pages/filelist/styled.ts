@@ -31,7 +31,7 @@ export const FileListSkeletonUI = styled.div<{ randomWitdh: string }>`
     content: ' ';
     width: 100%;
     height: auto;
-    animation: loading 2.5s infinite;
+    animation: loading 2s infinite;
     box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.3);
   }
   @keyframes loading {
