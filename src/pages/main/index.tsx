@@ -97,17 +97,35 @@ export const MainPage: React.FC = () => {
         <>
           <S.MainPageCheckBoxSection>
             <CheckBox
-              click={() => setRetentionPeriod(!retentionPeriod)}
+              click={() => {
+                setRetentionPeriod(false);
+                toast.success('제작중!', {
+                  autoClose: 1000,
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+              }}
               isCheck={retentionPeriod}
               label={'유지기간'}
             />
             <CheckBox
-              click={() => setDownloadCount(!downloadCount)}
+              click={() => {
+                setDownloadCount(false);
+                toast.success('제작중!', {
+                  autoClose: 1000,
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+              }}
               isCheck={downloadCount}
               label={'다운로드 횟수'}
             />
             <CheckBox
-              click={() => setPasswordBoolean(!passwordBoolean)}
+              click={() => {
+                setPasswordBoolean(false);
+                toast.success('제작중!', {
+                  autoClose: 1000,
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+              }}
               isCheck={passwordBoolean}
               label={'비밀번호'}
             />
