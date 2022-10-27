@@ -16,3 +16,10 @@ export const SetDeleteFileName = (name: string) => (dispatch: Dispatch<Action>) 
     name: name,
   });
 };
+
+export const SetDownloadFileProps = (props: any) => (dispatch: Dispatch<Action>) => {
+  dispatch({
+    type: ActionType.DownloadFileProps,
+    props: props,
+  });
+};

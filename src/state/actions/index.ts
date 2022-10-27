@@ -10,4 +10,9 @@ interface DeleteFileProps {
   name: string;
 }
 
-export type Action = SusccesFileProps | DeleteFileProps;
+interface DownloadFileProps {
+  type: ActionType.DownloadFileProps;
+  props: any;
+}
+
+export type Action = SusccesFileProps | DeleteFileProps | DownloadFileProps;
