@@ -8,8 +8,8 @@ export const globalStyle = css`
   :root {
     --color-text-primary: #ffffff;
     --color-text-secondary: #25262e;
+    --color-text-tertiary: #8f95e0;
     --color-text-placeholder: #757575;
-    --color-text-filelistbox: #8f95e0;
 
     --color-backgorund-progressbar: #2d2d2d;
 
