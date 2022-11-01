@@ -18,6 +18,7 @@ export const MainPage: React.FC = () => {
   const [retentionPeriod, setRetentionPeriod] = useState(false);
   const [downloadCount, setDownloadCount] = useState(false);
   const [passwordBoolean, setPasswordBoolean] = useState(false);
+  const [password, setPassword] = useState('');
   const [fileProps, setFileProps] = useState({ name: '', size: '', fileType: '', fileData: '' });
 
   const navigate = useNavigate();
@@ -41,7 +42,9 @@ export const MainPage: React.FC = () => {
       formdata.append('file', fileProps.fileData);
       await axios({
         method: 'post',
-        url: 'https://tfb.minpeter.cf/upload',
+        url: `https://tfb.minpeter.cf/upload${
+          passwordBoolean && password != '' && password != undefined ? `?pw=${password}` : ''
+        }`,
         data: formdata,
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -52,6 +55,7 @@ export const MainPage: React.FC = () => {
         },
       })
         .then(async (res) => {
+          console.log(res);
           setUploading(true);
           toast.success('업로드 성공!', {
             autoClose: 3000,
@@ -109,12 +113,24 @@ export const MainPage: React.FC = () => {
               label={'다운로드 횟수'}
             />
             <CheckBox
+              click={() => {
+                setPasswordBoolean(!passwordBoolean);
+              }}
               click={() => setPasswordBoolean(!passwordBoolean)}
               isCheck={passwordBoolean}
               label={'비밀번호'}
             />
           </S.MainPageCheckBoxSection>
-          {passwordBoolean ? <PasswordInput placeholder="비밀번호를 입력해주세요." /> : <></>}
+          {passwordBoolean ? (
+            <PasswordInput
+              onChange={(text) => {
+                setPassword(text.target.value.replace(/(\s*)/g, ''));
+              }}
+              placeholder="비밀번호를 입력해주세요."
+            />
+          ) : (
+            <></>
+          )}
           <FileFind handleChangeFile={handleChangeFile} fileProps={fileProps} />
           <UpLoadButton type={'button'} value={'업로드'} onClick={UpLoad} />
         </>
