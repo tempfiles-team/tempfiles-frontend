@@ -14,13 +14,16 @@ export const ApiPage: React.FC = () => {
     await axios({
       method: 'get',
       url: 'https://tfb.minpeter.cf/info',
-    }).then((res) => {
-      console.log(res.data);
-      setApiInfo(res.data);
-      setTimeout(() => {
-        setLoading(true); //loading 확인하고싶으면 false로 바꿔주세요.
-      }, 1200);
-    });
+    })
+      .then((res) => {
+        setApiInfo(res.data);
+        setTimeout(() => {
+          setLoading(true); //loading 확인하고싶으면 false로 바꿔주세요.
+        }, 1200);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
