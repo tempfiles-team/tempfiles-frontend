@@ -11,9 +11,9 @@ import {
   DownloadPage,
   DeletePage,
   FileListPage,
+  ApiPage,
   NotFoundPage,
 } from './pages';
-import { MainPage, SuccessPage, DownloadPage, DeletePage, FileListPage, ApiPage } from './pages';
 import { store } from './state/store';
 
 export const App: React.FC = () => (

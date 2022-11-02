@@ -113,9 +113,6 @@ export const MainPage: React.FC = () => {
               label={'다운로드 횟수'}
             />
             <CheckBox
-              click={() => {
-                setPasswordBoolean(!passwordBoolean);
-              }}
               click={() => setPasswordBoolean(!passwordBoolean)}
               isCheck={passwordBoolean}
               label={'비밀번호'}
