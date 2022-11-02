@@ -6,18 +6,12 @@ export const ApiPageContainer = styled.div`
   flex-direction: column;
 `;
 
-export const ApiPageText = styled.div`
-  font-size: 4rem;
-  font-weight: 700;
-  margin: 1rem;
-`;
-
 export const ApiListSection = styled.div`
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 30rem;
+  max-height: 40rem;
   &::-webkit-scrollbar {
     display: none;
   }
