@@ -20,7 +20,7 @@ export const ApiPostPage: React.FC = () => {
       })
         .then((res) => {
           if (res.data?.message === 'invalid api name') {
-            navigate('/'); //나중에 404페이지로 이동하게
+            navigate('/404'); //나중에 404페이지로 이동하게
           } else {
             setApiInfo(res.data);
             setTimeout(() => {
