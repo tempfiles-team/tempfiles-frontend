@@ -5,7 +5,14 @@ import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { Navbar } from './components';
-import { MainPage, SuccessPage, DownloadPage, DeletePage, FileListPage } from './pages';
+import {
+  MainPage,
+  SuccessPage,
+  DownloadPage,
+  DeletePage,
+  FileListPage,
+  NotFoundPage,
+} from './pages';
 import { store } from './state/store';
 
 export const App: React.FC = () => (
@@ -41,6 +48,7 @@ export const App: React.FC = () => (
         <Route path="/download" element={<DownloadPage />} />
         <Route path="/delete" element={<DeletePage />} />
         <Route path="/filelist" element={<FileListPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   </Provider>
