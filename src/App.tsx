@@ -13,6 +13,7 @@ import {
   FileListPage,
   NotFoundPage,
 } from './pages';
+import { MainPage, SuccessPage, DownloadPage, DeletePage, FileListPage, ApiPage } from './pages';
 import { store } from './state/store';
 
 export const App: React.FC = () => (
@@ -48,6 +49,7 @@ export const App: React.FC = () => (
         <Route path="/download" element={<DownloadPage />} />
         <Route path="/delete" element={<DeletePage />} />
         <Route path="/filelist" element={<FileListPage />} />
+        <Route path="/api/*" element={<ApiPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
