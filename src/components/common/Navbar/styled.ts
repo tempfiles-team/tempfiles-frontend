@@ -7,6 +7,7 @@ export const NavbarContainer = styled.nav`
   margin: 30px auto 30px auto;
   display: flex;
   justify-content: space-between;
+  z-index: 99;
 `;
 
 export const Nav = styled(Link)`

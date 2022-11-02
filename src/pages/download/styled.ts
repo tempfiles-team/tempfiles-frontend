@@ -15,7 +15,7 @@ export const DownloadPageButtonSection = styled.div`
 
 export const DonwloadFileBox = styled.div`
   background-color: var(--color-backgorund-filelistbox);
-  color: var(--color-text-filelistbox);
+  color: var(--color-text-tertiary);
   border-radius: 10px;
   padding: 1.2rem 1.2rem 1.2rem 1.2rem;
   display: flex;
