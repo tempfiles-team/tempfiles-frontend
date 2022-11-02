@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 
-import { FileListBox } from '../../components';
+import { FileListBox, SkeletonUIBox } from '../../components';
 import { actionCreators } from '../../state';
 import { getFileSize, getShortFileName, getDate } from '../../utils';
 import * as S from './styled';
@@ -25,7 +25,7 @@ export const FileListPage: React.FC = () => {
         setFileList(res.data.list); //파일리스트 요소 갯수에 따른 핸들링 추가예정
         setTimeout(() => {
           setLoading(true); //loading 확인하고싶으면 false로 바꿔주세요.
-        }, 1500);
+        }, 1200);
       })
       .catch((err) => {
         console.log(err);
@@ -62,27 +62,13 @@ export const FileListPage: React.FC = () => {
       ) : (
         <>
           <S.FileListPageContainer>
-            <S.FileListSkeletonUI
-              randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]}
-            />
-            <S.FileListSkeletonUI
-              randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]}
-            />
-            <S.FileListSkeletonUI
-              randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]}
-            />
-            <S.FileListSkeletonUI
-              randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]}
-            />
-            <S.FileListSkeletonUI
-              randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]}
-            />
-            <S.FileListSkeletonUI
-              randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]}
-            />
-            <S.FileListSkeletonUI
-              randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]}
-            />
+            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
           </S.FileListPageContainer>
           <S.FileListPageBoxShoadow />
         </>
