@@ -102,13 +102,23 @@ export const MainPage: React.FC = () => {
           <S.MainPageCheckBoxSection>
             <CheckBox
               click={() => {
-                setRetentionPeriod(!retentionPeriod);
+                setRetentionPeriod(false);
+                toast.success('제작중!', {
+                  autoClose: 1000,
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
               }}
               isCheck={retentionPeriod}
               label={'유지기간'}
             />
             <CheckBox
-              click={() => setDownloadCount(!downloadCount)}
+              click={() => {
+                setDownloadCount(false);
+                toast.success('제작중!', {
+                  autoClose: 1000,
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+              }}
               isCheck={downloadCount}
               label={'다운로드 횟수'}
             />
