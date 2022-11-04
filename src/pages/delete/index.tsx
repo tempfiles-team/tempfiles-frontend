@@ -20,7 +20,7 @@ export const DeletePage: React.FC = () => {
   const deleteFile = async () => {
     await axios({
       method: 'delete',
-      url: `https://tfb.minpeter.cf/del/${DeleteFileName}`,
+      url: `${process.env.BACKEND_BASEURL}/del/${DeleteFileName}`,
     })
       .then((res) => {
         console.log(res);

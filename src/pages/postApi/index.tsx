@@ -16,7 +16,7 @@ export const ApiPostPage: React.FC = () => {
     const getUrlApiInfo = async () => {
       await axios({
         method: 'get',
-        url: `https://tfb.minpeter.cf/info?api=${urlApi}`,
+        url: `${process.env.BACKEND_BASEURL}/info?api=${urlApi}`,
       })
         .then((res) => {
           if (res.data?.message === 'invalid api name') {
