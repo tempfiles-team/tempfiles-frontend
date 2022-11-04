@@ -24,7 +24,7 @@ export const MainPage: React.FC = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { SetSusccesFileProps } = bindActionCreators(actionCreators, dispatch);
+  const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
 
   const handleChangeFile = (event: any) => {
     setFileProps({
@@ -55,20 +55,17 @@ export const MainPage: React.FC = () => {
         },
       })
         .then(async (res) => {
-          console.log(res);
           setUploading(true);
           toast.success('업로드 성공!', {
             autoClose: 3000,
             position: toast.POSITION.BOTTOM_RIGHT,
           });
-          SetSusccesFileProps({
-            name: res.data.filename,
-            size: getFileSize(res.data.size),
-            fileType: res.data.filetype,
-            expiresAt: res.data.expires,
-            deleteUrl: res.data.delete_url,
+          SetDownloadFileProps({
+            Name: res.data.filename,
+            Size: getFileSize(res.data.size),
+            LastModified: res.data.expires,
           });
-          navigate('/success');
+          navigate('/download');
         })
         .catch((err) => {
           console.log(err);
