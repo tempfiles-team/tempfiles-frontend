@@ -13,7 +13,7 @@ export const ApiPage: React.FC = () => {
   const getApiInfo = async () => {
     await axios({
       method: 'get',
-      url: `${process.env.BACKEND_BASEURL}/info`,
+      url: `${process.env.REACT_APP_BACKEND_BASEURL}/info`,
     })
       .then((res) => {
         setApiInfo(res.data);
