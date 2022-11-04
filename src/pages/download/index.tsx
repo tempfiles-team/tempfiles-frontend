@@ -29,7 +29,7 @@ export const DownloadPage: React.FC = () => {
         {year}-{month}-{day}
       </S.DonwloadFileBox>
       <S.DownloadPageButtonSection>
-        <a href={`https://tfb.minpeter.cf/dl/${downloadFileProps.Name}`}>
+        <a href={`${process.env.BACKEND_BASEURL}/dl/${downloadFileProps.Name}`}>
           <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
         </a>
         <Button
