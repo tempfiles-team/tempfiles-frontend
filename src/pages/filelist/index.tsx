@@ -42,14 +42,14 @@ export const FileListPage: React.FC = () => {
             {fileList?.map((item, index) => (
               <FileListBox
                 key={index}
-                filename={getShortFileName(item.Name)}
-                size={getFileSize(item.Size)}
-                LastModified={getDate(item.LastModified)}
+                filename={getShortFileName(item.filename)}
+                size={getFileSize(item.size)}
+                LastModified={getDate(item.lastModified)}
                 click={() => {
                   SetDownloadFileProps({
-                    Name: item.Name,
-                    Size: item.Size,
-                    LastModified: item.LastModified,
+                    Name: item.filename,
+                    Size: item.size,
+                    LastModified: item.lastModified,
                     //passowrd 유무 추가예정
                   });
                   navigate('/download');
