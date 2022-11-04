@@ -42,7 +42,7 @@ export const MainPage: React.FC = () => {
       formdata.append('file', fileProps.fileData);
       await axios({
         method: 'post',
-        url: `https://tfb.minpeter.cf/upload${
+        url: `${process.env.BACKEND_BASEURL}/upload${
           passwordBoolean && password != '' && password != undefined ? `?pw=${password}` : ''
         }`,
         data: formdata,
