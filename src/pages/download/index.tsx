@@ -29,7 +29,12 @@ export const DownloadPage: React.FC = () => {
         {year}-{month}-{day}
       </S.DonwloadFileBox>
       <S.DownloadPageButtonSection>
+<<<<<<< HEAD
         <a href={`${process.env.BACKEND_BASEURL}/dl/${downloadFileProps.Name}`}>
+=======
+        <a href={`https://tfb.minpeter.cf/dl/${downloadFileProps.Name}}`}>
+          {/* 패스워드 핸들링해서 다운로드 요청하기 ( token 넣어야됨 ) */}
+>>>>>>> de99bb01cb25c312de34ceae7d6a30fb572cf083
           <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
         </a>
         <Button
