@@ -16,6 +16,7 @@ export const FileListPage: React.FC = () => {
   const dispatch = useDispatch();
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
   const [fileList, setFileList] = useState<any[]>();
+  console.log(`${process.env.REACT_APP_BACKEND_BASEURL}/list`);
   const getFileList = async () => {
     await axios({
       method: 'get',

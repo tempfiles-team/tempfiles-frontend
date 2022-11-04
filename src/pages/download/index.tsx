@@ -29,11 +29,7 @@ export const DownloadPage: React.FC = () => {
         {year}-{month}-{day}
       </S.DonwloadFileBox>
       <S.DownloadPageButtonSection>
-<<<<<<< HEAD
         <a href={`${process.env.REACT_APP_BACKEND_BASEURL}/dl/${downloadFileProps.Name}`}>
-=======
-        <a href={`${process.env.BACKEND_BASEURL}/dl/${downloadFileProps.Name}`}>
->>>>>>> 862b3c4 (fix: git)
           <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
         </a>
         <Button
