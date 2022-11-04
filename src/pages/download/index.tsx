@@ -18,9 +18,9 @@ export const DownloadPage: React.FC = () => {
       downloadFileProps.Size === null ||
       downloadFileProps.LastModified === null
     ) {
-      navigate(-1);
+      navigate('/');
     }
-  });
+  }, [navigate, downloadFileProps]);
   return (
     <S.DownloadPageContainer>
       <S.DonwloadFileBox>
@@ -32,6 +32,27 @@ export const DownloadPage: React.FC = () => {
         <a href={`${process.env.BACKEND_BASEURL}/dl/${downloadFileProps.Name}`}>
           <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
         </a>
+        <Button
+          click={() => {
+            navigator.clipboard.writeText(``);
+            toast.success('복사 완료', {
+              autoClose: 1000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          }}
+          bgColor="var(--color-button-primary)"
+          label="링크복사"
+        />
+        <Button
+          click={() => {
+            toast.success('제작중!', {
+              autoClose: 1000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          }}
+          bgColor="var(--color-button-secondary)"
+          label="파일삭제"
+        />
         <Button
           click={() => {
             toast.success('제작중!', {
