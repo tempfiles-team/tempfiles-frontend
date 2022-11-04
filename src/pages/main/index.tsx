@@ -42,7 +42,7 @@ export const MainPage: React.FC = () => {
       formdata.append('file', fileProps.fileData);
       await axios({
         method: 'post',
-        url: `${process.env.BACKEND_BASEURL}/upload${
+        url: `${process.env.REACT_APP_BACKEND_BASEURL}/upload${
           passwordBoolean && password != '' && password != undefined ? `?pw=${password}` : ''
         }`,
         data: formdata,
