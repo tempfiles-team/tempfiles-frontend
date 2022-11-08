@@ -7,7 +7,8 @@ export const FileListBoxContainer = styled.div`
   padding: 1.2rem 1.2rem 1.2rem 1.2rem;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-end;
   font-size: 2.2rem;
   margin-bottom: 1.5rem;
   cursor: pointer;
