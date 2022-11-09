@@ -13,7 +13,7 @@ export const DeletePage: React.FC = () => {
   const DeleteFileName = useSelector((state: RootState) => state.DeleteFileName);
   useEffect(() => {
     if (DeleteFileName === '') {
-      navigate(-1);
+      navigate('/');
     }
   });
 
@@ -24,7 +24,7 @@ export const DeletePage: React.FC = () => {
     })
       .then((res) => {
         console.log(res);
-        navigate('/');
+        navigate(-1);
         toast.success('삭제 완료', {
           autoClose: 3000,
           position: toast.POSITION.BOTTOM_RIGHT,
