@@ -10,9 +10,9 @@ import * as S from './styled';
 
 export const DeletePage: React.FC = () => {
   const navigate = useNavigate();
-  const DeleteFileName = useSelector((state: RootState) => state.DeleteFileName);
+  const DeleteFileProps = useSelector((state: RootState) => state.DeleteFileName);
   useEffect(() => {
-    if (DeleteFileName === '') {
+    if (DeleteFileProps.filename === null) {
       navigate(-1);
     }
   });
@@ -20,10 +20,11 @@ export const DeletePage: React.FC = () => {
   const deleteFile = async () => {
     await axios({
       method: 'delete',
-      url: `${process.env.REACT_APP_BACKEND_BASEURL}/del/${DeleteFileName}`,
+      url: `${process.env.REACT_APP_BACKEND_BASEURL}/del/${DeleteFileProps.filename}${
+        DeleteFileProps.token != null ? `?token=${DeleteFileProps.token}` : ''
+      }`,
     })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         navigate('/');
         toast.success('삭제 완료', {
           autoClose: 3000,
@@ -31,7 +32,6 @@ export const DeletePage: React.FC = () => {
         });
       })
       .catch((err) => {
-        console.log(err);
         toast.error(`삭제 실패 ${err.response.status}`, {
           autoClose: 3000,
           position: toast.POSITION.BOTTOM_RIGHT,

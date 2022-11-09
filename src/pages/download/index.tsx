@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { Button, FileBox } from '../../components';
+import { useDeletePageNavigator } from '../../hooks';
 import { RootState } from '../../state/reducers';
 import { getDate } from '../../utils';
 import * as S from './styled';
@@ -12,6 +13,7 @@ export const DownloadPage: React.FC = () => {
   const navigate = useNavigate();
   const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
   const { year, month, day } = getDate(downloadFileProps.lastModified);
+  const [move] = useDeletePageNavigator(downloadFileProps.filename, downloadFileProps.token);
   useEffect(() => {
     if (
       downloadFileProps.filename === null ||
@@ -48,10 +50,7 @@ export const DownloadPage: React.FC = () => {
         />
         <Button
           click={() => {
-            toast.success('제작중!', {
-              autoClose: 1000,
-              position: toast.POSITION.BOTTOM_RIGHT,
-            });
+            move();
           }}
           bgColor="var(--color-button-secondary)"
           label="파일삭제"
