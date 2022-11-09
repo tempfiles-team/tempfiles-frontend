@@ -1,8 +1,8 @@
 import { ActionType } from '../action-types';
 
 interface DeleteFileProps {
-  type: ActionType.DeleteFileName;
-  name: string;
+  type: ActionType.DeleteFileProps;
+  props: any;
 }
 
 interface DownloadFileProps {
