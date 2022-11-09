@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import { CheckBox, PasswordInput, UpLoadButton, FileFind, Progress } from '../../components';
 import { actionCreators } from '../../state';
-import { getFileSize } from '../../utils';
+import { getFileSize, getDate } from '../../utils';
 import * as S from './styled';
 
 export const MainPage: React.FC = () => {
@@ -24,7 +24,7 @@ export const MainPage: React.FC = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { SetSusccesFileProps } = bindActionCreators(actionCreators, dispatch);
+  const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
 
   const handleChangeFile = (event: any) => {
     setFileProps({
@@ -55,20 +55,29 @@ export const MainPage: React.FC = () => {
         },
       })
         .then(async (res) => {
-          console.log(res);
           setUploading(true);
           toast.success('업로드 성공!', {
             autoClose: 3000,
             position: toast.POSITION.BOTTOM_RIGHT,
           });
-          SetSusccesFileProps({
-            name: res.data.filename,
-            size: getFileSize(res.data.size),
-            fileType: res.data.filetype,
-            expiresAt: res.data.expires,
-            deleteUrl: res.data.delete_url,
-          });
-          navigate('/success');
+          if (res.data.isEncrypted) {
+            SetDownloadFileProps({
+              filename: res.data.filename,
+              size: getFileSize(res.data.size),
+              lastModified: getDate(res.data.lastModified),
+              token: res.data.token,
+              //추후에 기한,다운로드횟수 추가예정
+            });
+          } else {
+            SetDownloadFileProps({
+              filename: res.data.filename,
+              size: getFileSize(res.data.size),
+              lastModified: getDate(res.data.lastModified),
+              token: null,
+              //추후에 기한,다운로드횟수 추가예정
+            });
+          }
+          navigate('/download');
         })
         .catch((err) => {
           console.log(err);
