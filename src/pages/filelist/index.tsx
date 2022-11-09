@@ -63,6 +63,7 @@ export const FileListPage: React.FC = () => {
                       filename: item.filename,
                       size: getFileSize(item.size),
                       lastModified: getDate(item.lastModified),
+                      token: null,
                     });
                     navigate('/download');
                   }
