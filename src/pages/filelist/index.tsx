@@ -14,7 +14,11 @@ export const FileListPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
   const dispatch = useDispatch();
-  const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
+  // eslint-disable-next-line
+  const { SetDownloadFileProps, SetCheckPasswordFileProps } = bindActionCreators(
+    actionCreators,
+    dispatch,
+  );
   const [fileList, setFileList] = useState<any[]>();
   const getFileList = async () => {
     await axios({
@@ -45,14 +49,29 @@ export const FileListPage: React.FC = () => {
                 filename={getShortFileName(item.filename)}
                 size={getFileSize(item.size)}
                 LastModified={getDate(item.lastModified)}
+                isEncrypted={item.isEncrypted}
                 click={() => {
-                  SetDownloadFileProps({
-                    Name: item.filename,
-                    Size: item.size,
-                    LastModified: item.lastModified,
-                    //passowrd 유무 추가예정
-                  });
-                  navigate('/download');
+                  if (item.isEncrypted) {
+                    SetCheckPasswordFileProps({
+                      filename: item.filename,
+                      size: getFileSize(item.size),
+                      lastModified: getDate(item.lastModified),
+                    });
+                    navigate('/checkpw');
+                  } else {
+                    SetDownloadFileProps({
+                      filename: item.filename,
+                      size: getFileSize(item.size),
+                      lastModified: getDate(item.lastModified),
+                    });
+                    navigate('/download');
+                  }
+                  // SetDownloadFileProps({
+                  //   Name: item.filename,
+                  //   Size: item.size,
+                  //   LastModified: item.lastModified,
+                  //   //passowrd 유무 추가예정
+                  // });
                 }}
               />
             ))}
