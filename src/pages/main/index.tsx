@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import { CheckBox, PasswordInput, UpLoadButton, FileFind, Progress } from '../../components';
 import { actionCreators } from '../../state';
-import { getFileSize, getDate } from '../../utils';
+import { getFileSize } from '../../utils';
 import * as S from './styled';
 
 export const MainPage: React.FC = () => {
@@ -19,7 +19,12 @@ export const MainPage: React.FC = () => {
   const [downloadCount, setDownloadCount] = useState(false);
   const [passwordBoolean, setPasswordBoolean] = useState(false);
   const [password, setPassword] = useState('');
-  const [fileProps, setFileProps] = useState({ name: '', size: '', fileType: '', fileData: '' });
+  const [fileProps, setFileProps] = useState({
+    filename: '',
+    size: '',
+    fileType: '',
+    fileData: '',
+  });
 
   const navigate = useNavigate();
 
@@ -28,7 +33,7 @@ export const MainPage: React.FC = () => {
 
   const handleChangeFile = (event: any) => {
     setFileProps({
-      name: event.target.files[0].name,
+      filename: event.target.files[0].name,
       size: getFileSize(event.target.files[0].size),
       fileType:
         event.target.files[0].type === '' ? 'application/actet-stream' : event.target.files[0].type,
@@ -37,7 +42,7 @@ export const MainPage: React.FC = () => {
   };
 
   const UpLoad = async () => {
-    if (fileProps.name != '' && fileProps.size != '') {
+    if (fileProps.filename != '' && fileProps.size != '') {
       const formdata = new FormData();
       formdata.append('file', fileProps.fileData);
       await axios({
@@ -64,7 +69,7 @@ export const MainPage: React.FC = () => {
             SetDownloadFileProps({
               filename: res.data.filename,
               size: getFileSize(res.data.size),
-              lastModified: getDate(res.data.lastModified),
+              lastModified: res.data.lastModified,
               token: res.data.token,
               //추후에 기한,다운로드횟수 추가예정
             });
@@ -72,7 +77,7 @@ export const MainPage: React.FC = () => {
             SetDownloadFileProps({
               filename: res.data.filename,
               size: getFileSize(res.data.size),
-              lastModified: getDate(res.data.lastModified),
+              lastModified: res.data.lastModified,
               token: null,
               //추후에 기한,다운로드횟수 추가예정
             });
@@ -153,7 +158,7 @@ export const MainPage: React.FC = () => {
       ) : (
         <Progress
           value={progressValue}
-          fileName={fileProps.name}
+          fileName={fileProps.filename}
           typing={typingText[typingCount]}
         />
       )}
