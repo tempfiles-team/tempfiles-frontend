@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 
-import { FileBox } from '../../components';
+import { FileBox, Button } from '../../components';
 import { actionCreators } from '../../state';
 import { RootState } from '../../state/reducers';
 import { getDate } from '../../utils';
@@ -11,12 +14,55 @@ import * as S from './styled';
 
 export const CheckPasswordPage: React.FC = () => {
   const checkPasswordFileProps = useSelector((state: RootState) => state.CheckPasswordFileProps);
+  const [password, setPassword] = useState('');
   const { year, month, day } = getDate(checkPasswordFileProps.lastModified);
   const dispatch = useDispatch();
-  // eslint-disable-next-line
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
 
-  useEffect(() => {});
+  const navigate = useNavigate();
+
+  const passwordCheck = async () => {
+    if (password === '') {
+      toast.error('비밀번호를 입력해주세요.', {
+        autoClose: 1000,
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
+    } else {
+      await axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkPasswordFileProps.filename}?pw=${password}`,
+      })
+        .then((res) => {
+          SetDownloadFileProps({
+            filename: checkPasswordFileProps.filename,
+            size: checkPasswordFileProps.size,
+            lastModified: checkPasswordFileProps.lastModified,
+            token: res.data.token,
+          });
+          navigate('/download');
+          toast.success('통과!', {
+            autoClose: 1000,
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error('비밀번호를 다시 확인해주세요...', {
+            autoClose: 1000,
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
+        });
+    }
+  };
+  useEffect(() => {
+    if (
+      checkPasswordFileProps.filename === null ||
+      checkPasswordFileProps.size === null ||
+      checkPasswordFileProps.lastModified === null
+    ) {
+      navigate('/');
+    }
+  });
   return (
     <S.CheckPasswordPageContainer>
       <FileBox>
@@ -26,11 +72,18 @@ export const CheckPasswordPage: React.FC = () => {
       <S.PasswordInputSection>
         <S.CheckPasswordInput
           onChange={(text) => {
-            console.log(text);
+            setPassword(text.target.value.replace(/(\s*)/g, ''));
           }}
           placeholder="비밀번호를 입력해주세요."
         />
-        <S.CheckPasswordButton />
+
+        <Button
+          click={() => {
+            passwordCheck();
+          }}
+          bgColor="var(--color-button-primary)"
+          label="전송"
+        />
       </S.PasswordInputSection>
     </S.CheckPasswordPageContainer>
   );

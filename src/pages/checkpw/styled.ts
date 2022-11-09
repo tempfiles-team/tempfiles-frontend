@@ -7,18 +7,18 @@ export const CheckPasswordPageContainer = styled.div`
   width: 100%;
 `;
 
-export const PasswordInputSection = styled.div``;
+export const PasswordInputSection = styled.div`
+  display: flex;
+  margin: 4rem;
+`;
 
 export const CheckPasswordInput = styled.input`
   border: 4px solid var(--color-border);
   border-radius: 10px;
   outline: none;
-  width: 40rem;
-  height: 5rem;
+  width: 50rem;
+  height: 6rem;
   padding-left: 12px;
   font-size: 1.8rem;
   font-weight: 700;
-  margin-top: 20px;
 `;
-
-export const CheckPasswordButton = styled.button``;
