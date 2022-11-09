@@ -8,3 +8,4 @@ export * from './Button';
 export * from './FileListBox';
 export * from './Progress';
 export * from './SkeletonUIBox';
+export * from './FileBox';

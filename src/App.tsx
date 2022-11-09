@@ -7,12 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Navbar } from './components';
 import {
   MainPage,
-  SuccessPage,
   DownloadPage,
   DeletePage,
   FileListPage,
   ApiPage,
   NotFoundPage,
+  CheckPasswordPage,
 } from './pages';
 import { store } from './state/store';
 
@@ -45,11 +45,11 @@ export const App: React.FC = () => (
         }
       >
         <Route index element={<MainPage />} />
-        <Route path="/success" element={<SuccessPage />} />
         <Route path="/download" element={<DownloadPage />} />
         <Route path="/delete" element={<DeletePage />} />
         <Route path="/filelist" element={<FileListPage />} />
         <Route path="/api/*" element={<ApiPage />} />
+        <Route path="/checkpw" element={<CheckPasswordPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

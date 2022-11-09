@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import { CheckBox, PasswordInput, UpLoadButton, FileFind, Progress } from '../../components';
 import { actionCreators } from '../../state';
-import { getFileSize } from '../../utils';
+import { getFileSize, getDate } from '../../utils';
 import * as S from './styled';
 
 export const MainPage: React.FC = () => {
@@ -60,11 +60,23 @@ export const MainPage: React.FC = () => {
             autoClose: 3000,
             position: toast.POSITION.BOTTOM_RIGHT,
           });
-          SetDownloadFileProps({
-            Name: res.data.filename,
-            Size: getFileSize(res.data.size),
-            LastModified: res.data.expires,
-          });
+          if (res.data.isEncrypted) {
+            SetDownloadFileProps({
+              filename: res.data.filename,
+              size: getFileSize(res.data.size),
+              lastModified: getDate(res.data.lastModified),
+              token: res.data.token,
+              //추후에 기한,다운로드횟수 추가예정
+            });
+          } else {
+            SetDownloadFileProps({
+              filename: res.data.filename,
+              size: getFileSize(res.data.size),
+              lastModified: getDate(res.data.lastModified),
+              token: null,
+              //추후에 기한,다운로드횟수 추가예정
+            });
+          }
           navigate('/download');
         })
         .catch((err) => {
