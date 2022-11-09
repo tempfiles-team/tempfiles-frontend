@@ -3,33 +3,35 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { Button } from '../../components';
+import { Button, FileBox } from '../../components';
 import { RootState } from '../../state/reducers';
-import { getFileSize, getDate } from '../../utils';
 import * as S from './styled';
 
 export const DownloadPage: React.FC = () => {
   const navigate = useNavigate();
   const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
-  const { year, month, day } = getDate(downloadFileProps.LastModified);
+  const { year, month, day } = downloadFileProps.lastModified;
   useEffect(() => {
     if (
-      downloadFileProps.Name === null ||
-      downloadFileProps.Size === null ||
-      downloadFileProps.LastModified === null
+      downloadFileProps.filename === null ||
+      downloadFileProps.size === null ||
+      downloadFileProps.lastModified === null
     ) {
       navigate(-1);
     }
   });
   return (
     <S.DownloadPageContainer>
-      <S.DonwloadFileBox>
-        파일이름:{downloadFileProps.Name} / 크기:{getFileSize(downloadFileProps.Size)} / 업로드된
-        날짜:
+      <FileBox>
+        파일이름:{downloadFileProps.filename} / 크기:{downloadFileProps.size} / 업로드된 날짜:
         {year}-{month}-{day}
-      </S.DonwloadFileBox>
+      </FileBox>
       <S.DownloadPageButtonSection>
-        <a href={`${process.env.REACT_APP_BACKEND_BASEURL}/dl/${downloadFileProps.Name}`}>
+        <a
+          href={`${process.env.REACT_APP_BACKEND_BASEURL}/dl/${downloadFileProps.name}${
+            downloadFileProps.token != null ? `?${downloadFileProps.token}` : ''
+          }`}
+        >
           <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
         </a>
         <Button
