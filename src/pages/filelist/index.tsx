@@ -55,14 +55,14 @@ export const FileListPage: React.FC = () => {
                     SetCheckPasswordFileProps({
                       filename: item.filename,
                       size: getFileSize(item.size),
-                      lastModified: getDate(item.lastModified),
+                      lastModified: item.lastModified,
                     });
                     navigate('/checkpw');
                   } else {
                     SetDownloadFileProps({
                       filename: item.filename,
                       size: getFileSize(item.size),
-                      lastModified: getDate(item.lastModified),
+                      lastModified: item.lastModified,
                       token: null,
                     });
                     navigate('/download');

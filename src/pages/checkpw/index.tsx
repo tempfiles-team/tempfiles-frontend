@@ -6,11 +6,12 @@ import { bindActionCreators } from 'redux';
 import { FileBox } from '../../components';
 import { actionCreators } from '../../state';
 import { RootState } from '../../state/reducers';
+import { getDate } from '../../utils';
 import * as S from './styled';
 
 export const CheckPasswordPage: React.FC = () => {
   const checkPasswordFileProps = useSelector((state: RootState) => state.CheckPasswordFileProps);
-  const { year, month, day } = checkPasswordFileProps.lastModified;
+  const { year, month, day } = getDate(checkPasswordFileProps.lastModified);
   const dispatch = useDispatch();
   // eslint-disable-next-line
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
@@ -29,6 +30,7 @@ export const CheckPasswordPage: React.FC = () => {
           }}
           placeholder="비밀번호를 입력해주세요."
         />
+        <S.CheckPasswordButton />
       </S.PasswordInputSection>
     </S.CheckPasswordPageContainer>
   );

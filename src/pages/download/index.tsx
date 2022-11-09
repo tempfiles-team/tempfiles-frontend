@@ -5,12 +5,13 @@ import { toast } from 'react-toastify';
 
 import { Button, FileBox } from '../../components';
 import { RootState } from '../../state/reducers';
+import { getDate } from '../../utils';
 import * as S from './styled';
 
 export const DownloadPage: React.FC = () => {
   const navigate = useNavigate();
   const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
-  const { year, month, day } = downloadFileProps.lastModified;
+  const { year, month, day } = getDate(downloadFileProps.lastModified);
   useEffect(() => {
     if (
       downloadFileProps.filename === null ||
