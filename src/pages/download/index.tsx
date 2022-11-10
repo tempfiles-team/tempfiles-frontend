@@ -13,7 +13,11 @@ export const DownloadPage: React.FC = () => {
   const navigate = useNavigate();
   const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
   const { year, month, day } = getDate(downloadFileProps.uploadDate);
-  const [move] = useDeletePageNavigator(downloadFileProps.filename, downloadFileProps.token);
+  const [move] = useDeletePageNavigator(
+    downloadFileProps.filename,
+    downloadFileProps.delete_url,
+    downloadFileProps.token,
+  );
   useEffect(() => {
     if (
       downloadFileProps.filename === null ||

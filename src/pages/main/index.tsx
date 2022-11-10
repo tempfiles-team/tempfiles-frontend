@@ -72,18 +72,20 @@ export const MainPage: React.FC = () => {
             SetDownloadFileProps({
               filename: res.data.filename,
               size: getFileSize(res.data.size),
-              lastModified: res.data.lastModified,
+              uploadDate: res.data.uploadDate,
               token: res.data.token,
               download_url: res.data.download_url,
+              delete_url: res.data.delete_url,
               //추후에 기한,다운로드횟수 추가예정
             });
           } else {
             SetDownloadFileProps({
               filename: res.data.filename,
               size: getFileSize(res.data.size),
-              lastModified: res.data.lastModified,
+              uploadDate: res.data.uploadDate,
               token: null,
               download_url: res.data.download_url,
+              delete_url: res.data.delete_url,
               //추후에 기한,다운로드횟수 추가예정
             });
           }

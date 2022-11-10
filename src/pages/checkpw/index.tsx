@@ -15,7 +15,7 @@ import * as S from './styled';
 export const CheckPasswordPage: React.FC = () => {
   const checkPasswordFileProps = useSelector((state: RootState) => state.CheckPasswordFileProps);
   const [password, setPassword] = useState('');
-  const { year, month, day } = getDate(checkPasswordFileProps.lastModified);
+  const { year, month, day } = getDate(checkPasswordFileProps.uploadDate);
   const dispatch = useDispatch();
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
 
@@ -36,7 +36,7 @@ export const CheckPasswordPage: React.FC = () => {
           SetDownloadFileProps({
             filename: checkPasswordFileProps.filename,
             size: checkPasswordFileProps.size,
-            lastModified: checkPasswordFileProps.lastModified,
+            uploadDate: checkPasswordFileProps.uploadDate,
             token: res.data.token,
           });
           navigate('/download');
@@ -58,7 +58,7 @@ export const CheckPasswordPage: React.FC = () => {
     if (
       checkPasswordFileProps.filename === null ||
       checkPasswordFileProps.size === null ||
-      checkPasswordFileProps.lastModified === null
+      checkPasswordFileProps.uploadDate === null
     ) {
       navigate('/');
     }
