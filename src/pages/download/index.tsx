@@ -12,13 +12,13 @@ import * as S from './styled';
 export const DownloadPage: React.FC = () => {
   const navigate = useNavigate();
   const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
-  const { year, month, day } = getDate(downloadFileProps.lastModified);
+  const { year, month, day } = getDate(downloadFileProps.uploadDate);
   const [move] = useDeletePageNavigator(downloadFileProps.filename, downloadFileProps.token);
   useEffect(() => {
     if (
       downloadFileProps.filename === null ||
       downloadFileProps.size === null ||
-      downloadFileProps.lastModified === null
+      downloadFileProps.uploadDate === null
     ) {
       navigate('/');
     }
