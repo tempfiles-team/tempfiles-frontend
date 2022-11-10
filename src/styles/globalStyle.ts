@@ -9,17 +9,18 @@ export const globalStyle = css`
     --color-text-primary: #ffffff;
     --color-text-secondary: #25262e;
     --color-text-tertiary: #8f95e0;
-    --color-text-placeholder: #757575;
+    --color-text-placeholder: #c8beac;
 
     --color-backgorund-progressbar: #2d2d2d;
 
-    --color-check-true-background: #2ab514;
+    --color-check-true-background: #252728;
     --color-check-true-icon: var(--color-text-primary);
-    --color-check-false-background: var(--color-text-primary);
-    --color-check-false-icon: #c0c0c0;
+    --color-check-false-background: #252728;
+    --color-check-false-icon: #252728;
 
     --color-border: #757bab;
     --color-background: #282a3a;
+    --color-backgorund-black: #252728;
     --color-background-secondary: var(--color-border);
     --color-background-tertiary: #2e2836;
     --color-background-apicommand: #373c62cc;

@@ -7,14 +7,13 @@ export const FileFindContainer = styled.div`
   margin-top: 20px;
 `;
 
-export const FileFindTextBox = styled.div<{ placeholders: boolean }>`
+export const FileFindTextBox = styled.div`
   border: 4px solid var(--color-border);
   border-radius: 10px;
   width: 45rem;
   height: 4.2rem;
-  background-color: var(--color-text-primary);
-  color: ${(props) =>
-    props.placeholders ? 'var(--color-text-placeholder)' : ' var(--color-text-secondary)'};
+  background-color: var(--color-backgorund-black);
+  color: var(--color-text-placeholder);
   display: flex;
   align-items: center;
   white-space: nowrap;
@@ -35,7 +34,7 @@ export const FileFindButton = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   font-size: 2rem;
   font-weight: 700;
   border-radius: 10px;

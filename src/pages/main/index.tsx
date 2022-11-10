@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 
+// eslint-disable-next-line
 import { CheckBox, PasswordInput, UpLoadButton, FileFind, Progress } from '../../components';
 import { actionCreators } from '../../state';
 import { getFileSize } from '../../utils';
@@ -15,8 +16,11 @@ export const MainPage: React.FC = () => {
   const [typingCount, setTypingCount] = useState(0);
   const [uploading, setUploading] = useState(true);
   const [progressValue, serProgressValue] = useState(0);
+  // eslint-disable-next-line
   const [retentionPeriod, setRetentionPeriod] = useState(false);
+  // eslint-disable-next-line
   const [downloadCount, setDownloadCount] = useState(false);
+  // eslint-disable-next-line
   const [passwordBoolean, setPasswordBoolean] = useState(false);
   const [password, setPassword] = useState('');
   const [fileProps, setFileProps] = useState({
@@ -113,7 +117,7 @@ export const MainPage: React.FC = () => {
     <S.MainPageContainer>
       {uploading ? (
         <>
-          <S.MainPageCheckBoxSection>
+          {/* <S.MainPageCheckBoxSection>
             <CheckBox
               click={() => {
                 setRetentionPeriod(false);
@@ -141,7 +145,7 @@ export const MainPage: React.FC = () => {
               isCheck={passwordBoolean}
               label={'비밀번호'}
             />
-          </S.MainPageCheckBoxSection>
+          </S.MainPageCheckBoxSection> */}
           {passwordBoolean ? (
             <PasswordInput
               onChange={(text) => {
