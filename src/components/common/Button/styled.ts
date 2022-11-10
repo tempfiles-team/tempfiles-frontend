@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const ButtonContainer = styled.input<{ bgColor: string }>`
   background-color: ${(props) => props.bgColor};
-  border-radius: 8px;
+  border-radius: 0.8rem;
   outline: none;
   font-size: 2rem;
   font-weight: 700;
@@ -10,7 +10,7 @@ export const ButtonContainer = styled.input<{ bgColor: string }>`
   height: 6rem;
   border: 0;
   color: var(--color-text-primary);
-  margin: 0px 10px 0px 10px;
+  margin: 0px 1rem 0px 1rem;
 `;
 
 ButtonContainer.defaultProps = { type: 'button' };

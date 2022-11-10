@@ -3,15 +3,15 @@ import styled from '@emotion/styled';
 export const CheckBoxContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 40px;
+  margin-right: 4rem;
 `;
 
 export const CheckBoxObject = styled.div<{ isCheck: boolean }>`
   width: 2.4rem;
   height: 2.4rem;
-  padding: 5px;
-  margin: 5px 12px 5px 5px;
-  border-radius: 3px;
+  padding: 0.5rem;
+  margin: 0.5rem 1.2rem 0.5rem 0.5rem;
+  border-radius: 0.3rem;
   background-color: ${(props) =>
     props.isCheck ? 'var(--color-check-true-background)' : 'var(--color-check-false-background)'};
 `;

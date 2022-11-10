@@ -28,8 +28,14 @@ export const globalStyle = css`
 
     --color-button-primary: var(--color-border);
     --color-button-secondary: #aa75ab;
+
+    --small-mobile-breakpoint: 575px;
+    --mobile-breakpoint: 767px;
+    --tablet-breakpoint: 991px;
+    --desktop-breakpoint: 1200px;
   }
   html {
+    text-size-adjust: 100%;
     font-size: 10px;
   }
   body {
@@ -47,14 +53,14 @@ export const globalStyle = css`
   .MainLogoText {
     font-size: 6rem;
     font-weight: 900;
-    margin: 18px;
-    margin-top: 50px;
+    margin: 1.8rem;
+    margin-top: 5rem;
     color: var(--color-text-primary);
   }
   .MainLogoSubText {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 35px;
+    margin-bottom: 3.5rem;
     color: var(--color-text-primary);
   }
 `;

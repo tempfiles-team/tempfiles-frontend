@@ -14,5 +14,5 @@ export const DeletePagePageLabel = styled.div`
   font-size: 3rem;
   font-weight: 700;
   color: var(--color-text-primary);
-  margin: 30px;
+  margin: 3rem;
 `;

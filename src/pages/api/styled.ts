@@ -20,7 +20,7 @@ export const ApiListSection = styled.div`
 export const ApiListBox = styled.div`
   background-color: var(--color-backgorund-filelistbox);
   color: var(--color-text-tertiary);
-  border-radius: 10px;
+  border-radius: 1rem;
   padding: 2rem 1.4rem 2rem 1.4rem;
   margin: 1rem;
   display: flex;

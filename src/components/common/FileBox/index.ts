@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const FileBox = styled.div`
   background-color: var(--color-backgorund-filelistbox);
   color: var(--color-text-tertiary);
-  border-radius: 10px;
+  border-radius: 1rem;
   padding: 1.2rem 1.2rem 1.2rem 1.2rem;
   display: flex;
   flex-direction: row;
