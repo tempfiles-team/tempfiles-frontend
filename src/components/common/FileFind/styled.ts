@@ -3,14 +3,8 @@ import styled from '@emotion/styled';
 export const FileFindContainer = styled.div`
   width: 100%;
   display: flex;
-<<<<<<< HEAD
   align-items: center;
   margin-top: 2rem;
-=======
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
->>>>>>> 77ddbc7a3a9b1269418467b444928a8b76b6fe20
 `;
 
 export const FileFindTextBox = styled.div`
