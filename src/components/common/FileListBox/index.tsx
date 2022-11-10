@@ -5,6 +5,7 @@ import * as S from './styled';
 
 type FileListBoxProps = {
   filename: string;
+  fileId: string;
   size: string;
   uploadDate: any;
   isEncrypted: boolean;
@@ -13,6 +14,7 @@ type FileListBoxProps = {
 
 export const FileListBox: React.FC<FileListBoxProps> = ({
   filename,
+  fileId,
   size,
   uploadDate,
   isEncrypted,
@@ -20,7 +22,7 @@ export const FileListBox: React.FC<FileListBoxProps> = ({
 }) => (
   <S.FileListBoxContainer onClick={click}>
     {isEncrypted ? <LockIcon width={'2.3rem'} style={{ marginRight: '0.5rem' }} /> : <></>}
-    파일이름: {filename} / 크기:{size} / 업로드날짜:{uploadDate.year}-{uploadDate.month}-
-    {uploadDate.day}
+    ID: {fileId} / 파일이름: {filename} / 크기:{size} / 업로드날짜:{uploadDate.year}-
+    {uploadDate.month}-{uploadDate.day}
   </S.FileListBoxContainer>
 );

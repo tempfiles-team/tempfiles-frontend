@@ -47,6 +47,7 @@ export const FileListPage: React.FC = () => {
               <FileListBox
                 key={index}
                 filename={getShortFileName(item.filename)}
+                fileId={item.fileId}
                 size={getFileSize(item.size)}
                 uploadDate={getDate(item.uploadDate)}
                 isEncrypted={item.isEncrypted}
@@ -54,25 +55,17 @@ export const FileListPage: React.FC = () => {
                   if (item.isEncrypted) {
                     SetCheckPasswordFileProps({
                       filename: item.filename,
-                      size: getFileSize(item.size),
-                      uploadDate: item.uploadDate,
+                      fileId: item.fileId,
                     });
                     navigate('/checkpw');
                   } else {
                     SetDownloadFileProps({
                       filename: item.filename,
-                      size: getFileSize(item.size),
-                      uploadDate: item.uploadDate,
+                      fileId: item.fileId,
                       token: null,
                     });
                     navigate('/download');
                   }
-                  // SetDownloadFileProps({
-                  //   Name: item.filename,
-                  //   Size: item.size,
-                  //   uploadDate: item.uploadDate,
-                  //   //passowrd 유무 추가예정
-                  // });
                 }}
               />
             ))}

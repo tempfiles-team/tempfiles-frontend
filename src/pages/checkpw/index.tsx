@@ -30,13 +30,12 @@ export const CheckPasswordPage: React.FC = () => {
     } else {
       await axios({
         method: 'get',
-        url: `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkPasswordFileProps.filename}?pw=${password}`,
+        url: `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkPasswordFileProps.fileId}/${checkPasswordFileProps.filename}?pw=${password}`,
       })
         .then((res) => {
           SetDownloadFileProps({
             filename: checkPasswordFileProps.filename,
-            size: checkPasswordFileProps.size,
-            uploadDate: checkPasswordFileProps.uploadDate,
+            fileId: checkPasswordFileProps.fileId,
             token: res.data.token,
           });
           navigate('/download');
@@ -55,11 +54,7 @@ export const CheckPasswordPage: React.FC = () => {
     }
   };
   useEffect(() => {
-    if (
-      checkPasswordFileProps.filename === null ||
-      checkPasswordFileProps.size === null ||
-      checkPasswordFileProps.uploadDate === null
-    ) {
+    if (checkPasswordFileProps.filename === null || checkPasswordFileProps.fileId === null) {
       navigate('/');
     }
   });
