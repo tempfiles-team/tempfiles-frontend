@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import CheckPasswordFileProps from './CheckPasswordFileProps';
-import DeleteFileName from './DeleteFileName';
+import DeleteFileName from './DeleteFileProps';
 import DownloadFileProps from './DownloadFileProps';
 
 const reducers = combineReducers({

@@ -1,5 +1,5 @@
 export enum ActionType {
-  DeleteFileName = 'DeleteFileName',
+  DeleteFileProps = 'DeleteFileProps',
   DownloadFileProps = 'DownloadFileProps',
   CheckPasswordFileProps = 'CheckPasswordFileProps',
 }
