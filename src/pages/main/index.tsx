@@ -83,6 +83,7 @@ export const MainPage: React.FC = () => {
               size: getFileSize(res.data.size),
               lastModified: res.data.lastModified,
               token: null,
+              download_url: res.data.download_url,
               //추후에 기한,다운로드횟수 추가예정
             });
           }
