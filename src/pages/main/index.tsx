@@ -16,12 +16,11 @@ export const MainPage: React.FC = () => {
   const [typingCount, setTypingCount] = useState(0);
   const [uploading, setUploading] = useState(true);
   const [progressValue, serProgressValue] = useState(0);
-  // eslint-disable-next-line
+
   const [retentionPeriod, setRetentionPeriod] = useState(false);
-  // eslint-disable-next-line
   const [downloadCount, setDownloadCount] = useState(false);
-  // eslint-disable-next-line
   const [passwordBoolean, setPasswordBoolean] = useState(false);
+
   const [password, setPassword] = useState('');
   const [fileProps, setFileProps] = useState({
     filename: '',
@@ -75,6 +74,7 @@ export const MainPage: React.FC = () => {
               size: getFileSize(res.data.size),
               lastModified: res.data.lastModified,
               token: res.data.token,
+              download_url: res.data.download_url,
               //추후에 기한,다운로드횟수 추가예정
             });
           } else {

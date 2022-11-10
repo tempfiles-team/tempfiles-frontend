@@ -31,7 +31,7 @@ export const DownloadPage: React.FC = () => {
       </FileBox>
       <S.DownloadPageButtonSection>
         <a
-          href={`${process.env.REACT_APP_BACKEND_BASEURL}/dl/${downloadFileProps.filename}${
+          href={`${downloadFileProps.download_url}${
             downloadFileProps.token != null ? `?${downloadFileProps.token}` : ''
           }`}
         >
