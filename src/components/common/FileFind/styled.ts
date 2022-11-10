@@ -3,14 +3,13 @@ import styled from '@emotion/styled';
 export const FileFindContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 2rem;
 `;
 
 export const FileFindTextBox = styled.div`
-  border: 4px solid var(--color-border);
-  border-radius: 10px;
+  border: 0.4rem solid var(--color-border);
+  border-radius: 1rem;
   width: 45rem;
   height: 4.2rem;
   background-color: var(--color-backgorund-black);
@@ -18,8 +17,8 @@ export const FileFindTextBox = styled.div`
   display: flex;
   align-items: center;
   white-space: nowrap;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
   font-size: 1.8rem;
   font-weight: 700;
   overflow: auto;

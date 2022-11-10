@@ -5,7 +5,7 @@ export const RangeSlider = styled.input`
   padding: 0;
   width: 100%;
   height: 4rem;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   -webkit-appearance: none;
   -moz-appearance: none;
   outline: none;
@@ -22,7 +22,7 @@ export const RangeSlider = styled.input`
     background-color: var(--color-text-primary);
     height: 2rem;
     width: 1rem;
-    border-radius: 4px;
+    border-radius: 0.4rem;
   }
   //Firefox
   &::-moz-range-thumb {
@@ -31,7 +31,7 @@ export const RangeSlider = styled.input`
     background-color: var(--color-text-primary);
     height: 2rem;
     width: 1rem;
-    border-radius: 4px;
+    border-radius: 0.4rem;
   }
 `;
 
