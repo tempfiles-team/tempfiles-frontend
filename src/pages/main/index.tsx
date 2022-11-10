@@ -117,7 +117,7 @@ export const MainPage: React.FC = () => {
     <S.MainPageContainer>
       {uploading ? (
         <>
-          {/* <S.MainPageCheckBoxSection>
+          <S.MainPageCheckBoxSection>
             <CheckBox
               click={() => {
                 setRetentionPeriod(false);
@@ -145,7 +145,7 @@ export const MainPage: React.FC = () => {
               isCheck={passwordBoolean}
               label={'비밀번호'}
             />
-          </S.MainPageCheckBoxSection> */}
+          </S.MainPageCheckBoxSection>
           {passwordBoolean ? (
             <PasswordInput
               onChange={(text) => {

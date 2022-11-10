@@ -10,6 +10,6 @@ export const UpLoadButton = styled.input`
   font-weight: 900;
   background-color: var(--color-background-secondary);
   margin-top: 30px;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   text-align: center;
 `;
