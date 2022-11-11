@@ -20,8 +20,8 @@ export const DeletePage: React.FC = () => {
   const deleteFile = async () => {
     await axios({
       method: 'delete',
-      url: `${process.env.REACT_APP_BACKEND_BASEURL}/del/${DeleteFileProps.filename}${
-        DeleteFileProps.token != null ? `?token=${DeleteFileProps.token}` : ''
+      url: `${DeleteFileProps.delete_url}${
+        DeleteFileProps.isEncrypted ? `?token=${DeleteFileProps.token}` : ''
       }`,
     })
       .then(() => {
