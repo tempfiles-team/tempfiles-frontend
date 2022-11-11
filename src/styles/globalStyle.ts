@@ -33,6 +33,8 @@ export const globalStyle = css`
     --mobile-breakpoint: 767px;
     --tablet-breakpoint: 991px;
     --desktop-breakpoint: 1200px;
+
+    --vh: 100%;
   }
   html {
     text-size-adjust: 100%;
@@ -43,7 +45,7 @@ export const globalStyle = css`
     color: var(--color-text-primary);
     letter-spacing: -0.05rem;
     font-size: 1.6rem;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     display: flex;
     flex-direction: column;
     justify-content: center;
