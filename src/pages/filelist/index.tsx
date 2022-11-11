@@ -14,7 +14,6 @@ export const FileListPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
   const dispatch = useDispatch();
-  // eslint-disable-next-line
   const { SetDownloadFileProps, SetCheckPasswordFileProps } = bindActionCreators(
     actionCreators,
     dispatch,
@@ -29,7 +28,7 @@ export const FileListPage: React.FC = () => {
         setFileList(res.data.list); //파일리스트 요소 갯수에 따른 핸들링 추가예정
         setTimeout(() => {
           setLoading(true); //loading 확인하고싶으면 false로 바꿔주세요.
-        }, 1200);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -56,12 +55,16 @@ export const FileListPage: React.FC = () => {
                     SetCheckPasswordFileProps({
                       filename: item.filename,
                       fileId: item.fileId,
+                      size: getFileSize(item.size),
+                      uploadDate: item.uploadDate,
+                      isEncrypted: item.isEncrypted,
                     });
                     navigate('/checkpw');
                   } else {
                     SetDownloadFileProps({
                       filename: item.filename,
                       fileId: item.fileId,
+                      isEncrypted: item.isEncrypted,
                       token: null,
                     });
                     navigate('/download');

@@ -36,6 +36,7 @@ export const CheckPasswordPage: React.FC = () => {
           SetDownloadFileProps({
             filename: checkPasswordFileProps.filename,
             fileId: checkPasswordFileProps.fileId,
+            isEncrypted: checkPasswordFileProps.isEncrypted,
             token: res.data.token,
           });
           navigate('/download');
