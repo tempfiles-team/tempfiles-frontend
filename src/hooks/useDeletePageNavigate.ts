@@ -4,12 +4,12 @@ import { bindActionCreators } from 'redux';
 
 import { actionCreators } from '../state';
 
-export const useDeletePageNavigator = (filename: string, delete_url: string, token: string) => {
+export const useDeletePageNavigator = (delete_url: string, isEncrypted: boolean, token: string) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { SetDeleteFileProps } = bindActionCreators(actionCreators, dispatch);
   const move = () => {
-    SetDeleteFileProps({ filename: filename, delete_url: delete_url, token: token });
+    SetDeleteFileProps({ delete_url: delete_url, isEncrypted: isEncrypted, token: token });
     navigate('/delete');
   };
   return [move];
