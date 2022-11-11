@@ -1,13 +1,8 @@
 import { ActionType } from '../action-types';
 
-interface SusccesFileProps {
-  type: ActionType.SusccesFileProps;
-  props: any;
-}
-
 interface DeleteFileProps {
-  type: ActionType.DeleteFileName;
-  name: string;
+  type: ActionType.DeleteFileProps;
+  props: any;
 }
 
 interface DownloadFileProps {
@@ -15,4 +10,8 @@ interface DownloadFileProps {
   props: any;
 }
 
-export type Action = SusccesFileProps | DeleteFileProps | DownloadFileProps;
+interface CheckPasswordFileProps {
+  type: ActionType.CheckPasswordFileProps;
+  props: any;
+}
+export type Action = DeleteFileProps | DownloadFileProps | CheckPasswordFileProps;

@@ -3,23 +3,23 @@ import { Dispatch } from 'redux';
 import { ActionType } from '../action-types';
 import { Action } from '../actions';
 
-export const SetSusccesFileProps = (props: any) => (dispatch: Dispatch<Action>) => {
+export const SetDeleteFileProps = (props: any) => (dispatch: Dispatch<Action>) => {
   dispatch({
-    type: ActionType.SusccesFileProps,
+    type: ActionType.DeleteFileProps,
     props: props,
-  });
-};
-
-export const SetDeleteFileName = (name: string) => (dispatch: Dispatch<Action>) => {
-  dispatch({
-    type: ActionType.DeleteFileName,
-    name: name,
   });
 };
 
 export const SetDownloadFileProps = (props: any) => (dispatch: Dispatch<Action>) => {
   dispatch({
     type: ActionType.DownloadFileProps,
+    props: props,
+  });
+};
+
+export const SetCheckPasswordFileProps = (props: any) => (dispatch: Dispatch<Action>) => {
+  dispatch({
+    type: ActionType.CheckPasswordFileProps,
     props: props,
   });
 };

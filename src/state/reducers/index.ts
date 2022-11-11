@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
-import DeleteFileName from './DeleteFileName';
+import CheckPasswordFileProps from './CheckPasswordFileProps';
+import DeleteFileName from './DeleteFileProps';
 import DownloadFileProps from './DownloadFileProps';
-import SuccessFileProps from './SuccessFileProps';
 
 const reducers = combineReducers({
-  SuccessFileProps: SuccessFileProps,
   DeleteFileName: DeleteFileName,
   DownloadFileProps: DownloadFileProps,
+  CheckPasswordFileProps: CheckPasswordFileProps,
 });
 
 export default reducers;

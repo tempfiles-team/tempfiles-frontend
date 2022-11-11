@@ -16,23 +16,27 @@ export const MainPage: React.FC = () => {
   const [typingCount, setTypingCount] = useState(0);
   const [uploading, setUploading] = useState(true);
   const [progressValue, serProgressValue] = useState(0);
-  // eslint-disable-next-line
+
   const [retentionPeriod, setRetentionPeriod] = useState(false);
-  // eslint-disable-next-line
   const [downloadCount, setDownloadCount] = useState(false);
-  // eslint-disable-next-line
   const [passwordBoolean, setPasswordBoolean] = useState(false);
+
   const [password, setPassword] = useState('');
-  const [fileProps, setFileProps] = useState({ name: '', size: '', fileType: '', fileData: '' });
+  const [fileProps, setFileProps] = useState({
+    filename: '',
+    size: '',
+    fileType: '',
+    fileData: '',
+  });
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { SetSusccesFileProps } = bindActionCreators(actionCreators, dispatch);
+  const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
 
   const handleChangeFile = (event: any) => {
     setFileProps({
-      name: event.target.files[0].name,
+      filename: event.target.files[0].name,
       size: getFileSize(event.target.files[0].size),
       fileType:
         event.target.files[0].type === '' ? 'application/actet-stream' : event.target.files[0].type,
@@ -41,7 +45,7 @@ export const MainPage: React.FC = () => {
   };
 
   const UpLoad = async () => {
-    if (fileProps.name != '' && fileProps.size != '') {
+    if (fileProps.filename != '' && fileProps.size != '') {
       const formdata = new FormData();
       formdata.append('file', fileProps.fileData);
       await axios({
@@ -59,20 +63,31 @@ export const MainPage: React.FC = () => {
         },
       })
         .then(async (res) => {
-          console.log(res);
           setUploading(true);
           toast.success('업로드 성공!', {
             autoClose: 3000,
             position: toast.POSITION.BOTTOM_RIGHT,
           });
-          SetSusccesFileProps({
-            name: res.data.filename,
-            size: getFileSize(res.data.size),
-            fileType: res.data.filetype,
-            expiresAt: res.data.expires,
-            deleteUrl: res.data.delete_url,
-          });
-          navigate('/success');
+          if (res.data.isEncrypted) {
+            SetDownloadFileProps({
+              filename: res.data.filename,
+              size: getFileSize(res.data.size),
+              lastModified: res.data.lastModified,
+              token: res.data.token,
+              download_url: res.data.download_url,
+              //추후에 기한,다운로드횟수 추가예정
+            });
+          } else {
+            SetDownloadFileProps({
+              filename: res.data.filename,
+              size: getFileSize(res.data.size),
+              lastModified: res.data.lastModified,
+              token: null,
+              download_url: res.data.download_url,
+              //추후에 기한,다운로드횟수 추가예정
+            });
+          }
+          navigate('/download');
         })
         .catch((err) => {
           console.log(err);
@@ -103,7 +118,7 @@ export const MainPage: React.FC = () => {
     <S.MainPageContainer>
       {uploading ? (
         <>
-          {/* <S.MainPageCheckBoxSection>
+          <S.MainPageCheckBoxSection>
             <CheckBox
               click={() => {
                 setRetentionPeriod(false);
@@ -131,7 +146,7 @@ export const MainPage: React.FC = () => {
               isCheck={passwordBoolean}
               label={'비밀번호'}
             />
-          </S.MainPageCheckBoxSection> */}
+          </S.MainPageCheckBoxSection>
           {passwordBoolean ? (
             <PasswordInput
               onChange={(text) => {
@@ -148,7 +163,7 @@ export const MainPage: React.FC = () => {
       ) : (
         <Progress
           value={progressValue}
-          fileName={fileProps.name}
+          fileName={fileProps.filename}
           typing={typingText[typingCount]}
         />
       )}

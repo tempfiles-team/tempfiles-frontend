@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
+//나중에 loading애니메이션 변수화하기
 export const SkeletonUIBox = styled.div<{ randomWitdh: string }>`
   display: flex;
   background-color: var(--color-backgorund-filelistbox);
-  border-radius: 10px;
+  border-radius: 1rem;
   margin-bottom: 1.5rem;
   min-height: 4.6rem;
   min-width: ${(props) => props.randomWitdh}rem;
@@ -12,7 +13,7 @@ export const SkeletonUIBox = styled.div<{ randomWitdh: string }>`
     width: 100%;
     height: auto;
     animation: loading 2s infinite;
-    box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 3rem 3rem rgba(255, 255, 255, 0.3);
   }
   @keyframes loading {
     0% {
@@ -41,14 +42,14 @@ export const SkeletonUI = styled.div<{
   min-height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   background: var(--color-backgorund-filelistbox);
-  border-radius: 10px;
+  border-radius: 1rem;
   overflow: hidden;
   &::before {
     content: ' ';
     width: 100%;
     height: auto;
     animation: loading 2s infinite;
-    box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 3rem 3rem rgba(255, 255, 255, 0.3);
   }
   @keyframes loading {
     0% {

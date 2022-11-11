@@ -11,14 +11,14 @@ export const ProgressBar = styled.div<{ width: number }>`
   min-width: 70rem;
   min-height: 5.6rem;
   background: var(--color-backgorund-progressbar);
-  border-radius: 15px;
+  border-radius: 1.5rem;
   overflow: hidden;
   &::before {
     content: ' ';
     transition: all 1s;
     width: ${(props) => props.width}%;
     height: auto;
-    border-radius: 15px;
+    border-radius: 1.5rem;
     background: #373c62;
   }
 `;
@@ -33,5 +33,5 @@ export const ProgressAnimationBox = styled.div`
   width: 20rem;
   height: 20rem;
   overflow: hidden;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 `;

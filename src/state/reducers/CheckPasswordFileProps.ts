@@ -2,11 +2,11 @@ import { ActionType } from '../action-types';
 import { Action } from '../actions';
 
 const reducer = (
-  state: any = { name: null, size: null, fileType: null, files: null },
+  state: any = { filename: null, size: null, lastModified: null },
   action: Action,
 ): any => {
   switch (action.type) {
-    case ActionType.SusccesFileProps:
+    case ActionType.CheckPasswordFileProps:
       return action.props;
     default:
       return state;

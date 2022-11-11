@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const NavbarContainer = styled.nav`
   width: 32rem;
   min-width: 250px;
-  margin: 30px auto 30px auto;
+  margin: 3rem auto 3rem auto;
   display: flex;
   justify-content: space-between;
   z-index: 99;

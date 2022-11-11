@@ -3,24 +3,22 @@ import styled from '@emotion/styled';
 export const FileFindContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 2rem;
 `;
 
-export const FileFindTextBox = styled.div<{ placeholders: boolean }>`
-  border: 4px solid var(--color-border);
-  border-radius: 10px;
+export const FileFindTextBox = styled.div`
+  border: 0.4rem solid var(--color-border);
+  border-radius: 1rem;
   width: 45rem;
   height: 4.2rem;
-  background-color: var(--color-text-primary);
-  color: ${(props) =>
-    props.placeholders ? 'var(--color-text-placeholder)' : ' var(--color-text-secondary)'};
+  background-color: var(--color-backgorund-black);
+  color: var(--color-text-placeholder);
   display: flex;
   align-items: center;
   white-space: nowrap;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
   font-size: 1.8rem;
   font-weight: 700;
   overflow: auto;
@@ -36,7 +34,7 @@ export const FileFindButton = styled.label`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   font-size: 2rem;
   font-weight: 700;
   border-radius: 10px;
