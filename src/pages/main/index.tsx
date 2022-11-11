@@ -68,25 +68,13 @@ export const MainPage: React.FC = () => {
             autoClose: 3000,
             position: toast.POSITION.BOTTOM_RIGHT,
           });
-          if (res.data.isEncrypted) {
-            SetDownloadFileProps({
-              filename: res.data.filename,
-              size: getFileSize(res.data.size),
-              lastModified: res.data.lastModified,
-              token: res.data.token,
-              download_url: res.data.download_url,
-              //추후에 기한,다운로드횟수 추가예정
-            });
-          } else {
-            SetDownloadFileProps({
-              filename: res.data.filename,
-              size: getFileSize(res.data.size),
-              lastModified: res.data.lastModified,
-              token: null,
-              download_url: res.data.download_url,
-              //추후에 기한,다운로드횟수 추가예정
-            });
-          }
+          SetDownloadFileProps({
+            filename: res.data.filename,
+            fileId: res.data.fileId,
+            token: res.data.isEncrypted ? res.data.token : null,
+            isEncrypted: res.data.isEncrypted,
+            //추후에 기한,다운로드횟수 추가예정
+          });
           navigate('/download');
         })
         .catch((err) => {

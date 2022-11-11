@@ -2,7 +2,7 @@ import { ActionType } from '../action-types';
 import { Action } from '../actions';
 
 const reducer = (
-  state: any = { filename: null, size: null, lastModified: null },
+  state: any = { filename: null, fileId: null, size: null, uploadDate: null, isEncrypted: null },
   action: Action,
 ): any => {
   switch (action.type) {

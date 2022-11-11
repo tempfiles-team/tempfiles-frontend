@@ -15,7 +15,7 @@ import * as S from './styled';
 export const CheckPasswordPage: React.FC = () => {
   const checkPasswordFileProps = useSelector((state: RootState) => state.CheckPasswordFileProps);
   const [password, setPassword] = useState('');
-  const { year, month, day } = getDate(checkPasswordFileProps.lastModified);
+  const { year, month, day } = getDate(checkPasswordFileProps.uploadDate);
   const dispatch = useDispatch();
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
 
@@ -30,13 +30,13 @@ export const CheckPasswordPage: React.FC = () => {
     } else {
       await axios({
         method: 'get',
-        url: `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkPasswordFileProps.filename}?pw=${password}`,
+        url: `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkPasswordFileProps.fileId}/${checkPasswordFileProps.filename}?pw=${password}`,
       })
         .then((res) => {
           SetDownloadFileProps({
             filename: checkPasswordFileProps.filename,
-            size: checkPasswordFileProps.size,
-            lastModified: checkPasswordFileProps.lastModified,
+            fileId: checkPasswordFileProps.fileId,
+            isEncrypted: checkPasswordFileProps.isEncrypted,
             token: res.data.token,
           });
           navigate('/download');
@@ -55,11 +55,7 @@ export const CheckPasswordPage: React.FC = () => {
     }
   };
   useEffect(() => {
-    if (
-      checkPasswordFileProps.filename === null ||
-      checkPasswordFileProps.size === null ||
-      checkPasswordFileProps.lastModified === null
-    ) {
+    if (checkPasswordFileProps.filename === null || checkPasswordFileProps.fileId === null) {
       navigate('/');
     }
   });
