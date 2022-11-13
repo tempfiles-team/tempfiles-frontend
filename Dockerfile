@@ -1,6 +1,9 @@
 FROM nginx:latest
 
-COPY build /usr/share/nginx/html
+# Copy the nginx configuration file
+COPY nginx.conf /etc/nginx/nginx.conf
+
+COPY build /etc/nginx/html
 
 EXPOSE 80
 
