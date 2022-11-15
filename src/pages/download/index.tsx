@@ -33,9 +33,9 @@ export const DownloadPage: React.FC = () => {
     const getFileProps = async () => {
       await axios({
         method: 'get',
-        url: `${process.env.REACT_APP_BACKEND_BASEURL}/file/${downloadFileProps.fileId}/${
-          downloadFileProps.filename
-        }${downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''}`,
+        url: `${process.env.REACT_APP_BACKEND_BASEURL}/file/${downloadFileProps.fileId}${
+          downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
+        }`,
       })
         .then((res) => {
           setFileProps({
@@ -57,7 +57,7 @@ export const DownloadPage: React.FC = () => {
           console.log(err);
         });
     };
-    if (downloadFileProps.filename != null || downloadFileProps.fileId != null) {
+    if (downloadFileProps.fileId != null) {
       getFileProps();
     } else {
       navigate('/');

@@ -30,11 +30,10 @@ export const CheckPasswordPage: React.FC = () => {
     } else {
       await axios({
         method: 'get',
-        url: `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkPasswordFileProps.fileId}/${checkPasswordFileProps.filename}?pw=${password}`,
+        url: `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkPasswordFileProps.fileId}?pw=${password}`,
       })
         .then((res) => {
           SetDownloadFileProps({
-            filename: checkPasswordFileProps.filename,
             fileId: checkPasswordFileProps.fileId,
             isEncrypted: checkPasswordFileProps.isEncrypted,
             token: res.data.token,
