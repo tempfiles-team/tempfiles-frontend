@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { Outlet, Route, Routes, Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import '../node_modules/react-toastify/dist/ReactToastify.css';
 import { Navbar } from './components';
 import {
   MainPage,
