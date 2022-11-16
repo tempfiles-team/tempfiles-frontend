@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { Button, FileBox, SkeletonUI } from '../../components';
@@ -14,6 +15,7 @@ export const DownloadPage: React.FC = () => {
   const navigate = useNavigate();
   const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
   const [loading, setLoading] = useState(true);
+  const { fileid } = useParams<{ fileid: string }>();
   const [fileProps, setFileProps] = useState({
     filename: '',
     // fileId: '',
@@ -34,7 +36,7 @@ export const DownloadPage: React.FC = () => {
     const getFileProps = async () => {
       await axios({
         method: 'get',
-        url: `${process.env.REACT_APP_BACKEND_BASEURL}/file/${downloadFileProps.fileId}${
+        url: `${process.env.REACT_APP_BACKEND_BASEURL}/file/${fileid}${
           downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
         }`,
       })
@@ -51,20 +53,22 @@ export const DownloadPage: React.FC = () => {
           });
         })
         .catch((err) => {
-          navigate(-1);
-          toast.error(`error 문의해주세요. ${err.response.status}`, {
-            autoClose: 1000,
-            position: toast.POSITION.BOTTOM_RIGHT,
-          });
-          console.log(err);
+          navigate('/');
+          if (err.response.status != 401) {
+            toast.error(`error 문의해주세요. ${err.response.status}`, {
+              autoClose: 1000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          } else {
+            toast.error(`잘못된 링크입니다`, {
+              autoClose: 1000,
+              position: toast.POSITION.BOTTOM_RIGHT,
+            });
+          }
         });
     };
-    if (downloadFileProps.fileId != null) {
-      getFileProps();
-    } else {
-      navigate('/');
-    }
-  }, [downloadFileProps, navigate]);
+    getFileProps();
+  }, [downloadFileProps, navigate, fileid]);
   return (
     <S.DownloadPageContainer>
       {!loading ? (
