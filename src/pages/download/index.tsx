@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { Button, FileBox } from '../../components';
+import { Button, FileBox, SkeletonUI } from '../../components';
 import { useDeletePageNavigator } from '../../hooks';
 import { RootState } from '../../state/reducers';
 import { getDate, getFileSize } from '../../utils';
@@ -13,6 +13,7 @@ import * as S from './styled';
 export const DownloadPage: React.FC = () => {
   const navigate = useNavigate();
   const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
+  const [loading, setLoading] = useState(true);
   const [fileProps, setFileProps] = useState({
     filename: '',
     // fileId: '',
@@ -38,6 +39,7 @@ export const DownloadPage: React.FC = () => {
         }`,
       })
         .then((res) => {
+          setLoading(false);
           setFileProps({
             filename: res.data.filename,
             // fileId: res.data.fileId,
@@ -65,51 +67,60 @@ export const DownloadPage: React.FC = () => {
   }, [downloadFileProps, navigate]);
   return (
     <S.DownloadPageContainer>
-      <FileBox>
-        파일이름:{fileProps.filename} / 크기:{fileProps.size} / 업로드된 날짜:
-        {fileProps.uploadDate.year}-{fileProps.uploadDate.month}-{fileProps.uploadDate.day}
-      </FileBox>
-      <S.DownloadPageButtonSection>
-        <a
-          href={`${fileProps.download_url}${
-            fileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
-          }`}
-        >
-          <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
-        </a>
-        <Button
-          click={() => {
-            navigator.clipboard.writeText(
-              `${fileProps.download_url}${
+      {!loading ? (
+        <>
+          <FileBox>
+            파일이름:{fileProps.filename} / 크기:{fileProps.size} / 업로드된 날짜:
+            {fileProps.uploadDate.year}-{fileProps.uploadDate.month}-{fileProps.uploadDate.day}
+          </FileBox>
+          <S.DownloadPageButtonSection>
+            <a
+              href={`${fileProps.download_url}${
                 fileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
-              }`,
-            );
-            toast.success('복사 완료', {
-              autoClose: 1000,
-              position: toast.POSITION.BOTTOM_RIGHT,
-            });
-          }}
-          bgColor="var(--color-button-primary)"
-          label="링크복사"
-        />
-        <Button
-          click={() => {
-            move();
-          }}
-          bgColor="var(--color-button-secondary)"
-          label="파일삭제"
-        />
-        <Button
-          click={() => {
-            toast.success('제작중!', {
-              autoClose: 1000,
-              position: toast.POSITION.BOTTOM_RIGHT,
-            });
-          }}
-          bgColor="var(--color-button-secondary)"
-          label="신고"
-        />
-      </S.DownloadPageButtonSection>
+              }`}
+            >
+              <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
+            </a>
+            <Button
+              click={() => {
+                navigator.clipboard.writeText(
+                  `${fileProps.download_url}${
+                    fileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
+                  }`,
+                );
+                toast.success('복사 완료', {
+                  autoClose: 1000,
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+              }}
+              bgColor="var(--color-button-primary)"
+              label="링크복사"
+            />
+            <Button
+              click={() => {
+                move();
+              }}
+              bgColor="var(--color-button-secondary)"
+              label="파일삭제"
+            />
+            <Button
+              click={() => {
+                toast.success('제작중!', {
+                  autoClose: 1000,
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+              }}
+              bgColor="var(--color-button-secondary)"
+              label="신고"
+            />
+          </S.DownloadPageButtonSection>
+        </>
+      ) : (
+        <>
+          <SkeletonUI width="80rem" height="4.6rem" margin="0" />
+          <SkeletonUI width="64rem" height="6rem" margin="3rem 0px 0px 0px" />
+        </>
+      )}
     </S.DownloadPageContainer>
   );
 };
