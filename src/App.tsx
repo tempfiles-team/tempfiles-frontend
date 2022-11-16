@@ -45,7 +45,7 @@ export const App: React.FC = () => (
         }
       >
         <Route index element={<MainPage />} />
-        <Route path="/download" element={<DownloadPage />} />
+        <Route path="/download/:fileid" element={<DownloadPage />} />
         <Route path="/delete" element={<DeletePage />} />
         <Route path="/filelist" element={<FileListPage />} />
         <Route path="/api/*" element={<ApiPage />} />

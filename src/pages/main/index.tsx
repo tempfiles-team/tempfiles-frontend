@@ -69,13 +69,12 @@ export const MainPage: React.FC = () => {
             position: toast.POSITION.BOTTOM_RIGHT,
           });
           SetDownloadFileProps({
-            filename: res.data.filename,
             fileId: res.data.fileId,
             token: res.data.isEncrypted ? res.data.token : null,
             isEncrypted: res.data.isEncrypted,
             //추후에 기한,다운로드횟수 추가예정
           });
-          navigate('/download');
+          navigate(`/download/${res.data.fileId}`);
         })
         .catch((err) => {
           console.log(err);

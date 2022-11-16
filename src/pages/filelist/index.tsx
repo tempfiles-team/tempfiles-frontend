@@ -62,12 +62,11 @@ export const FileListPage: React.FC = () => {
                     navigate('/checkpw');
                   } else {
                     SetDownloadFileProps({
-                      filename: item.filename,
                       fileId: item.fileId,
                       isEncrypted: item.isEncrypted,
                       token: null,
                     });
-                    navigate('/download');
+                    navigate(`/download/${item.fileId}`);
                   }
                 }}
               />
