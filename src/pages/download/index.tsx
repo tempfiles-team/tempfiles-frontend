@@ -107,16 +107,6 @@ export const DownloadPage: React.FC = () => {
               bgColor="var(--color-button-secondary)"
               label="파일삭제"
             />
-            <Button
-              click={() => {
-                toast.success('제작중!', {
-                  autoClose: 1000,
-                  position: toast.POSITION.BOTTOM_RIGHT,
-                });
-              }}
-              bgColor="var(--color-button-secondary)"
-              label="신고"
-            />
           </S.DownloadPageButtonSection>
         </>
       ) : (
