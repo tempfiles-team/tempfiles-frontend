@@ -1,21 +1,25 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 
 import { FileBox, Button } from '../../components';
 import { actionCreators } from '../../state';
-import { RootState } from '../../state/reducers';
 import { getDate } from '../../utils';
 import * as S from './styled';
 
 export const CheckPasswordPage: React.FC = () => {
-  const checkPasswordFileProps = useSelector((state: RootState) => state.CheckPasswordFileProps);
   const [password, setPassword] = useState('');
-  const { year, month, day } = getDate(checkPasswordFileProps.uploadDate);
+  const { checkfileid } = useParams<{ checkfileid: string }>();
+  const [fileProps, setFileProps] = useState({
+    filename: '',
+    size: '',
+    uploadDate: { year: 0, month: 0, day: 0 },
+  });
+  // const { year, month, day } = getDate(checkPasswordFileProps.uploadDate);
   const dispatch = useDispatch();
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
 
@@ -30,15 +34,14 @@ export const CheckPasswordPage: React.FC = () => {
     } else {
       await axios({
         method: 'get',
-        url: `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkPasswordFileProps.fileId}?pw=${password}`,
+        url: `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkfileid}?pw=${password}`,
       })
         .then((res) => {
           SetDownloadFileProps({
-            fileId: checkPasswordFileProps.fileId,
-            isEncrypted: checkPasswordFileProps.isEncrypted,
+            isEncrypted: true,
             token: res.data.token,
           });
-          navigate('/download');
+          navigate(`/download/${checkfileid}`);
           toast.success('통과!', {
             autoClose: 1000,
             position: toast.POSITION.BOTTOM_RIGHT,
@@ -54,15 +57,34 @@ export const CheckPasswordPage: React.FC = () => {
     }
   };
   useEffect(() => {
-    if (checkPasswordFileProps.filename === null || checkPasswordFileProps.fileId === null) {
-      navigate('/');
-    }
+    const getFileProps = async () => {
+      await axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_BACKEND_BASEURL}/file/${checkfileid}`,
+      })
+        .then((res) => {
+          setFileProps({
+            filename: res.data.filename,
+            size: res.data.size,
+            uploadDate: getDate(res.data.uploadDate),
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          navigate('/');
+          toast.error('error 문의해주세요...', {
+            autoClose: 1000,
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
+        });
+    };
+    getFileProps();
   });
   return (
     <S.CheckPasswordPageContainer>
       <FileBox>
-        파일이름:{checkPasswordFileProps.filename} / 크기:{checkPasswordFileProps.size} / 업로드된
-        날짜: {year}-{month}-{day}
+        파일이름:{fileProps.filename} / 크기:{fileProps.size} / 업로드된 날짜:{' '}
+        {fileProps.uploadDate.year}-{fileProps.uploadDate.month}-{fileProps.uploadDate.day}
       </FileBox>
       <S.PasswordInputSection>
         <S.CheckPasswordInput

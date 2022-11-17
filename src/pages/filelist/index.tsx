@@ -14,10 +14,7 @@ export const FileListPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
   const dispatch = useDispatch();
-  const { SetDownloadFileProps, SetCheckPasswordFileProps } = bindActionCreators(
-    actionCreators,
-    dispatch,
-  );
+  const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
   const [fileList, setFileList] = useState<any[]>();
   const getFileList = async () => {
     await axios({
@@ -52,14 +49,7 @@ export const FileListPage: React.FC = () => {
                 isEncrypted={item.isEncrypted}
                 click={() => {
                   if (item.isEncrypted) {
-                    SetCheckPasswordFileProps({
-                      filename: item.filename,
-                      fileId: item.fileId,
-                      size: getFileSize(item.size),
-                      uploadDate: item.uploadDate,
-                      isEncrypted: item.isEncrypted,
-                    });
-                    navigate('/checkpw');
+                    navigate(`/checkpw/${item.fileId}`);
                   } else {
                     SetDownloadFileProps({
                       fileId: item.fileId,

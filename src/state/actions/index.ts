@@ -10,8 +10,4 @@ interface DownloadFileProps {
   props: any;
 }
 
-interface CheckPasswordFileProps {
-  type: ActionType.CheckPasswordFileProps;
-  props: any;
-}
-export type Action = DeleteFileProps | DownloadFileProps | CheckPasswordFileProps;
+export type Action = DeleteFileProps | DownloadFileProps;

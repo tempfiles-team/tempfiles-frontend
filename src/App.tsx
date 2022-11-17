@@ -49,7 +49,7 @@ export const App: React.FC = () => (
         <Route path="/delete" element={<DeletePage />} />
         <Route path="/filelist" element={<FileListPage />} />
         <Route path="/api/*" element={<ApiPage />} />
-        <Route path="/checkpw" element={<CheckPasswordPage />} />
+        <Route path="/checkpw/:checkfileid" element={<CheckPasswordPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

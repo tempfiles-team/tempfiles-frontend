@@ -16,10 +16,3 @@ export const SetDownloadFileProps = (props: any) => (dispatch: Dispatch<Action>)
     props: props,
   });
 };
-
-export const SetCheckPasswordFileProps = (props: any) => (dispatch: Dispatch<Action>) => {
-  dispatch({
-    type: ActionType.CheckPasswordFileProps,
-    props: props,
-  });
-};

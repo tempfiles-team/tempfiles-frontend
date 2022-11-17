@@ -3,7 +3,6 @@ import { Action } from '../actions';
 
 const reducer = (
   state: any = {
-    fileId: null,
     token: null,
     isEncrypted: null,
   },
