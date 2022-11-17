@@ -12,7 +12,7 @@ import * as S from './styled';
 export const FileListPage: React.FC = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [listZero, setListZero] = useState(true); //test: true
+  const [listZero, setListZero] = useState(false); //test: true
   const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
   const dispatch = useDispatch();
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
