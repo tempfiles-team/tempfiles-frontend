@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 
-// eslint-disable-next-line
 import { CheckBox, PasswordInput, UpLoadButton, FileFind, Progress } from '../../components';
 import { actionCreators } from '../../state';
 import { getFileSize } from '../../utils';
