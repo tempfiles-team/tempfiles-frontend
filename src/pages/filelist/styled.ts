@@ -18,3 +18,9 @@ export const FileListPageBoxShoadow = styled.div`
   top: -2.5rem; //-25px
   background: linear-gradient(180deg, rgba(40, 42, 58, 0) 0%, #282a3a 45.31%);
 `;
+
+export const FileListZero = styled.div`
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 5rem;
+`;
