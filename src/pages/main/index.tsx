@@ -14,7 +14,8 @@ export const MainPage: React.FC = () => {
   const typingText = ['.', '..', '...'];
   const [typingCount, setTypingCount] = useState(0);
   const [uploading, setUploading] = useState(true);
-  const [progressValue, serProgressValue] = useState(0);
+  const [progressValue, setProgressValue] = useState(0);
+  const [progressStateText, setProgressStateText] = useState('uploading');
 
   const [retentionPeriod, setRetentionPeriod] = useState(false);
   const [downloadCount, setDownloadCount] = useState(false);
@@ -58,7 +59,10 @@ export const MainPage: React.FC = () => {
         },
         onUploadProgress(progress) {
           setUploading(false);
-          serProgressValue(Math.floor((progress.loaded / progress.total) * 100));
+          setProgressValue(Math.floor((progress.loaded / progress.total) * 100));
+          if (Math.floor((progress.loaded / progress.total) * 100) === 100) {
+            setProgressStateText('백엔드 처리중');
+          }
         },
       })
         .then(async (res) => {
@@ -151,6 +155,7 @@ export const MainPage: React.FC = () => {
           value={progressValue}
           fileName={fileProps.filename}
           typing={typingText[typingCount]}
+          stateText={progressStateText}
         />
       )}
     </S.MainPageContainer>
