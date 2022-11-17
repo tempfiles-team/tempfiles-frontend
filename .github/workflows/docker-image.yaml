@@ -44,4 +44,4 @@ jobs:
           file: ./Dockerfile
           platforms: linux/arm64, linux/amd64
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tempfiles-front:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tempfiles-frontend:latest
