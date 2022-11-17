@@ -56,6 +56,7 @@ export const CheckPasswordPage: React.FC = () => {
         });
     }
   };
+
   useEffect(() => {
     const getFileProps = async () => {
       await axios({
@@ -79,7 +80,7 @@ export const CheckPasswordPage: React.FC = () => {
         });
     };
     getFileProps();
-  });
+  }, [checkfileid, navigate]);
   return (
     <S.CheckPasswordPageContainer>
       <FileBox>
@@ -88,6 +89,11 @@ export const CheckPasswordPage: React.FC = () => {
       </FileBox>
       <S.PasswordInputSection>
         <S.CheckPasswordInput
+          onKeyPress={(e: any) => {
+            if (e.key === 'Enter') {
+              passwordCheck();
+            }
+          }}
           onChange={(text) => {
             setPassword(text.target.value.replace(/(\s*)/g, ''));
           }}
