@@ -1,4 +1,4 @@
 export const getDate = (date: string) => {
-  const NewDate = new Date(date);
-  return { year: NewDate.getFullYear(), month: NewDate.getMonth() + 1, day: NewDate.getDay() };
+  const NewDate = date.split('T')[0].split('-');
+  return { year: Number(NewDate[0]), month: Number(NewDate[1]), day: Number(NewDate[2]) };
 };
