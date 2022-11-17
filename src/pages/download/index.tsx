@@ -37,20 +37,24 @@ export const DownloadPage: React.FC = () => {
       await axios({
         method: 'get',
         url: `${process.env.REACT_APP_BACKEND_BASEURL}/file/${fileid}${
-          downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
+          downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ``
         }`,
       })
         .then((res) => {
           setLoading(false);
-          setFileProps({
-            filename: res.data.filename,
-            // fileId: res.data.fileId,
-            size: getFileSize(res.data.size),
-            uploadDate: getDate(res.data.uploadDate),
-            download_url: res.data.download_url,
-            delete_url: res.data.delete_url,
-            isEncrypted: res.data.isEncrypted,
-          });
+          if (res.data.isEncrypted && !res.data.provide_token) {
+            navigate(`/checkpw/${fileid}`);
+          } else {
+            setFileProps({
+              filename: res.data.filename,
+              // fileId: res.data.fileId,
+              size: getFileSize(res.data.size),
+              uploadDate: getDate(res.data.uploadDate),
+              download_url: res.data.download_url,
+              delete_url: res.data.delete_url,
+              isEncrypted: res.data.isEncrypted,
+            });
+          }
         })
         .catch((err) => {
           navigate('/');
@@ -87,11 +91,7 @@ export const DownloadPage: React.FC = () => {
             </a>
             <Button
               click={() => {
-                navigator.clipboard.writeText(
-                  `${fileProps.download_url}${
-                    fileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
-                  }`,
-                );
+                navigator.clipboard.writeText(window.location.href);
                 toast.success('복사 완료', {
                   autoClose: 1000,
                   position: toast.POSITION.BOTTOM_RIGHT,
