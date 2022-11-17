@@ -8,9 +8,10 @@ type ProgressBarProps = {
   value: number;
   fileName: string;
   typing: string;
+  stateText: string;
 };
 
-export const Progress: React.FC<ProgressBarProps> = ({ value, fileName, typing }) => {
+export const Progress: React.FC<ProgressBarProps> = ({ value, fileName, typing, stateText }) => {
   const likecontainer = useRef();
   useEffect(() => {
     Lottie.loadAnimation({
@@ -26,7 +27,8 @@ export const Progress: React.FC<ProgressBarProps> = ({ value, fileName, typing }
       <S.ProgressAnimationBox ref={likecontainer} />
       <S.ProgressBar width={value} />
       <S.ProgressText>
-        {fileName} uploading{typing}
+        {fileName} {stateText}
+        {typing}
       </S.ProgressText>
     </S.ProgressContainer>
   );
