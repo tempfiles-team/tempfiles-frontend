@@ -6,13 +6,14 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 
-import { FileBox, Button } from '../../components';
+import { FileBox, Button, SkeletonUI } from '../../components';
 import { actionCreators } from '../../state';
 import { getDate } from '../../utils';
 import * as S from './styled';
 
 export const CheckPasswordPage: React.FC = () => {
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(true);
   const { checkfileid } = useParams<{ checkfileid: string }>();
   const [fileProps, setFileProps] = useState({
     filename: '',
@@ -64,6 +65,7 @@ export const CheckPasswordPage: React.FC = () => {
         url: `${process.env.REACT_APP_BACKEND_BASEURL}/file/${checkfileid}`,
       })
         .then((res) => {
+          setLoading(false);
           setFileProps({
             filename: res.data.filename,
             size: res.data.size,
@@ -83,31 +85,40 @@ export const CheckPasswordPage: React.FC = () => {
   }, [checkfileid, navigate]);
   return (
     <S.CheckPasswordPageContainer>
-      <FileBox>
-        파일이름:{fileProps.filename} / 크기:{fileProps.size} / 업로드된 날짜:{' '}
-        {fileProps.uploadDate.year}-{fileProps.uploadDate.month}-{fileProps.uploadDate.day}
-      </FileBox>
-      <S.PasswordInputSection>
-        <S.CheckPasswordInput
-          onKeyPress={(e: any) => {
-            if (e.key === 'Enter') {
-              passwordCheck();
-            }
-          }}
-          onChange={(text) => {
-            setPassword(text.target.value.replace(/(\s*)/g, ''));
-          }}
-          placeholder="비밀번호를 입력해주세요."
-        />
+      {!loading ? (
+        <>
+          <FileBox>
+            파일이름:{fileProps.filename} / 크기:{fileProps.size} / 업로드된 날짜:{' '}
+            {fileProps.uploadDate.year}-{fileProps.uploadDate.month}-{fileProps.uploadDate.day}
+          </FileBox>
+          <S.PasswordInputSection>
+            <S.CheckPasswordInput
+              onKeyPress={(e: any) => {
+                if (e.key === 'Enter') {
+                  passwordCheck();
+                }
+              }}
+              onChange={(text) => {
+                setPassword(text.target.value.replace(/(\s*)/g, ''));
+              }}
+              placeholder="비밀번호를 입력해주세요."
+            />
 
-        <Button
-          click={() => {
-            passwordCheck();
-          }}
-          bgColor="var(--color-button-primary)"
-          label="전송"
-        />
-      </S.PasswordInputSection>
+            <Button
+              click={() => {
+                passwordCheck();
+              }}
+              bgColor="var(--color-button-primary)"
+              label="전송"
+            />
+          </S.PasswordInputSection>
+        </>
+      ) : (
+        <>
+          <SkeletonUI width="80rem" height="4.6rem" margin="0rem" />
+          <SkeletonUI width="66rem" height="6rem" margin="4rem" />
+        </>
+      )}
     </S.CheckPasswordPageContainer>
   );
 };
