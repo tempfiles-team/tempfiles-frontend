@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 
 import { FileBox, Button, SkeletonUI } from '../../components';
 import { actionCreators } from '../../state';
-import { getDate } from '../../utils';
+import { getDate, getFileSize } from '../../utils';
 import * as S from './styled';
 
 export const CheckPasswordPage: React.FC = () => {
@@ -68,7 +68,7 @@ export const CheckPasswordPage: React.FC = () => {
           setLoading(false);
           setFileProps({
             filename: res.data.filename,
-            size: res.data.size,
+            size: getFileSize(res.data.size),
             uploadDate: getDate(res.data.uploadDate),
           });
         })
