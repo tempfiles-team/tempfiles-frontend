@@ -34,10 +34,18 @@ export const globalStyle = css`
     --mobile-breakpoint: 767px;
     --tablet-breakpoint: 991px;
     --desktop-breakpoint: 1200px;
+
+    --vh: 100%;
   }
   html {
     text-size-adjust: 100%;
     font-size: 10px;
+    @media (max-width: 767px) {
+      font-size: 9px;
+    }
+    @media (max-width: 575px) {
+      font-size: 6px;
+    }
   }
   body {
     background: var(--color-background);
