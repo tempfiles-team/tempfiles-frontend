@@ -40,13 +40,19 @@ export const globalStyle = css`
   html {
     text-size-adjust: 100%;
     font-size: 10px;
+    @media (max-width: 767px) {
+      font-size: 9px;
+    }
+    @media (max-width: 575px) {
+      font-size: 6px;
+    }
   }
   body {
     background: var(--color-background);
     color: var(--color-text-primary);
     letter-spacing: -0.05rem;
     font-size: 1.6rem;
-    height: calc(var(--vh, 1vh) * 100);
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
