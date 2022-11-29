@@ -5,7 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 
-import { CheckBox, PasswordInput, UpLoadButton, FileFind, Progress } from '../../components';
+import {
+  CheckBox,
+  PasswordInput,
+  UpLoadButton,
+  FileFind,
+  Progress,
+  DownLoadCountSlider,
+} from '../../components';
 import { actionCreators } from '../../state';
 import { getFileSize } from '../../utils';
 import * as S from './styled';
@@ -111,22 +118,14 @@ export const MainPage: React.FC = () => {
           <S.MainPageCheckBoxSection>
             <CheckBox
               click={() => {
-                setRetentionPeriod(false);
-                toast.success('제작중!', {
-                  autoClose: 1000,
-                  position: toast.POSITION.BOTTOM_RIGHT,
-                });
+                setRetentionPeriod(!retentionPeriod);
               }}
               isCheck={retentionPeriod}
               label={'유지기간'}
             />
             <CheckBox
               click={() => {
-                setDownloadCount(false);
-                toast.success('제작중!', {
-                  autoClose: 1000,
-                  position: toast.POSITION.BOTTOM_RIGHT,
-                });
+                setDownloadCount(!downloadCount);
               }}
               isCheck={downloadCount}
               label={'다운로드 횟수'}
@@ -137,15 +136,14 @@ export const MainPage: React.FC = () => {
               label={'비밀번호'}
             />
           </S.MainPageCheckBoxSection>
-          {passwordBoolean ? (
+          {downloadCount && <DownLoadCountSlider />}
+          {passwordBoolean && (
             <PasswordInput
               onChange={(text) => {
                 setPassword(text.target.value.replace(/(\s*)/g, ''));
               }}
               placeholder="비밀번호를 입력해주세요."
             />
-          ) : (
-            <></>
           )}
           <FileFind handleChangeFile={handleChangeFile} fileProps={fileProps} />
           <UpLoadButton type={'button'} value={'업로드'} onClick={UpLoad} />

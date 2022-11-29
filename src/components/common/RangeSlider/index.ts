@@ -1,38 +1,29 @@
 import styled from '@emotion/styled';
 
 export const RangeSlider = styled.input`
-  margin: 0;
-  padding: 0;
+  -webkit-appearance: none;
   width: 100%;
   height: 4rem;
-  border-radius: 0.4rem;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  outline: none;
-  //Chrome, Safari, Opera, and Edge Chromium
-  &::-ms-fill-lower {
-    background-color: var(--color-background-secondary);
-  }
-  &::-ms-fill-upper {
-    background-color: var(--color-background-tertiary);
-  }
+  border-radius: 8px;
+  background: var(--color-backgorund-black);
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    background-color: var(--color-text-primary);
-    height: 2rem;
-    width: 1rem;
-    border-radius: 0.4rem;
+    width: 3.9rem;
+    height: 4rem;
+    background: var(--color-background-secondary);
+    border-radius: 12px;
   }
-  //Firefox
-  &::-moz-range-thumb {
+  /* &::-webkit-fill-upper {
     -webkit-appearance: none;
     appearance: none;
-    background-color: var(--color-text-primary);
-    height: 2rem;
-    width: 1rem;
-    border-radius: 0.4rem;
+    background: var(--color-slider-upper);
   }
+  &::-webkit-fill-lower {
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--color-slider-lower);
+  } */
 `;
 
 RangeSlider.defaultProps = { type: 'range' };

@@ -3,7 +3,7 @@ import React from 'react';
 import { RangeSlider } from '../RangeSlider';
 import * as S from './styled';
 
-export const DownLoadCount: React.FC = () => (
+export const DownLoadCountSlider: React.FC = () => (
   <S.DownloadCountContainer>
     <RangeSlider
       min={1}
