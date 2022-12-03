@@ -30,6 +30,10 @@ export const globalStyle = css`
     --color-button-primary: var(--color-border);
     --color-button-secondary: #aa75ab;
 
+    --color-slider-thumb: var(--color-text-primary);
+    --color-slider-upper: #757bab;
+    --color-slider-lower: #2e2836;
+
     --small-mobile-breakpoint: 575px;
     --mobile-breakpoint: 767px;
     --tablet-breakpoint: 991px;
