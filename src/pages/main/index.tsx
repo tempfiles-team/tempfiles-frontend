@@ -11,10 +11,11 @@ import {
   UpLoadButton,
   FileFind,
   Progress,
-  DownLoadCountSlider,
+  DownloadCountSlider,
+  ExpireTime,
 } from '../../components';
 import { actionCreators } from '../../state';
-import { getFileSize } from '../../utils';
+import { getFileSize, getTime } from '../../utils';
 import * as S from './styled';
 
 export const MainPage: React.FC = () => {
@@ -24,11 +25,14 @@ export const MainPage: React.FC = () => {
   const [progressValue, setProgressValue] = useState(0);
   const [progressStateText, setProgressStateText] = useState('uploading');
 
-  const [retentionPeriod, setRetentionPeriod] = useState(false);
-  const [downloadCount, setDownloadCount] = useState(false);
+  const [expireTimeBoolean, setExpireTimeBoolean] = useState(false);
+  const [downloadCountBoolean, setDownloadCountBoolean] = useState(false);
   const [passwordBoolean, setPasswordBoolean] = useState(false);
 
+  const [expireTime, setExpireTime] = useState(1);
+  const [downloadCount, setDownloadCount] = useState(100);
   const [password, setPassword] = useState('');
+
   const [fileProps, setFileProps] = useState({
     filename: '',
     size: '',
@@ -63,7 +67,10 @@ export const MainPage: React.FC = () => {
         data: formdata,
         headers: {
           'Content-Type': 'multipart/form-data',
+          'X-Download-Limit': downloadCountBoolean ? downloadCount : 100,
+          'X-Time-Limit': expireTimeBoolean ? expireTime : 180,
         },
+        withCredentials: true,
         onUploadProgress(progress) {
           setUploading(false);
           setProgressValue(Math.floor((progress.loaded / progress.total) * 100));
@@ -118,16 +125,17 @@ export const MainPage: React.FC = () => {
           <S.MainPageCheckBoxSection>
             <CheckBox
               click={() => {
-                setRetentionPeriod(!retentionPeriod);
+                setExpireTimeBoolean(!expireTimeBoolean);
               }}
-              isCheck={retentionPeriod}
+              isCheck={expireTimeBoolean}
               label={'유지기간'}
             />
             <CheckBox
               click={() => {
-                setDownloadCount(!downloadCount);
+                setDownloadCountBoolean(!downloadCountBoolean);
+                setDownloadCount(1);
               }}
-              isCheck={downloadCount}
+              isCheck={downloadCountBoolean}
               label={'다운로드 횟수'}
             />
             <CheckBox
@@ -136,7 +144,20 @@ export const MainPage: React.FC = () => {
               label={'비밀번호'}
             />
           </S.MainPageCheckBoxSection>
-          {downloadCount && <DownLoadCountSlider />}
+          {expireTimeBoolean && (
+            <ExpireTime
+              expireTime={Number(expireTime)}
+              setExpireTime={setExpireTime}
+              expireTimePlusButton={['1분', '10분', '1시간', '1일']}
+              time={getTime(Number(expireTime))}
+            />
+          )}
+          {downloadCountBoolean && (
+            <DownloadCountSlider
+              downloadCount={downloadCount}
+              setDownloadCount={setDownloadCount}
+            />
+          )}
           {passwordBoolean && (
             <PasswordInput
               onChange={(text) => {
