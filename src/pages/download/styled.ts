@@ -13,3 +13,10 @@ export const DownloadPageButtonSection = styled.div`
   justify-content: center;
   margin-top: 3rem;
 `;
+
+export const DownloadFileStatusText = styled.div`
+  color: var(--color-text-primary);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 3rem;
+`;

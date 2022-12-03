@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { Button, FileBox, SkeletonUI } from '../../components';
 import { useDeletePageNavigator } from '../../hooks';
 import { RootState } from '../../state/reducers';
-import { getDate, getFileSize } from '../../utils';
+import { getDate, getFileSize, getExpireTime } from '../../utils';
 import * as S from './styled';
 
 export const DownloadPage: React.FC = () => {
@@ -24,6 +24,8 @@ export const DownloadPage: React.FC = () => {
     download_url: '',
     delete_url: '',
     isEncrypted: false,
+    downloadCount: 0,
+    expireTime: { day: 0, hour: 0, minute: 0 },
   });
   const [move] = useDeletePageNavigator(
     fileProps.delete_url,
@@ -53,6 +55,8 @@ export const DownloadPage: React.FC = () => {
               download_url: res.data.download_url,
               delete_url: res.data.delete_url,
               isEncrypted: res.data.isEncrypted,
+              downloadCount: res.data.downloadLimit - res.data.downloadCount,
+              expireTime: getExpireTime(res.data.expireTime),
             });
           }
         })
@@ -81,9 +85,13 @@ export const DownloadPage: React.FC = () => {
             파일이름:{fileProps.filename} / 크기:{fileProps.size} / 업로드된 날짜:
             {fileProps.uploadDate.year}-{fileProps.uploadDate.month}-{fileProps.uploadDate.day}
           </FileBox>
+          <S.DownloadFileStatusText>
+            만료까지 {fileProps.expireTime.day}일 {fileProps.expireTime.hour}시간{' '}
+            {fileProps.expireTime.minute}분 / {fileProps.downloadCount}회 남았습니다.
+          </S.DownloadFileStatusText>
           <S.DownloadPageButtonSection>
             <a
-              href={`${fileProps.download_url}${
+              href={`${process.env.REACT_APP_BACKEND_BASEURL}${fileProps.download_url}${
                 fileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
               }`}
             >
