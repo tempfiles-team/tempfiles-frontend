@@ -70,7 +70,6 @@ export const MainPage: React.FC = () => {
           'X-Download-Limit': downloadCountBoolean ? downloadCount : 100,
           'X-Time-Limit': expireTimeBoolean ? expireTime : 180,
         },
-        withCredentials: true,
         onUploadProgress(progress) {
           setUploading(false);
           setProgressValue(Math.floor((progress.loaded / progress.total) * 100));
