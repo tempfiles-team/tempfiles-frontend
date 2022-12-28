@@ -28,6 +28,7 @@ export const MainPage: React.FC = () => {
   const [expireTimeBoolean, setExpireTimeBoolean] = useState(false);
   const [downloadCountBoolean, setDownloadCountBoolean] = useState(false);
   const [passwordBoolean, setPasswordBoolean] = useState(false);
+  const [passwordFilter, setPasswordFilter] = useState(true);
 
   const [expireTime, setExpireTime] = useState(1);
   const [downloadCount, setDownloadCount] = useState(100);
@@ -98,6 +99,7 @@ export const MainPage: React.FC = () => {
             autoClose: 3000,
             position: toast.POSITION.BOTTOM_RIGHT,
           });
+          setUploading(true);
         });
     } else {
       toast.error('파일을 선택해주세요!', {
@@ -159,9 +161,10 @@ export const MainPage: React.FC = () => {
           )}
           {passwordBoolean && (
             <PasswordInput
-              onChange={(text) => {
-                setPassword(text.target.value.replace(/(\s*)/g, ''));
-              }}
+              type={passwordFilter ? 'password' : 'text'}
+              isFillter={passwordFilter}
+              setPassword={setPassword}
+              setPasswordFilter={setPasswordFilter}
               placeholder="비밀번호를 입력해주세요."
             />
           )}
