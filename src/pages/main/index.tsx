@@ -47,6 +47,7 @@ export const MainPage: React.FC = () => {
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
 
   const handleChangeFile = (event: any) => {
+    event.preventDefault();
     setFileProps({
       filename: event.target.files[0].name,
       size: getFileSize(event.target.files[0].size),
@@ -54,6 +55,22 @@ export const MainPage: React.FC = () => {
         event.target.files[0].type === '' ? 'application/actet-stream' : event.target.files[0].type,
       fileData: event.target.files[0],
     });
+  };
+
+  const handleDrop = function (event: any) {
+    event.preventDefault();
+    setFileProps({
+      filename: event.dataTransfer.files[0].name,
+      size: getFileSize(event.dataTransfer.files[0].size),
+      fileType:
+        event.dataTransfer.files[0].type === ''
+          ? 'application/actet-stream'
+          : event.dataTransfer.files[0].type,
+      fileData: event.dataTransfer.files[0],
+    });
+  };
+  const dragOver = (event: any) => {
+    event.preventDefault();
   };
 
   const UpLoad = async () => {
@@ -168,7 +185,12 @@ export const MainPage: React.FC = () => {
               placeholder="비밀번호를 입력해주세요."
             />
           )}
-          <FileFind handleChangeFile={handleChangeFile} fileProps={fileProps} />
+          <FileFind
+            handleDrop={handleDrop}
+            handleDragOver={dragOver}
+            handleChangeFile={handleChangeFile}
+            fileProps={fileProps}
+          />
           <UpLoadButton type={'button'} value={'업로드'} onClick={UpLoad} />
         </>
       ) : (
