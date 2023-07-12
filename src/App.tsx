@@ -13,6 +13,7 @@ import {
   ApiPage,
   NotFoundPage,
   CheckPasswordPage,
+  CNPList,
 } from './pages';
 import { store } from './state/store';
 
@@ -50,6 +51,7 @@ export const App: React.FC = () => (
         <Route path="/filelist" element={<FileListPage />} />
         <Route path="/api/*" element={<ApiPage />} />
         <Route path="/checkpw/:checkfileid" element={<CheckPasswordPage />} />
+        <Route path="/cnplist" element={<CNPList />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
