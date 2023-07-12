@@ -1,7 +1,13 @@
 import React from 'react';
 
-export const CNPList: React.FC = () => (
-  <div>
-    <h1>sadf</h1>
-  </div>
-);
+import { useGetCnpList } from '../../api/query';
+
+export const CNPList: React.FC = () => {
+  const { data } = useGetCnpList();
+  console.log(data);
+  return (
+    <div>
+      <h1>sadf</h1>
+    </div>
+  );
+};
