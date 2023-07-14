@@ -38,7 +38,7 @@ export interface CNPDeleteValue {
 
 export interface CNPUploadValues {
   textData: string;
-  downloadCount: number;
+  downloadCount?: number;
   expireTime: number;
 }
 
@@ -60,7 +60,7 @@ export const deleteCNP = async ({ textId }: CNPDeleteValue) => {
 export const uploadCNP = async ({ textData, downloadCount, expireTime }: CNPUploadValues) => {
   const { data } = await axios({
     method: 'post',
-    url: `${API_SUFFIX.CNP_UPLOAD}`,
+    url: `${process.env.REACT_APP_BACKEND_BASEURL}/${API_SUFFIX.CNP_UPLOAD}`,
     data: textData,
     headers: {
       'Content-Type': 'text/plain',

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { uploadState } from '../../atom';
-import { FileUpload, UpLoadButton } from '../../components';
+import { FileUpLoad, TextUpLoad, UpLoadButton } from '../../components';
 import * as S from './styled';
 
 export const MainPage: React.FC = () => {
@@ -22,24 +22,24 @@ export const MainPage: React.FC = () => {
   return (
     <S.MainPageContainer>
       {upload.file ? (
-        <FileUpload />
+        <FileUpLoad />
       ) : !upload.text && !upload.file ? (
-        <>
+        <div style={{ display: 'flex', flexDirection: 'row', columnGap: '5rem' }}>
           <UpLoadButton
             type={'button'}
-            value={`파일 업로드 →`}
+            value={`파일 업로드`}
             onClick={() => setUpload({ file: true, text: false })}
             mainPage={true}
           />
           <UpLoadButton
             type={'button'}
-            value={`텍스트 업로드 →`}
+            value={`텍스트 업로드`}
             onClick={() => setUpload({ file: false, text: true })}
             mainPage={true}
           />
-        </>
+        </div>
       ) : (
-        <h1>asdf</h1>
+        <TextUpLoad />
       )}
     </S.MainPageContainer>
   );

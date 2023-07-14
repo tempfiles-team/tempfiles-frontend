@@ -17,7 +17,7 @@ import { PasswordInput } from '../PasswordInput';
 import { UpLoadButton } from '../UpLoadButton';
 import * as S from './styled';
 
-export const FileUpload: React.FC = () => {
+export const FileUpLoad: React.FC = () => {
   const setUpload = useSetRecoilState(uploadState);
 
   const [expireTimeBoolean, setExpireTimeBoolean] = useState(false);
@@ -113,7 +113,7 @@ export const FileUpload: React.FC = () => {
   };
   return (
     <>
-      <S.MainPageCheckBoxSection>
+      <S.FileUpLoadCheckBoxSection>
         <CheckBox
           click={() => {
             setExpireTimeBoolean(!expireTimeBoolean);
@@ -134,7 +134,7 @@ export const FileUpload: React.FC = () => {
           isCheck={passwordBoolean}
           label={'비밀번호'}
         />
-      </S.MainPageCheckBoxSection>
+      </S.FileUpLoadCheckBoxSection>
       {expireTimeBoolean && (
         <ExpireTime
           expireTime={Number(expireTime)}
