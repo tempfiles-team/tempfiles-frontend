@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { API_SUFFIX, instance } from './api';
 
 export interface CNPItemResponse {
@@ -30,10 +32,14 @@ export interface CNPItemResponse {
   uploadDate: string;
 }
 
-export interface CNPDeleteResponse {
-  delete: boolean;
-  error: null | boolean;
-  message: string;
+export interface CNPDeleteValue {
+  textId: string;
+}
+
+export interface CNPUploadValues {
+  textData: string;
+  downloadCount: number;
+  expireTime: number;
 }
 
 export const getCNPList = async (): Promise<CNPListResponse> => {
@@ -46,7 +52,21 @@ export const getCNP = async (textId: string): Promise<CNPResponse> => {
   return data;
 };
 
-export const deleteCNP = async (textId: string): Promise<CNPDeleteResponse> => {
+export const deleteCNP = async ({ textId }: CNPDeleteValue) => {
   const { data } = await instance.delete(`${API_SUFFIX.CNP}/${textId}`);
+  return data;
+};
+
+export const uploadCNP = async ({ textData, downloadCount, expireTime }: CNPUploadValues) => {
+  const { data } = await axios({
+    method: 'post',
+    url: `${API_SUFFIX.CNP_UPLOAD}`,
+    data: textData,
+    headers: {
+      'Content-Type': 'text/plain',
+      'X-Download-Limit': downloadCount,
+      'X-Time-Limit': expireTime,
+    },
+  });
   return data;
 };

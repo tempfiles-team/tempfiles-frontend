@@ -9,3 +9,9 @@ export const MainPageContainer = styled.div`
 export const MainPageCheckBoxSection = styled.div`
   display: flex;
 `;
+
+export const MainPageTitle = styled.h1`
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 5rem;
+`;

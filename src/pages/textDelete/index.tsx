@@ -9,7 +9,7 @@ export const TextDelete: React.FC = () => {
   const { textId } = useParams<{ textId: string }>();
   const navigate = useNavigate();
   console.log(textId, 'asdf');
-  const { mutate } = useDeleteCNP(textId);
+  const { mutate } = useDeleteCNP({ textId });
   return (
     <S.TextDeletePageContainer>
       <S.TextDeletePagePageLabel>
