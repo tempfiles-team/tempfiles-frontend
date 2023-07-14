@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
 
 import { useGetCNP } from '../../api/query';
-import { LoadingState } from '../../atom';
-import { FileBox, SkeletonUI } from '../../components';
+import { Button, SkeletonUI } from '../../components';
 import { getDate, getExpireTime } from '../../utils';
 import * as S from './styled';
 
@@ -30,6 +30,37 @@ export const Text: React.FC = () => {
             만료까지 {expireDate.day}일 {expireDate.hour}시간 {expireDate.minute}분 /{' '}
             {data.downloadCount}번 조회 했습니다.
           </S.TextFileStatusText>
+          <S.TextPageButtonSection>
+            <Button
+              click={() => {
+                navigator.clipboard.writeText(data.textData);
+                toast.success('복사 완료', {
+                  autoClose: 1000,
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+              }}
+              bgColor="var(--color-button-primary)"
+              label="데이터 복사"
+            />
+            <Button
+              click={() => {
+                navigator.clipboard.writeText(window.location.href);
+                toast.success('복사 완료', {
+                  autoClose: 1000,
+                  position: toast.POSITION.BOTTOM_RIGHT,
+                });
+              }}
+              bgColor="var(--color-button-primary)"
+              label="링크 복사"
+            />
+            <Button
+              click={() => {
+                console.log('delete');
+              }}
+              bgColor="var(--color-button-secondary)"
+              label="데이터 삭제"
+            />
+          </S.TextPageButtonSection>
         </>
       )}
     </S.TextPageContainer>
