@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 import { bindActionCreators } from 'redux';
 
+import { uploadState } from '../../../atom';
 import { actionCreators } from '../../../state';
 import { getFileSize, getTime } from '../../../utils';
 import { CheckBox } from '../CheckBox';
@@ -16,9 +18,7 @@ import { UpLoadButton } from '../UpLoadButton';
 import * as S from './styled';
 
 export const FileUpload: React.FC = () => {
-  const [uploading, setUploading] = useState(true);
-  const [progressValue, setProgressValue] = useState(0);
-  const [progressStateText, setProgressStateText] = useState('uploading');
+  const setUpload = useSetRecoilState(uploadState);
 
   const [expireTimeBoolean, setExpireTimeBoolean] = useState(false);
   const [downloadCountBoolean, setDownloadCountBoolean] = useState(false);
@@ -83,16 +83,8 @@ export const FileUpload: React.FC = () => {
           'X-Download-Limit': downloadCountBoolean ? downloadCount : 100,
           'X-Time-Limit': expireTimeBoolean ? expireTime : 180,
         },
-        onUploadProgress(progress) {
-          setUploading(false);
-          setProgressValue(Math.floor((progress.loaded / progress.total) * 100));
-          if (Math.floor((progress.loaded / progress.total) * 100) === 100) {
-            setProgressStateText('백엔드 처리중');
-          }
-        },
       })
         .then(async (res) => {
-          setUploading(true);
           toast.success('업로드 성공!', {
             autoClose: 3000,
             position: toast.POSITION.BOTTOM_RIGHT,
@@ -111,7 +103,6 @@ export const FileUpload: React.FC = () => {
             autoClose: 3000,
             position: toast.POSITION.BOTTOM_RIGHT,
           });
-          setUploading(true);
         });
     } else {
       toast.error('파일을 선택해주세요!', {
@@ -170,7 +161,15 @@ export const FileUpload: React.FC = () => {
         handleChangeFile={handleChangeFile}
         fileProps={fileProps}
       />
-      <UpLoadButton type={'button'} value={'업로드'} onClick={UpLoad} />
+      <div>
+        <UpLoadButton
+          type={'button'}
+          value={'← 뒤로가기'}
+          onClick={() => setUpload({ file: false, text: false })}
+          style={{ marginRight: '4rem' }}
+        />
+        <UpLoadButton type={'button'} value={'업로드'} onClick={UpLoad} />
+      </div>
     </>
   );
 };
