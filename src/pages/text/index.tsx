@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
 
@@ -13,6 +13,7 @@ export const Text: React.FC = () => {
   const { data, isLoading } = useGetCNP(textId);
   const upLoadDate = !isLoading && getDate(data.uploadDate);
   const expireDate = !isLoading && getExpireTime(data.expireTime);
+  const navigation = useNavigate();
   return (
     <S.TextPageContainer>
       {isLoading ? (
@@ -55,7 +56,7 @@ export const Text: React.FC = () => {
             />
             <Button
               click={() => {
-                console.log('delete');
+                navigation('delete');
               }}
               bgColor="var(--color-button-secondary)"
               label="데이터 삭제"

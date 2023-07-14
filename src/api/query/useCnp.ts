@@ -23,6 +23,7 @@ export const useGetCNP = (textId: string): UseQueryResult<CNPResponse> =>
 
 export const useDeleteCNP = (textId: string): UseMutationResult<CNPDeleteResponse> => {
   const navigate = useNavigate();
+  console.log(textId);
   return useMutation('useDeleteCNP', () => deleteCNP(textId), {
     onSuccess: () => {
       toast.success('삭제 완료.', {
