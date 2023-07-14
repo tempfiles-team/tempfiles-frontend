@@ -5,6 +5,7 @@ export interface CNPItemResponse {
   downloadLimit: number;
   expireTime: string;
   textId: string;
+  textData?: string;
   data?: string;
   uploadDate: string;
 }
@@ -22,6 +23,10 @@ export interface CNPResponse extends CNPItemResponse {
 
 export const getCNPList = async (): Promise<CNPListResponse> => {
   const { data } = await instance.get(API_SUFFIX.CNP_LIST);
-  console.log(data);
+  return data;
+};
+
+export const getCNP = async (textId: string): Promise<CNPItemResponse> => {
+  const { data } = await instance.get(`${API_SUFFIX.CNP}/${textId}`);
   return data;
 };

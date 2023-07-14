@@ -2,15 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-import { useGetCnpList } from '../../api/query';
+import { useGetCNPList } from '../../api/query';
 import { LoadingState } from '../../atom/loading';
 import { SkeletonUIBox } from '../../components';
 import { getDate, getShortName } from '../../utils';
 import * as S from './styled';
 
 export const TextList: React.FC = () => {
-  const { data } = useGetCnpList();
-  const isLoading = useRecoilValue(LoadingState);
+  const { data, isLoading } = useGetCNPList();
   const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
   const navigate = useNavigate();
   return (

@@ -2,18 +2,18 @@ import { UseQueryResult, useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 
 import { LoadingState } from '../../atom';
-import { CNPListResponse, getCNPList } from '../cnp';
+import { CNPItemResponse, CNPListResponse, getCNP, getCNPList } from '../cnp';
 
-export const useGetCnpList = (): UseQueryResult<CNPListResponse> => {
+export const useGetCNPList = (): UseQueryResult<CNPListResponse> => {
   const setIsLoading = useSetRecoilState(LoadingState);
-  return useQuery('useGetCnpList', getCNPList, {
-    onSuccess: () => {
-      setIsLoading(false);
-    },
-    onError: (err) => {
-      console.log(err);
-    },
+  return useQuery('useGetCNPList', getCNPList, {
     retry: 0,
-    staleTime: 36000,
+  });
+};
+
+export const useGetCNP = (textId: string): UseQueryResult<CNPItemResponse> => {
+  const setIsLoading = useSetRecoilState(LoadingState);
+  return useQuery('useGetCNP', () => getCNP(textId), {
+    retry: 0,
   });
 };
