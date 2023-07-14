@@ -33,7 +33,7 @@ export const Text: React.FC = () => {
           <S.TextPageButtonSection>
             <Button
               click={() => {
-                navigator.clipboard.writeText(data.textData);
+                navigator.clipboard.writeText(data.textData.replace(/"/g, ''));
                 toast.success('복사 완료', {
                   autoClose: 1000,
                   position: toast.POSITION.BOTTOM_RIGHT,

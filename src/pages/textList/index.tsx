@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { useGetCNPList } from '../../api/query';
-import { LoadingState } from '../../atom/loading';
 import { SkeletonUIBox } from '../../components';
 import { getDate, getShortName } from '../../utils';
 import * as S from './styled';
