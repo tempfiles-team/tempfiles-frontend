@@ -22,5 +22,6 @@ export interface CNPResponse extends CNPItemResponse {
 
 export const getCNPList = async (): Promise<CNPListResponse> => {
   const { data } = await instance.get(API_SUFFIX.CNP_LIST);
+  console.log(data);
   return data;
 };

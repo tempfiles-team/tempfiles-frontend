@@ -8,16 +8,11 @@ export const useGetCnpList = (): UseQueryResult<CNPListResponse> => {
   const setIsLoading = useSetRecoilState(LoadingState);
   return useQuery('useGetCnpList', getCNPList, {
     onSuccess: () => {
-      setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false);
       }, 1000);
     },
     onError: (err) => {
-      setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 1000);
       console.log(err);
     },
     retry: 0,

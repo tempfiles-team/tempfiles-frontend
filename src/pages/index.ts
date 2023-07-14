@@ -5,4 +5,4 @@ export * from './filelist';
 export * from './api';
 export * from './notfound';
 export * from './checkpw';
-export * from './cnpList';
+export * from './textList';
