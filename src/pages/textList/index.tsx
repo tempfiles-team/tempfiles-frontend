@@ -37,10 +37,7 @@ export const TextList: React.FC = () => {
                   const date = getDate(uploadDate);
                   const shortName = getShortName(data);
                   return (
-                    <S.TextListBoxContainer
-                      key={index}
-                      onClick={() => navigate(`/cnp-download/${textId}`)}
-                    >
+                    <S.TextListBoxContainer key={index} onClick={() => navigate(`${textId}`)}>
                       ID: {textId} / 데이터: {shortName} / 업로드 날짜: 업로드날짜:{date.year}-
                       {date.month}-{date.day}
                     </S.TextListBoxContainer>

@@ -14,6 +14,7 @@ import {
   NotFoundPage,
   CheckPasswordPage,
   TextList,
+  Text,
 } from './pages';
 import { store } from './state/store';
 
@@ -51,7 +52,10 @@ export const App: React.FC = () => (
         <Route path="/filelist" element={<FileListPage />} />
         <Route path="/api/*" element={<ApiPage />} />
         <Route path="/checkpw/:checkfileid" element={<CheckPasswordPage />} />
-        <Route path="/textlist" element={<TextList />} />
+        <Route path="/text">
+          <Route index element={<TextList />} />
+          <Route path="/text/:textId" element={<Text />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
