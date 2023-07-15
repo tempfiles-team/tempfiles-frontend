@@ -24,7 +24,7 @@ export const MainPage: React.FC = () => {
       {upload.file ? (
         <FileUpLoad />
       ) : !upload.text && !upload.file ? (
-        <div style={{ display: 'flex', flexDirection: 'row', columnGap: '5rem' }}>
+        <S.MainPageButtonContainer>
           <UpLoadButton
             type={'button'}
             value={`파일 업로드`}
@@ -37,7 +37,7 @@ export const MainPage: React.FC = () => {
             onClick={() => setUpload({ file: false, text: true })}
             mainPage={true}
           />
-        </div>
+        </S.MainPageButtonContainer>
       ) : (
         <TextUpLoad />
       )}

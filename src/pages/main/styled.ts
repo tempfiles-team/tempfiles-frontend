@@ -15,3 +15,12 @@ export const MainPageTitle = styled.h1`
   font-weight: 700;
   margin: 5rem;
 `;
+
+export const MainPageButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  column-gap: 5rem;
+  @media (max-width: 575px) {
+    flex-direction: column;
+  }
+`;
