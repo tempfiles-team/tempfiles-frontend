@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 //나중에 loading애니메이션 변수화하기
-export const SkeletonUIBox = styled.div<{ randomWitdh: string }>`
+export const SkeletonUIBox = styled.div<{ randomWidth: string }>`
   display: flex;
   background-color: var(--color-backgorund-filelistbox);
   border-radius: 1rem;
   margin-bottom: 1.5rem;
   min-height: 4.6rem;
-  min-width: ${(props) => props.randomWitdh}rem;
+  min-width: ${(props) => props.randomWidth}rem;
   overflow: hidden;
   &::before {
     content: ' ';
