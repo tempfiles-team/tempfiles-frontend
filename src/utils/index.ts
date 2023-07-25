@@ -1,3 +1,3 @@
 export * from './getFileSize';
-export * from './getShortFileName';
+export * from './getShortName';
 export * from './getDate';

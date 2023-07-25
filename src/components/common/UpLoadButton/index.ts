@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
-export const UpLoadButton = styled.input`
+export const UpLoadButton = styled.input<{ mainPage?: boolean }>`
   outline: none;
-  border-radius: 1.5rem;
+  border-radius: ${({ mainPage }) => (mainPage ? '1.2rem' : '1.5rem')};
   border: 0;
-  width: 15rem;
-  height: 5rem;
+  width: ${({ mainPage }) => (mainPage ? '18rem' : '15rem')};
+  height: ${({ mainPage }) => (mainPage ? '6rem' : '5rem')};
   font-size: 2rem;
   font-weight: 900;
   background-color: var(--color-background-secondary);

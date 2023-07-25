@@ -10,3 +10,5 @@ export * from './Progress';
 export * from './SkeletonUIBox';
 export * from './FileBox';
 export * from './ExpireTime';
+export * from './FileUpload';
+export * from './TextUpLoad';
