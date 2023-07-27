@@ -6,14 +6,23 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 
+
 import { FileBox, Button, SkeletonUI } from '../../components';
 import { actionCreators } from '../../state';
 import { getDate, getFileSize } from '../../utils';
+import { ReactComponent as EyeIcon } from '../../assets/Eye.svg';
+import { ReactComponent as EyeHiddenIcon } from '../../assets/EyeHidden.svg';
 import * as S from './styled';
+
+import {
+  PasswordInput,
+} from '../../components';
 
 export const CheckPasswordPage: React.FC = () => {
   const [password, setPassword] = useState('');
+  const [passwordVisible, setPasswordVisibility] = useState(false); // 비밀번호 보기/숨기기 상태
   const [loading, setLoading] = useState(true);
+  const [passwordFilter, setPasswordFilter] = useState(true);
   const { checkfileid } = useParams<{ checkfileid: string }>();
   const [fileProps, setFileProps] = useState({
     filename: '',
@@ -91,8 +100,10 @@ export const CheckPasswordPage: React.FC = () => {
           </FileBox>
           <S.PasswordInputSection>
             <S.CheckPasswordInput
-              type="password"
+              type={passwordFilter ? 'password' : 'text'}
               value={password}
+              isFillter={passwordFilter}
+              setPassword={setPassword}
               onKeyPress={(e: any) => {
                 if (e.key === 'Enter') {
                   passwordCheck();
@@ -103,7 +114,19 @@ export const CheckPasswordPage: React.FC = () => {
               }}
               placeholder="비밀번호를 입력해주세요."
             />
-
+            <S.EyeIconWrapper
+              onClick={() => setPasswordFilter(!passwordFilter)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '4rem',
+                height: '4rem',
+                marginLeft: '44rem', // 눈 아이콘을 왼쪽으로 1rem 이동시킴
+              }}
+            >
+              {passwordFilter ? <EyeHiddenIcon /> : <EyeIcon />}
+            </S.EyeIconWrapper>
             <Button
               click={() => {
                 passwordCheck();
