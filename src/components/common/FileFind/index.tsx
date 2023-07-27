@@ -29,7 +29,7 @@ export const FileFind: React.FC<FileFindProps> = ({
           fileProps.size +
           ' / 타입:' +
           fileProps.fileType
-        : '업로드1 할 파일을 선택해주세요....'}
+        : '업로드 할 파일을 선택해주세요....'}
     </S.FileFindLabelBox>
 
     <S.FileFindButton htmlFor="input-file-upload">찾아보기</S.FileFindButton>
