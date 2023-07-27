@@ -182,7 +182,7 @@ export const MainPage: React.FC = () => {
               isFillter={passwordFilter}
               setPassword={setPassword}
               setPasswordFilter={setPasswordFilter}
-              placeholder="비밀번호를 입력해주세요."
+              placeholder="비밀번호3를 입력해주세요."
             />
           )}
           <FileFind

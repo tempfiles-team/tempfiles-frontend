@@ -103,7 +103,7 @@ export const CheckPasswordPage: React.FC = () => {
               onChange={(text) => {
                 setPassword(text.target.value.replace(/(\s*)/g, ''));
               }}
-              placeholder="비밀번호를 입력해주세요."
+              placeholder="비밀번호2를 입력해주세요."
             />
 
             <Button
