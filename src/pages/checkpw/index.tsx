@@ -6,21 +6,15 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 
-
+import { ReactComponent as EyeIcon } from '../../assets/Eye.svg';
+import { ReactComponent as EyeHiddenIcon } from '../../assets/EyeHidden.svg';
 import { FileBox, Button, SkeletonUI } from '../../components';
 import { actionCreators } from '../../state';
 import { getDate, getFileSize } from '../../utils';
-import { ReactComponent as EyeIcon } from '../../assets/Eye.svg';
-import { ReactComponent as EyeHiddenIcon } from '../../assets/EyeHidden.svg';
 import * as S from './styled';
-
-import {
-  PasswordInput,
-} from '../../components';
 
 export const CheckPasswordPage: React.FC = () => {
   const [password, setPassword] = useState('');
-  const [passwordVisible, setPasswordVisibility] = useState(false); // 비밀번호 보기/숨기기 상태
   const [loading, setLoading] = useState(true);
   const [passwordFilter, setPasswordFilter] = useState(true);
   const { checkfileid } = useParams<{ checkfileid: string }>();
@@ -44,7 +38,7 @@ export const CheckPasswordPage: React.FC = () => {
     } else {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkfileid}?pw=${password}`
+          `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkfileid}?pw=${password}`,
         );
         SetDownloadFileProps({
           isEncrypted: true,
@@ -69,9 +63,7 @@ export const CheckPasswordPage: React.FC = () => {
   useEffect(() => {
     const getFileProps = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_BASEURL}/file/${checkfileid}`
-        );
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_BASEURL}/file/${checkfileid}`);
         setLoading(false);
         setFileProps({
           filename: res.data.filename,
@@ -102,8 +94,6 @@ export const CheckPasswordPage: React.FC = () => {
             <S.CheckPasswordInput
               type={passwordFilter ? 'password' : 'text'}
               value={password}
-              isFillter={passwordFilter}
-              setPassword={setPassword}
               onKeyPress={(e: any) => {
                 if (e.key === 'Enter') {
                   passwordCheck();
@@ -120,8 +110,8 @@ export const CheckPasswordPage: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: '4rem',
-                height: '4rem',
+                width: '3.5rem',
+                height: '3.5rem',
                 marginLeft: '44rem', // 눈 아이콘을 왼쪽으로 1rem 이동시킴
               }}
             >
