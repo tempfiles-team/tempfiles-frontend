@@ -112,7 +112,8 @@ export const CheckPasswordPage: React.FC = () => {
                 justifyContent: 'center',
                 width: '3.5rem',
                 height: '3.5rem',
-                marginLeft: '44rem', // 눈 아이콘을 왼쪽으로 1rem 이동시킴
+                marginLeft: '44rem',
+                backgroundColor: 'var(--color-background-black)',
               }}
             >
               {passwordFilter ? <EyeHiddenIcon /> : <EyeIcon />}

@@ -19,7 +19,7 @@ export const PasswordInputSection = styled.div`
 // CheckPasswordInput 스타일 정의
 export const CheckPasswordInput = styled.input`
   border: 0.4rem solid var(--color-border);
-  background-color: var(--color-background-black);
+  background-color: var(--color-backgorund-black);
   color: var(--color-text-placeholder);
   border-radius: 1rem;
   z-index: 1;
