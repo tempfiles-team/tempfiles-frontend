@@ -12,4 +12,9 @@ export const FileListBoxContainer = styled.div`
   font-size: 2.2rem;
   margin-bottom: 1.5rem;
   cursor: pointer;
+
+  img {
+    width: 2.3rem;
+    margin-right: 0.5rem;
+  }
 `;

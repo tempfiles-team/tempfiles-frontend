@@ -14,6 +14,12 @@ export const CheckBoxObject = styled.div<{ isCheck: boolean }>`
   border-radius: 0.3rem;
   background-color: ${(props) =>
     props.isCheck ? 'var(--color-check-true-background)' : 'var(--color-check-false-background)'};
+
+  img {
+    display: ${(props) => (props.isCheck ? 'block' : 'none')};
+
+    filter: invert(100%);
+  }
 `;
 
 export const CheckBoxText = styled.div`
