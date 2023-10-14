@@ -38,7 +38,7 @@ export const DownloadPage: React.FC = () => {
     const getFileProps = async () => {
       await axios({
         method: 'get',
-        url: `${process.env.REACT_APP_BACKEND_BASEURL}/file/${fileid}${
+        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${fileid}${
           downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ``
         }`,
       })

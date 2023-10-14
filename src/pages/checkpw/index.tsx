@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 
-import { ReactComponent as EyeIcon } from '../../assets/Eye.svg';
-import { ReactComponent as EyeHiddenIcon } from '../../assets/EyeHidden.svg';
+// import EyeIcon from '../../assets/Eye.svg';
+// import EyeHiddenIcon from '../../assets/EyeHidden.svg';
 import { FileBox, Button, SkeletonUI } from '../../components';
 import { actionCreators } from '../../state';
 import { getDate, getFileSize } from '../../utils';
@@ -38,7 +38,7 @@ export const CheckPasswordPage: React.FC = () => {
     } else {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_BASEURL}/checkpw/${checkfileid}?pw=${password}`,
+          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/checkpw/${checkfileid}?pw=${password}`,
         );
         SetDownloadFileProps({
           isEncrypted: true,
@@ -63,7 +63,7 @@ export const CheckPasswordPage: React.FC = () => {
   useEffect(() => {
     const getFileProps = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_BASEURL}/file/${checkfileid}`);
+        const res = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${checkfileid}`);
         setLoading(false);
         setFileProps({
           filename: res.data.filename,
@@ -116,7 +116,7 @@ export const CheckPasswordPage: React.FC = () => {
                 backgroundColor: 'var(--color-background-black)',
               }}
             >
-              {passwordFilter ? <EyeHiddenIcon /> : <EyeIcon />}
+              {/* {passwordFilter ? <EyeHiddenIcon /> : <EyeIcon />} */}
             </S.EyeIconWrapper>
             <Button
               click={() => {

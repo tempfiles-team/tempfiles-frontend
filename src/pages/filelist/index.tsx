@@ -20,7 +20,7 @@ export const FileListPage: React.FC = () => {
   const getFileList = async () => {
     await axios({
       method: 'get',
-      url: `${process.env.REACT_APP_BACKEND_BASEURL}/list`,
+      url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/list`,
     })
       .then((res) => {
         setFileList(res.data.list); //파일리스트 요소 갯수에 따른 핸들링 추가예정

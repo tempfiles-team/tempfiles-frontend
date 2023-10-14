@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ReactComponent as EyeIcon } from '../../../assets/Eye.svg';
-import { ReactComponent as EyeHiddenIcon } from '../../../assets/EyeHidden.svg';
+// import { ReactComponent as EyeIcon } from '../../../assets/Eye.svg';
+// import { ReactComponent as EyeHiddenIcon } from '../../../assets/EyeHidden.svg';
 import * as S from './styled';
 
 interface PasswordInputProps {
@@ -36,7 +36,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
         marginRight: '1.2rem',
       }}
     >
-      {isFillter ? <EyeHiddenIcon /> : <EyeIcon />}
+      {/* {isFillter ? <EyeHiddenIcon /> : <EyeIcon />} */}
     </div>
   </S.PasswordInputContainer>
 );
