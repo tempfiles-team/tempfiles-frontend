@@ -22,26 +22,24 @@ export const App: React.FC = () => (
       <Route
         path=""
         element={
-          <>
-            <div
-              style={{
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              <ToastContainer />
-              <div>
-                <Link to="" style={{ textAlign: 'center', textDecoration: 'none' }}>
-                  <div className="MainLogoText">TEMPFILES</div>
-                  <div className="MainLogoSubText">간단한 파일 공유 서비스</div>
-                </Link>
-                <Outlet />
-              </div>
-              <Navbar />
+          <div
+            style={{
+              height: '100dvh',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }}
+          >
+            <ToastContainer />
+            <div>
+              <Link to="" style={{ textAlign: 'center', textDecoration: 'none' }}>
+                <div className="MainLogoText">TEMPFILES</div>
+                <div className="MainLogoSubText">간단한 파일 공유 서비스</div>
+              </Link>
+              <Outlet />
             </div>
-          </>
+            <Navbar />
+          </div>
         }
       >
         <Route index element={<MainPage />} />
