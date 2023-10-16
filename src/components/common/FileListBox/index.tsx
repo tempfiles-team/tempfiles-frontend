@@ -22,8 +22,15 @@ export const FileListBox: React.FC<FileListBoxProps> = ({
 }) => (
   <S.FileListBoxContainer onClick={click}>
     {isEncrypted ? <img src={LockIcon} alt="lock icon"/> : <></>}
-    ID: {fileId} / 파일이름: {filename} / 크기:{size} / 업로드날짜:{uploadDate.year}-
-    {uploadDate.month}-{uploadDate.day}
+    <div className='long'>
+      ID: {fileId} / 파일이름: {filename} / 크기:{size} / 업로드날짜:{uploadDate.year}-
+      {uploadDate.month}-{uploadDate.day}
+    </div>
 
+    <div className='short'>
+      <p>ID: {fileId} / 파일이름: {filename}</p>
+      <p>크기:{size} / 업로드날짜:{uploadDate.year}-
+      {uploadDate.month}-{uploadDate.day}</p>
+    </div>
   </S.FileListBoxContainer>
 );

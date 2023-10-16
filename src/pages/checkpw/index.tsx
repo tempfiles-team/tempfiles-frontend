@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bindActionCreators } from 'redux';
 
-// import EyeIcon from '../../assets/Eye.svg';
-// import EyeHiddenIcon from '../../assets/EyeHidden.svg';
+import EyeIcon from '../../assets/Eye.svg';
+import EyeHiddenIcon from '../../assets/EyeHidden.svg';
 import { FileBox, Button, SkeletonUI } from '../../components';
 import { actionCreators } from '../../state';
 import { getDate, getFileSize } from '../../utils';
@@ -116,7 +116,7 @@ export const CheckPasswordPage: React.FC = () => {
                 backgroundColor: 'var(--color-background-black)',
               }}
             >
-              {/* {passwordFilter ? <EyeHiddenIcon /> : <EyeIcon />} */}
+              <img src={passwordFilter ? EyeHiddenIcon : EyeIcon} alt="eye icon" />
             </S.EyeIconWrapper>
             <Button
               click={() => {
