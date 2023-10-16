@@ -108,7 +108,7 @@ export const MainPage: React.FC = () => {
             isEncrypted: res.data.isEncrypted,
             //추후에 기한,다운로드횟수 추가예정
           });
-          navigate(`/download/${res.data.fileId}`);
+          navigate(`/dl/${res.data.fileId}`);
         })
         .catch((err) => {
           console.log(err);

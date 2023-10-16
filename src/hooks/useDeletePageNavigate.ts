@@ -10,7 +10,7 @@ export const useDeletePageNavigator = (delete_url: string, isEncrypted: boolean,
   const { SetDeleteFileProps } = bindActionCreators(actionCreators, dispatch);
   const move = () => {
     SetDeleteFileProps({ delete_url: delete_url, isEncrypted: isEncrypted, token: token });
-    navigate('/delete');
+    navigate('/del');
   };
   return [move];
 };

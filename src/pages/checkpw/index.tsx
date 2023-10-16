@@ -38,13 +38,13 @@ export const CheckPasswordPage: React.FC = () => {
     } else {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/checkpw/${checkfileid}?pw=${password}`,
+          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/check/${checkfileid}?pw=${password}`,
         );
         SetDownloadFileProps({
           isEncrypted: true,
           token: res.data.token,
         });
-        navigate(`/download/${checkfileid}`);
+        navigate(`/dl/${checkfileid}`);
         toast.success('통과!', {
           autoClose: 1000,
           position: toast.POSITION.BOTTOM_RIGHT,

@@ -55,14 +55,14 @@ export const FileListPage: React.FC = () => {
                     isEncrypted={item.isEncrypted}
                     click={() => {
                       if (item.isEncrypted) {
-                        navigate(`/checkpw/${item.fileId}`);
+                        navigate(`/check/${item.fileId}`);
                       } else {
                         SetDownloadFileProps({
                           fileId: item.fileId,
                           isEncrypted: item.isEncrypted,
                           token: null,
                         });
-                        navigate(`/download/${item.fileId}`);
+                        navigate(`/dl/${item.fileId}`);
                       }
                     }}
                   />

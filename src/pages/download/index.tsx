@@ -45,7 +45,7 @@ export const DownloadPage: React.FC = () => {
         .then((res) => {
           setLoading(false);
           if (res.data.isEncrypted && !res.data.provide_token) {
-            navigate(`/checkpw/${fileid}`);
+            navigate(`/check/${fileid}`);
           } else {
             setFileProps({
               filename: res.data.filename,

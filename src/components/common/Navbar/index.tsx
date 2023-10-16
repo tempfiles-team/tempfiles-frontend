@@ -6,6 +6,6 @@ export const Navbar: React.FC = () => (
   <S.NavbarContainer>
     <S.Nav to={'/'}>Upload</S.Nav>
     <S.Nav to={'/api'}>API</S.Nav>
-    <S.Nav to={'/filelist'}>File list</S.Nav>
+    <S.Nav to={'/list'}>File list</S.Nav>
   </S.NavbarContainer>
 );
