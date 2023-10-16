@@ -1,9 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Outlet, Route, Routes, Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { Toaster } from 'react-hot-toast';
 
-//react-toastify/dist/ReactToastify.css
 import { Navbar } from './components';
 import {
   MainPage,
@@ -30,7 +29,18 @@ export const App: React.FC = () => (
               justifyContent: 'space-between',
             }}
           >
-            <ToastContainer />
+            <div>
+              <Toaster
+                toastOptions={{
+                  className: '',
+                  style: {
+                    // border: '2px solid #757BAB',
+                    padding: '16px',
+                    backgroundColor: '#757BAB',
+                    color: '#FFFFFF',
+                  },
+              }}/>
+            </div>
             <div>
               <Link to="" style={{ textAlign: 'center', textDecoration: 'none' }}>
                 <div className="MainLogoText">TEMPFILES</div>

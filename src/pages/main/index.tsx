@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { bindActionCreators } from 'redux';
 
 import {
@@ -99,8 +99,8 @@ export const MainPage: React.FC = () => {
         .then(async (res) => {
           setUploading(true);
           toast.success('업로드 성공!', {
-            autoClose: 3000,
-            position: toast.POSITION.BOTTOM_RIGHT,
+            duration: 3000,
+            icon: '🎉',
           });
           SetDownloadFileProps({
             fileId: res.data.fileId,
@@ -113,15 +113,15 @@ export const MainPage: React.FC = () => {
         .catch((err) => {
           console.log(err);
           toast.error('업로드 실패..', {
-            autoClose: 3000,
-            position: toast.POSITION.BOTTOM_RIGHT,
+            duration: 3000,
+            icon: '🔥',
           });
           setUploading(true);
         });
     } else {
       toast.error('파일을 선택해주세요!', {
-        autoClose: 3000,
-        position: toast.POSITION.BOTTOM_RIGHT,
+        duration: 3000,
+        icon: '🔥',
       });
     }
   };

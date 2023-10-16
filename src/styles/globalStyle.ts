@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
 
 import { reset } from './reset';
-import { toastify } from './toastify';
 export const globalStyle = css`
   ${reset}
-  ${toastify}
   
   :root {
     --color-text-primary: #ffffff;

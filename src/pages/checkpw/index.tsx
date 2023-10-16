@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { bindActionCreators } from 'redux';
 
 import EyeIcon from '../../assets/Eye.svg';
@@ -32,8 +32,8 @@ export const CheckPasswordPage: React.FC = () => {
   const passwordCheck = async () => {
     if (password === '') {
       toast.error('비밀번호를 입력해주세요.', {
-        autoClose: 1000,
-        position: toast.POSITION.BOTTOM_RIGHT,
+        duration: 3000,
+        icon: "🔑"
       });
     } else {
       try {
@@ -46,15 +46,15 @@ export const CheckPasswordPage: React.FC = () => {
         });
         navigate(`/dl/${checkfileid}`);
         toast.success('통과!', {
-          autoClose: 1000,
-          position: toast.POSITION.BOTTOM_RIGHT,
+          duration: 3000,
+          icon: "🎉"
         });
       } catch (err) {
         console.log(err);
         setPassword('');
         toast.error('비밀번호를 다시 확인해주세요...', {
-          autoClose: 1000,
-          position: toast.POSITION.BOTTOM_RIGHT,
+          duration: 3000,
+          icon: "🔑"
         });
       }
     }
@@ -74,8 +74,8 @@ export const CheckPasswordPage: React.FC = () => {
         console.log(err);
         navigate('/');
         toast.error('error 문의해주세요...', {
-          autoClose: 1000,
-          position: toast.POSITION.BOTTOM_RIGHT,
+          duration: 3000,
+          icon: "🔥"
         });
       }
     };

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 import { Button } from '../../components';
 import { RootState } from '../../state/reducers';
@@ -27,14 +27,14 @@ export const DeletePage: React.FC = () => {
       .then(() => {
         navigate('/');
         toast.success('삭제 완료', {
-          autoClose: 3000,
-          position: toast.POSITION.BOTTOM_RIGHT,
+          duration: 3000,
+          icon: '🗑️',
         });
       })
       .catch((err) => {
         toast.error(`삭제 실패 ${err.response.status}`, {
-          autoClose: 3000,
-          position: toast.POSITION.BOTTOM_RIGHT,
+          duration: 3000,
+          icon: '🗑️',
         });
       });
   };

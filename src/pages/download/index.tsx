@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 
 import { FileListBox, Button, SkeletonUI } from '../../components';
 import { useDeletePageNavigator } from '../../hooks';
@@ -64,13 +64,13 @@ export const DownloadPage: React.FC = () => {
           navigate('/');
           if (err.response.status != 401) {
             toast.error(`error 문의해주세요. ${err.response.status}`, {
-              autoClose: 1000,
-              position: toast.POSITION.BOTTOM_RIGHT,
+              duration: 3000,
+              icon: '🔥',
             });
           } else {
             toast.error(`잘못된 링크입니다`, {
-              autoClose: 1000,
-              position: toast.POSITION.BOTTOM_RIGHT,
+              duration: 3000,
+              icon: '🔥',
             });
           }
         });
@@ -104,12 +104,19 @@ export const DownloadPage: React.FC = () => {
               <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
             </a>
             <Button
-              click={() => {
-                navigator.clipboard.writeText(window.location.href);
-                toast.success('복사 완료', {
-                  autoClose: 1000,
-                  position: toast.POSITION.BOTTOM_RIGHT,
-                });
+              click={async () => {
+                try {
+                  await navigator.clipboard.writeText(window.location.href);
+                  toast.success('복사 완료', {
+                    duration: 3000,
+                    icon: '🎉',
+                  });
+                } catch (err) {
+                  toast.error('복사 실패', {
+                    duration: 3000,
+                    icon: '❌',
+                  }); 
+                }
               }}
               bgColor="var(--color-button-primary)"
               label="링크복사"
