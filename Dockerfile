@@ -3,7 +3,7 @@ FROM nginx:latest
 # Copy the nginx configuration file
 COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY build /etc/nginx/html
+COPY dist /etc/nginx/html
 
 EXPOSE 80
 
