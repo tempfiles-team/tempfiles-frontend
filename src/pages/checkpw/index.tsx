@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 
 import EyeIcon from '../../assets/Eye.svg';
 import EyeHiddenIcon from '../../assets/EyeHidden.svg';
-import { FileBox, Button, SkeletonUI } from '../../components';
+import { FileListBox, Button, SkeletonUI } from '../../components';
 import { actionCreators } from '../../state';
 import { getDate, getFileSize } from '../../utils';
 import * as S from './styled';
@@ -86,10 +86,15 @@ export const CheckPasswordPage: React.FC = () => {
     <S.CheckPasswordPageContainer>
       {!loading ? (
         <>
-          <FileBox>
-            파일이름: {fileProps.filename} / 크기: {fileProps.size} / 업로드된 날짜:{' '}
-            {fileProps.uploadDate.year}-{fileProps.uploadDate.month}-{fileProps.uploadDate.day}
-          </FileBox>
+          <FileListBox
+            key={fileProps.filename}
+            filename={fileProps.filename}
+            size={fileProps.size}
+            uploadDate={fileProps.uploadDate}
+            fileId=""
+            isEncrypted={true}
+            click={() => {}}
+          />
           <S.PasswordInputSection>
             <S.CheckPasswordInput
               type={passwordFilter ? 'password' : 'text'}

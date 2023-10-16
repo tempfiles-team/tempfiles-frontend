@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { Button, FileBox, SkeletonUI } from '../../components';
+import { FileListBox, Button, SkeletonUI } from '../../components';
 import { useDeletePageNavigator } from '../../hooks';
 import { RootState } from '../../state/reducers';
 import { getDate, getFileSize, getExpireTime } from '../../utils';
@@ -81,10 +81,16 @@ export const DownloadPage: React.FC = () => {
     <S.DownloadPageContainer>
       {!loading ? (
         <>
-          <FileBox>
-            파일이름:{fileProps.filename} / 크기:{fileProps.size} / 업로드된 날짜:
-            {fileProps.uploadDate.year}-{fileProps.uploadDate.month}-{fileProps.uploadDate.day}
-          </FileBox>
+          <FileListBox
+            key={fileProps.filename}
+            filename={fileProps.filename}
+            size={fileProps.size}
+            uploadDate={fileProps.uploadDate}
+            fileId=""
+            isEncrypted={false}
+            click={() => {}}
+          />
+
           <S.DownloadFileStatusText>
             만료까지 {fileProps.expireTime.day}일 {fileProps.expireTime.hour}시간{' '}
             {fileProps.expireTime.minute}분 / {fileProps.downloadCount}회 남았습니다.
