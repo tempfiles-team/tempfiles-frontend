@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
-
+import toast from 'react-hot-toast';
 import { SkeletonUIApiBox } from '../../components';
 import { ApiPostPage } from '../postApi';
 import * as S from './styled';
@@ -22,7 +22,10 @@ export const ApiPage: React.FC = () => {
         }, 1200);
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(`API 정보를 불러오는데 실패했습니다. ${err.response.status}`, {
+          duration: 3000,
+          icon: '❌',
+        });
       });
   };
 

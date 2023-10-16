@@ -6,7 +6,7 @@ const reducer = (
     token: null,
     isEncrypted: null,
   },
-  action: Action,
+  action: Action
 ): any => {
   switch (action.type) {
     case ActionType.DownloadFileProps:

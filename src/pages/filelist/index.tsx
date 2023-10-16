@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-
+import toast from 'react-hot-toast';
 import { FileListBox, SkeletonUIBox } from '../../components';
 import { actionCreators } from '../../state';
 import { getFileSize, getShortFileName, getDate } from '../../utils';
@@ -32,7 +32,10 @@ export const FileListPage: React.FC = () => {
         }, 1000);
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(`파일 리스트를 불러오는데 실패했습니다. ${err.response.status}`, {
+          duration: 3000,
+          icon: '❌',
+        });
       });
   };
   useEffect(() => {

@@ -1,10 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-
 import { FileListBox, Button, SkeletonUI } from '../../components';
 import { useDeletePageNavigator } from '../../hooks';
 import { RootState } from '../../state/reducers';
@@ -30,7 +28,7 @@ export const DownloadPage: React.FC = () => {
   const [move] = useDeletePageNavigator(
     fileProps.delete_url,
     fileProps.isEncrypted,
-    downloadFileProps.token,
+    downloadFileProps.token
   );
 
   //https://github.com/facebook/react/issues/14920
@@ -39,7 +37,7 @@ export const DownloadPage: React.FC = () => {
       await axios({
         method: 'get',
         url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${fileid}${
-          downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ``
+          downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
         }`,
       })
         .then((res) => {
@@ -68,7 +66,7 @@ export const DownloadPage: React.FC = () => {
               icon: '🔥',
             });
           } else {
-            toast.error(`잘못된 링크입니다`, {
+            toast.error('잘못된 링크입니다', {
               duration: 3000,
               icon: '🔥',
             });
@@ -115,7 +113,7 @@ export const DownloadPage: React.FC = () => {
                   toast.error('복사 실패', {
                     duration: 3000,
                     icon: '❌',
-                  }); 
+                  });
                 }
               }}
               bgColor="var(--color-button-primary)"

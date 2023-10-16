@@ -36,7 +36,6 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
         marginRight: '1.2rem',
       }}
     >
-
       <img src={isFillter ? EyeHiddenIcon : EyeIcon} alt="eye icon" />
     </div>
   </S.PasswordInputContainer>

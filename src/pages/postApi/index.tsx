@@ -1,9 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-
 import { Button, SkeletonUI } from '../../components';
 import * as S from './styled';
 
@@ -29,7 +27,10 @@ export const ApiPostPage: React.FC = () => {
           }
         })
         .catch((err) => {
-          console.log(err);
+          toast.error(`API 정보를 불러오는데 실패했습니다. ${err.response.status}`, {
+            duration: 3000,
+            icon: '❌',
+          });
         });
     };
     getUrlApiInfo();
@@ -55,9 +56,9 @@ export const ApiPostPage: React.FC = () => {
                 toast.error('복사 실패', {
                   duration: 3000,
                   icon: '❌',
-                }); 
+                });
               }
-          }}
+            }}
             bgColor="var(--color-button-primary)"
             label="명령어 복사"
           />

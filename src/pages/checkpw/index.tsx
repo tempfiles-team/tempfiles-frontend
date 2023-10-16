@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { bindActionCreators } from 'redux';
 
@@ -33,12 +32,12 @@ export const CheckPasswordPage: React.FC = () => {
     if (password === '') {
       toast.error('비밀번호를 입력해주세요.', {
         duration: 3000,
-        icon: "🔑"
+        icon: '🔑',
       });
     } else {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/checkpw/${checkfileid}?pw=${password}`,
+          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/checkpw/${checkfileid}?pw=${password}`
         );
         SetDownloadFileProps({
           isEncrypted: true,
@@ -47,14 +46,13 @@ export const CheckPasswordPage: React.FC = () => {
         navigate(`/dl/${checkfileid}`);
         toast.success('통과!', {
           duration: 3000,
-          icon: "🎉"
+          icon: '🎉',
         });
       } catch (err) {
-        console.log(err);
         setPassword('');
         toast.error('비밀번호를 다시 확인해주세요...', {
           duration: 3000,
-          icon: "🔑"
+          icon: '🔑',
         });
       }
     }
@@ -63,7 +61,9 @@ export const CheckPasswordPage: React.FC = () => {
   useEffect(() => {
     const getFileProps = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${checkfileid}`);
+        const res = await axios.get(
+          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${checkfileid}`
+        );
         setLoading(false);
         setFileProps({
           filename: res.data.filename,
@@ -71,11 +71,10 @@ export const CheckPasswordPage: React.FC = () => {
           uploadDate: getDate(res.data.uploadDate),
         });
       } catch (err) {
-        console.log(err);
         navigate('/');
-        toast.error('error 문의해주세요...', {
+        toast.error('잘못된 링크입니다', {
           duration: 3000,
-          icon: "🔥"
+          icon: '🔥',
         });
       }
     };

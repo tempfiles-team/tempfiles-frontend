@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Outlet, Route, Routes, Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-
+import { store } from './state/store';
 import { Navbar } from './components';
 import {
   MainPage,
@@ -13,7 +13,6 @@ import {
   NotFoundPage,
   CheckPasswordPage,
 } from './pages';
-import { store } from './state/store';
 
 export const App: React.FC = () => (
   <Provider store={store}>
@@ -39,7 +38,8 @@ export const App: React.FC = () => (
                     backgroundColor: '#757BAB',
                     color: '#FFFFFF',
                   },
-              }}/>
+                }}
+              />
             </div>
             <div>
               <Link to="" style={{ textAlign: 'center', textDecoration: 'none' }}>

@@ -3,7 +3,7 @@ import { Action } from '../actions';
 
 const reducer = (
   state: any = { token: null, delete_url: null, isEncrypted: null },
-  action: Action,
+  action: Action
 ): any => {
   switch (action.type) {
     case ActionType.DeleteFileProps:

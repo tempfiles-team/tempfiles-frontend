@@ -111,7 +111,6 @@ export const MainPage: React.FC = () => {
           navigate(`/dl/${res.data.fileId}`);
         })
         .catch((err) => {
-          console.log(err);
           toast.error('업로드 실패..', {
             duration: 3000,
             icon: '🔥',
