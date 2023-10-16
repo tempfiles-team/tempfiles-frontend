@@ -18,5 +18,5 @@
     "jsx": "react-jsx",
     "types": ["vite/client"]
   },
-  "include": ["src", "src/components", "src/custom.d.ts"],
+  "include": ["src", "src/components"],
 }
