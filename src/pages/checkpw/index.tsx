@@ -38,7 +38,7 @@ export const CheckPasswordPage: React.FC = () => {
     } else {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/check/${checkfileid}?pw=${password}`,
+          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/checkpw/${checkfileid}?pw=${password}`,
         );
         SetDownloadFileProps({
           isEncrypted: true,

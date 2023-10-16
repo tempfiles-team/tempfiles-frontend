@@ -11,6 +11,9 @@ dependencies:
   '@emotion/styled':
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.28)(react@18.2.0)
+  '@swc/plugin-emotion':
+    specifier: ^2.5.92
+    version: 2.5.92
   '@types/react':
     specifier: ^18.2.28
     version: 18.2.28
@@ -968,6 +971,10 @@ packages:
   /@swc/counter@0.1.2:
     resolution: {integrity: sha512-9F4ys4C74eSTEUNndnER3VJ15oru2NumfQxS8geE+f3eB5xvfxpWyqE5XlVnxb/R14uoXi6SLbBwwiDSkv+XEw==}
     dev: true
+
+  /@swc/plugin-emotion@2.5.92:
+    resolution: {integrity: sha512-mt7HUtENIT8zimQEiNxX+VCAWNxf9H14X4gVrD6XgaSQpqGEe+i7CCgQrbCxPP1s065wgS/6/j6O1WTznZk6Aw==}
+    dev: false
 
   /@swc/types@0.1.5:
     resolution: {integrity: sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==}

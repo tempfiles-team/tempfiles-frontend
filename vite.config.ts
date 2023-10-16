@@ -14,6 +14,7 @@ export default defineConfig({
     svgr(),
     react({
       jsxImportSource: '@emotion/react',
+      plugins: [['@swc/plugin-emotion', {}]],
     }),
   ],
   build: {
