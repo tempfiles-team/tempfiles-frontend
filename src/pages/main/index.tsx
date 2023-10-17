@@ -106,7 +106,6 @@ export const MainPage: React.FC = () => {
             fileId: res.data.fileId,
             token: res.data.isEncrypted ? res.data.token : null,
             isEncrypted: res.data.isEncrypted,
-            //추후에 기한,다운로드횟수 추가예정
           });
           navigate(`/dl/${res.data.fileId}`);
         })

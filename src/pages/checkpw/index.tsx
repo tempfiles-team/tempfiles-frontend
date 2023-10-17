@@ -4,10 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { bindActionCreators } from 'redux';
-
-import EyeIcon from '../../assets/Eye.svg';
-import EyeHiddenIcon from '../../assets/EyeHidden.svg';
-import { FileListBox, Button, SkeletonUI } from '../../components';
+import { FileListBox, Button, SkeletonUI, PasswordInput } from '../../components';
 import { actionCreators } from '../../state';
 import { getDate, getFileSize } from '../../utils';
 import * as S from './styled';
@@ -94,34 +91,15 @@ export const CheckPasswordPage: React.FC = () => {
             isEncrypted={true}
             click={() => {}}
           />
-          <S.PasswordInputSection>
-            <S.CheckPasswordInput
+          <div className="input-box">
+            <PasswordInput
               type={passwordFilter ? 'password' : 'text'}
-              value={password}
-              onKeyPress={(e: any) => {
-                if (e.key === 'Enter') {
-                  passwordCheck();
-                }
-              }}
-              onChange={(text) => {
-                setPassword(text.target.value.replace(/(\s*)/g, ''));
-              }}
+              setPassword={setPassword}
+              setPasswordFilter={setPasswordFilter}
               placeholder="비밀번호를 입력해주세요."
+              isFillter={passwordFilter}
             />
-            <S.EyeIconWrapper
-              onClick={() => setPasswordFilter(!passwordFilter)}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '3.5rem',
-                height: '3.5rem',
-                marginLeft: '44rem',
-                backgroundColor: 'var(--color-background-black)',
-              }}
-            >
-              <img src={passwordFilter ? EyeHiddenIcon : EyeIcon} alt="eye icon" />
-            </S.EyeIconWrapper>
+
             <Button
               click={() => {
                 passwordCheck();
@@ -129,7 +107,7 @@ export const CheckPasswordPage: React.FC = () => {
               bgColor="var(--color-button-primary)"
               label="전송"
             />
-          </S.PasswordInputSection>
+          </div>
         </>
       ) : (
         <>

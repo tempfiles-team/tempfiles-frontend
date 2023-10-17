@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const PasswordInputContainer = styled.div`
   width: 100%;
-  height: 5rem;
+  height: 6rem;
   margin-top: 2rem;
   position: relative;
   display: flex;

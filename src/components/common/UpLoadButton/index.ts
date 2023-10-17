@@ -5,7 +5,7 @@ export const UpLoadButton = styled.input`
   border-radius: 1.5rem;
   border: 0;
   width: 15rem;
-  height: 5rem;
+  height: 6rem;
   font-size: 2rem;
   font-weight: 900;
   background-color: var(--color-background-secondary);

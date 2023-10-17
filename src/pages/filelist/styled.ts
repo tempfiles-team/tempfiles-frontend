@@ -11,7 +11,7 @@ export const FileListPageContainer = styled.div`
   }
 `;
 
-export const FileListPageBoxShoadow = styled.div`
+export const FileListPageBoxShadow = styled.div`
   width: 100%;
   height: 6rem;
   position: relative;

@@ -11,7 +11,7 @@ export const FileFindLabelBox = styled.label`
   border: 0.4rem solid var(--color-border);
   border-radius: 1rem;
   width: 45rem;
-  height: 4.2rem;
+  height: 5.2rem;
   background-color: var(--color-backgorund-black);
   color: var(--color-text-placeholder);
   display: flex;
@@ -29,8 +29,8 @@ export const FileFindLabelBox = styled.label`
 
 export const FileFindButton = styled.label`
   background-color: var(--color-background-secondary);
-  width: 10rem;
-  height: 4.6rem;
+  width: 12rem;
+  height: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
