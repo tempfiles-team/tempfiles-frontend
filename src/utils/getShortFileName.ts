@@ -20,7 +20,12 @@ const getFileExtension = (fileName: string) => {
 export const getShortFileName = (fileName: string) => {
   const fileFullName = getFileFullName(fileName);
   if (fileFullName.length >= 9) {
-    return fileFullName.substring(0, 10) + '(...)' + getFileExtension(fileName);
+    return (
+      fileFullName.substring(0, 4) +
+      '(...)' +
+      fileFullName.substring(fileFullName.length - 5, fileFullName.length) +
+      getFileExtension(fileName)
+    );
   }
   return fileName;
 };

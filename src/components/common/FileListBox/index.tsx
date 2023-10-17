@@ -1,12 +1,16 @@
 import React from 'react';
-
+import { getShortFileName } from '../../../utils';
 import * as S from './styled';
 
 type FileListBoxProps = {
   filename: string;
   fileId: string;
   size: string;
-  uploadDate: any;
+  uploadDate: {
+    year: number;
+    month: number;
+    day: number;
+  };
   isEncrypted: boolean;
   click: () => void;
 };
@@ -27,21 +31,18 @@ export const FileListBox: React.FC<FileListBoxProps> = ({
 
     <div className="middle">
       <p>
-        {isEncrypted ? '🔐' : ''} {fileId != '' ? 'ID: ' + fileId + ' / ' : ''}파일이름: {filename}
+        {isEncrypted ? '🔐' : ''} {fileId != '' ? 'ID: ' + fileId + ' / ' : ''} 크기:{size} /
+        업로드날짜:{uploadDate.year}-{uploadDate.month}-{uploadDate.day}
       </p>
-      <p>
-        크기:{size} / 업로드날짜:{uploadDate.year}-{uploadDate.month}-{uploadDate.day}
-      </p>
+      <p>파일이름: {filename}</p>
     </div>
 
     <div className="short">
       <p>
-        {isEncrypted ? '🔐' : ''} {fileId != '' ? 'ID: ' + fileId + ' / ' : ''}크기:{size}
-      </p>
-      <p>파일이름: {filename}</p>
-      <p>
+        {isEncrypted ? '🔐' : ''} {fileId != '' ? 'ID: ' + fileId + ' / ' : ''} 크기:{size} /
         업로드날짜:{uploadDate.year}-{uploadDate.month}-{uploadDate.day}
       </p>
+      <p>파일이름: {getShortFileName(filename)}</p>
     </div>
   </S.FileListBoxContainer>
 );

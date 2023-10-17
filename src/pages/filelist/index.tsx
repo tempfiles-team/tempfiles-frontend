@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import toast from 'react-hot-toast';
 import { FileListBox, SkeletonUIBox } from '../../components';
 import { actionCreators } from '../../state';
-import { getFileSize, getShortFileName, getDate } from '../../utils';
+import { getFileSize, getDate } from '../../utils';
 import * as S from './styled';
 
 export const FileListPage: React.FC = () => {
@@ -51,7 +51,7 @@ export const FileListPage: React.FC = () => {
                 {fileList?.map((item, index) => (
                   <FileListBox
                     key={index}
-                    filename={getShortFileName(item.filename)}
+                    filename={item.filename}
                     fileId={item.fileId}
                     size={getFileSize(item.size)}
                     uploadDate={getDate(item.uploadDate)}
