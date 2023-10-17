@@ -6,7 +6,7 @@ type ExpireTimeProps = {
   expireTimePlusButton: string[];
   time: { day: number; hour: number; minute: number };
   expireTime: number;
-  setExpireTime: (expireTime: number) => void;
+  setExpireTime: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const ExpireTime: React.FC<ExpireTimeProps> = ({

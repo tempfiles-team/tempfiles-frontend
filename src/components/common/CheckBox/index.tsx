@@ -4,7 +4,7 @@ import CheckIcon from '../../../assets/CheckIcon.svg';
 import * as S from './styled';
 
 type CheckBoxProps = {
-  click: any;
+  click: React.MouseEventHandler<HTMLDivElement>;
   isCheck: boolean;
   label: string;
 };

@@ -8,7 +8,16 @@ import * as S from './styled';
 
 export const ApiPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const [apiInfo, setApiInfo] = useState<any[]>();
+  const [apiInfo, setApiInfo] = useState<
+    {
+      apiName: string;
+      apiUrl: string;
+      apiHandler: string;
+      method: string;
+      desc: string;
+      command: string;
+    }[]
+  >();
   const SkeletonUIRandomWidth = ['40', '50', '55', '45'];
   const getApiInfo = async () => {
     await axios({

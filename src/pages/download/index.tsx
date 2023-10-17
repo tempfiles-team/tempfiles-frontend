@@ -11,7 +11,10 @@ import * as S from './styled';
 
 export const DownloadPage: React.FC = () => {
   const navigate = useNavigate();
-  const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
+  const downloadFileProps: {
+    isEncrypted: boolean;
+    token: string;
+  } = useSelector((state: RootState) => state.DownloadFileProps);
   const [loading, setLoading] = useState(true);
   const { fileid } = useParams<{ fileid: string }>();
   const [fileProps, setFileProps] = useState({

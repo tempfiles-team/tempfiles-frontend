@@ -6,7 +6,14 @@ import { Button, SkeletonUI } from '../../components';
 import * as S from './styled';
 
 export const ApiPostPage: React.FC = () => {
-  const [apiInfo, setApiInfo] = useState<any>();
+  const [apiInfo, setApiInfo] = useState<{
+    apiName: string;
+    apiUrl: string;
+    apiHandler: string;
+    method: string;
+    desc: string;
+    command: string;
+  }>();
   const [loading, setLoading] = useState(false);
   const { urlApi } = useParams<{ urlApi: string }>();
   const navigate = useNavigate();

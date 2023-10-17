@@ -12,14 +12,13 @@ export const getExpireTime = (date: string) => {
     differenceTime / (1000 * 60 * 60 * 24) >= 0 ? differenceTime / (1000 * 60 * 60 * 24) : 0;
 
   let differenceTimeHour = differenceTime / (1000 * 60 * 60);
-  while (true) {
+  let differenceTimeMinute = differenceTime / (1000 * 60);
+  const condition = true;
+  while (condition) {
     differenceTimeHour %= 24;
     if (differenceTimeHour <= 24) {
       break;
     }
-  }
-  let differenceTimeMinute = differenceTime / (1000 * 60);
-  while (true) {
     differenceTimeMinute %= 60;
     if (differenceTimeMinute <= 60) {
       break;

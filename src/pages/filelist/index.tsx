@@ -16,7 +16,16 @@ export const FileListPage: React.FC = () => {
   const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
   const dispatch = useDispatch();
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
-  const [fileList, setFileList] = useState<any[]>();
+  const [fileList, setFileList] = useState<
+    {
+      filename: string;
+      fileId: string;
+      size: number;
+      uploadDate: string;
+      isEncrypted: boolean;
+    }[]
+  >();
+
   const getFileList = async () => {
     await axios({
       method: 'get',

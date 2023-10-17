@@ -3,10 +3,14 @@ import React from 'react';
 import * as S from './styled';
 
 type FileFindProps = {
-  handleChangeFile: any;
-  handleDrop: any;
-  handleDragOver: any;
-  fileProps: any;
+  handleChangeFile: React.ChangeEventHandler<HTMLInputElement>;
+  handleDrop: React.DragEventHandler<HTMLLabelElement>;
+  handleDragOver: React.DragEventHandler<HTMLLabelElement>;
+  fileProps: {
+    filename: string;
+    size: string;
+    fileType: string;
+  };
 };
 
 export const FileFind: React.FC<FileFindProps> = ({

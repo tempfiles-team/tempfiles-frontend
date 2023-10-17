@@ -7,8 +7,8 @@ import * as S from './styled';
 interface PasswordInputProps {
   type: string;
   isFillter: boolean;
-  setPassword: any;
-  setPasswordFilter: any;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+  setPasswordFilter: React.Dispatch<React.SetStateAction<boolean>>;
   placeholder: string;
 }
 

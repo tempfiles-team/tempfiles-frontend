@@ -69,7 +69,7 @@ export const MainPage: React.FC = () => {
       fileData: event.dataTransfer.files[0],
     });
   };
-  const dragOver = (event: any) => {
+  const dragOver = (event: DragEvent) => {
     event.preventDefault();
   };
 
@@ -109,7 +109,7 @@ export const MainPage: React.FC = () => {
           });
           navigate(`/dl/${res.data.fileId}`);
         })
-        .catch((err) => {
+        .catch(() => {
           toast.error('업로드 실패..', {
             duration: 3000,
             icon: '🔥',
