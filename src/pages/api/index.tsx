@@ -66,7 +66,6 @@ export const ApiPage: React.FC = () => {
                   </>
                 )}
               </S.ApiListSection>
-              <S.ApiListSectionShadow />
             </>
           }
         />

@@ -75,7 +75,6 @@ export const FileListPage: React.FC = () => {
               <S.FileListZero>업로드된 파일이 없습니다.</S.FileListZero>
             )}
           </S.FileListPageContainer>
-          <S.FileListPageBoxShoadow />
         </>
       ) : (
         <>
@@ -88,7 +87,6 @@ export const FileListPage: React.FC = () => {
             <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
             <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
           </S.FileListPageContainer>
-          <S.FileListPageBoxShoadow />
         </>
       )}
     </>

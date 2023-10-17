@@ -61,17 +61,4 @@ export const globalStyle = css`
     align-items: center;
     overflow: hidden;
   }
-  .MainLogoText {
-    font-size: 6rem;
-    font-weight: 900;
-    margin: 1.8rem;
-    margin-top: 5rem;
-    color: var(--color-text-primary);
-  }
-  .MainLogoSubText {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 3.5rem;
-    color: var(--color-text-primary);
-  }
 `;

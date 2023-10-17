@@ -4,6 +4,8 @@ import { Outlet, Route, Routes, Link } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { store } from './state/store';
 import { Navbar } from './components';
+import * as S from './styles/app';
+
 import {
   MainPage,
   DownloadPage,
@@ -18,38 +20,27 @@ export const App: React.FC = () => (
   <Provider store={store}>
     <Routes>
       <Route
-        path=""
         element={
-          <div
-            style={{
-              height: '100dvh',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }}
-          >
+          <S.RootLayout>
             <div>
               <Toaster
                 toastOptions={{
-                  className: '',
                   style: {
-                    // border: '2px solid #757BAB',
-                    padding: '16px',
                     backgroundColor: '#757BAB',
                     color: '#FFFFFF',
                   },
                 }}
               />
             </div>
-            <div>
-              <Link to="" style={{ textAlign: 'center', textDecoration: 'none' }}>
-                <div className="MainLogoText">TEMPFILES</div>
-                <div className="MainLogoSubText">간단한 파일 공유 서비스</div>
+            <div className="RootWrapper">
+              <Link className="LinkBox" to="/">
+                <div className="Text">TEMPFILES</div>
+                <div className="SubText">간단한 파일 공유 서비스</div>
               </Link>
               <Outlet />
             </div>
             <Navbar />
-          </div>
+          </S.RootLayout>
         }
       >
         <Route index element={<MainPage />} />

@@ -30,11 +30,3 @@ export const ApiListBox = styled.div`
   font-weight: 700;
   cursor: pointer;
 `;
-
-export const ApiListSectionShadow = styled.div`
-  width: 100%;
-  height: 6rem;
-  position: relative;
-  top: -25px;
-  background: linear-gradient(180deg, rgba(40, 42, 58, 0) 0%, #282a3a 45.31%);
-`;

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const FileListPageContainer = styled.div`
-  max-height: 40rem;
+  max-height: 70dvh;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -9,14 +9,6 @@ export const FileListPageContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-`;
-
-export const FileListPageBoxShoadow = styled.div`
-  width: 100%;
-  height: 6rem;
-  position: relative;
-  top: -2.5rem; //-25px
-  background: linear-gradient(180deg, rgba(40, 42, 58, 0) 0%, #282a3a 45.31%);
 `;
 
 export const FileListZero = styled.div`
