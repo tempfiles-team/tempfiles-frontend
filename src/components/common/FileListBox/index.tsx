@@ -6,11 +6,7 @@ type FileListBoxProps = {
   filename: string;
   fileId: string;
   size: string;
-  uploadDate: {
-    year: number;
-    month: number;
-    day: number;
-  };
+  uploadDate: string;
   isEncrypted: boolean;
   click: () => void;
 };
@@ -25,24 +21,21 @@ export const FileListBox: React.FC<FileListBoxProps> = ({
 }) => (
   <S.FileListBoxContainer onClick={click}>
     <div className="long">
-      {isEncrypted ? '🔐' : ''} {fileId != '' ? 'ID: ' + fileId + ' / ' : ''}파일이름: {filename} /
-      크기:{size} / 업로드날짜:{uploadDate.year}-{uploadDate.month}-{uploadDate.day}
+      {isEncrypted ? '🔐' : ''} {fileId != '' ? fileId + ' / ' : ''} {filename} / {size} / {uploadDate}
     </div>
 
     <div className="middle">
       <p>
-        {isEncrypted ? '🔐' : ''} {fileId != '' ? 'ID: ' + fileId + ' / ' : ''} 크기:{size} /
-        업로드날짜:{uploadDate.year}-{uploadDate.month}-{uploadDate.day}
+        {isEncrypted ? '🔐' : ''} {fileId != '' ? fileId + ' / ' : ''} {size} / {uploadDate}
       </p>
-      <p>파일이름: {filename}</p>
+      <p>{filename}</p>
     </div>
 
     <div className="short">
       <p>
-        {isEncrypted ? '🔐' : ''} {fileId != '' ? 'ID: ' + fileId + ' / ' : ''} 크기:{size} /
-        업로드날짜:{uploadDate.year}-{uploadDate.month}-{uploadDate.day}
+        {isEncrypted ? '🔐' : ''} {fileId != '' ? fileId + ' / ' : ''} {size} / {uploadDate}
       </p>
-      <p>파일이름: {getShortFileName(filename)}</p>
+      <p>{getShortFileName(filename)}</p>
     </div>
   </S.FileListBoxContainer>
 );

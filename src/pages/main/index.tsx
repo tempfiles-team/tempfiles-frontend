@@ -69,6 +69,7 @@ export const MainPage: React.FC = () => {
       fileData: event.dataTransfer.files[0],
     });
   };
+
   const dragOver = (event: any) => {
     event.preventDefault();
   };
@@ -79,9 +80,8 @@ export const MainPage: React.FC = () => {
       formdata.append('file', fileProps.fileData);
       await axios({
         method: 'post',
-        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/upload${
-          passwordBoolean && password != '' && password != undefined ? `?pw=${password}` : ''
-        }`,
+        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/upload${passwordBoolean && password != '' && password != undefined ? `?pw=${password}` : ''
+          }`,
         data: formdata,
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -109,7 +109,7 @@ export const MainPage: React.FC = () => {
           });
           navigate(`/dl/${res.data.fileId}`);
         })
-        .catch((err) => {
+        .catch(() => {
           toast.error('업로드 실패..', {
             duration: 3000,
             icon: '🔥',
@@ -123,6 +123,7 @@ export const MainPage: React.FC = () => {
       });
     }
   };
+
   useEffect(() => {
     const typingInterval = setInterval(() => {
       setTypingCount(typingCount + 1);

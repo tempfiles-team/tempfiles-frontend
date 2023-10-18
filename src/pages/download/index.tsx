@@ -18,7 +18,7 @@ export const DownloadPage: React.FC = () => {
     filename: '',
     // fileId: '',
     size: '',
-    uploadDate: { year: 0, month: 0, day: 0 },
+    uploadDate: '',
     download_url: '',
     delete_url: '',
     isEncrypted: false,
@@ -36,9 +36,8 @@ export const DownloadPage: React.FC = () => {
     const getFileProps = async () => {
       await axios({
         method: 'get',
-        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${fileid}${
-          downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
-        }`,
+        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${fileid}${downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
+          }`,
       })
         .then((res) => {
           setLoading(false);
@@ -86,7 +85,7 @@ export const DownloadPage: React.FC = () => {
             uploadDate={fileProps.uploadDate}
             fileId=""
             isEncrypted={false}
-            click={() => {}}
+            click={() => { }}
           />
 
           <S.DownloadFileStatusText>
@@ -95,11 +94,10 @@ export const DownloadPage: React.FC = () => {
           </S.DownloadFileStatusText>
           <S.DownloadPageButtonSection>
             <a
-              href={`${fileProps.download_url}${
-                fileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
-              }`}
+              href={`${fileProps.download_url}${fileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
+                }`}
             >
-              <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
+              <Button click={() => { }} bgColor="var(--color-button-primary)" label="다운로드" />
             </a>
             <Button
               click={async () => {

@@ -17,7 +17,7 @@ export const CheckPasswordPage: React.FC = () => {
   const [fileProps, setFileProps] = useState({
     filename: '',
     size: '',
-    uploadDate: { year: 0, month: 0, day: 0 },
+    uploadDate: '',
   });
 
   const dispatch = useDispatch();
@@ -89,7 +89,7 @@ export const CheckPasswordPage: React.FC = () => {
             uploadDate={fileProps.uploadDate}
             fileId=""
             isEncrypted={true}
-            click={() => {}}
+            click={() => { }}
           />
           <div className="input-box">
             <PasswordInput
@@ -98,6 +98,7 @@ export const CheckPasswordPage: React.FC = () => {
               setPasswordFilter={setPasswordFilter}
               placeholder="비밀번호를 입력해주세요."
               isFillter={passwordFilter}
+              action={passwordCheck}
             />
 
             <Button
