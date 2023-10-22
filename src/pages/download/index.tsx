@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+// import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { FileListBox, Button, SkeletonUI } from '../../components';
-import { useDeletePageNavigator } from '../../hooks';
-import { RootState } from '../../state/reducers';
+// import { useDeletePageNavigator } from '../../hooks';
+// import { RootState } from '../../state/reducers';
 import { getDate, getFileSize, getExpireTime } from '../../utils';
 import * as S from './styled';
 

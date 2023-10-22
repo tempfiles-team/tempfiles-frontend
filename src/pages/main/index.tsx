@@ -50,20 +50,32 @@ export const MainPage: React.FC = () => {
   const dispatch = useDispatch();
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
 
-  const handleChangeFile = (event: any) => {
+  const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const filesArray = Array.from(event.target.files);
 
-    const updatedFileProps = {
-      files: filesArray.map((file) => ({
-        filename: file.name,
-        size: getFileSize(file.size),
-        fileType: file.type === '' ? 'application/octet-stream' : file.type,
-        fileData: file,
-      })),
-    };
+    const fileReadPromises = filesArray.map((file: File) => {
+      return new Promise<string>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const fileData = e.target?.result as string;
+          resolve(fileData);
+        };
+        reader.readAsText(file);
+      });
+    });
 
-    setFileProps(updatedFileProps);
+    Promise.all(fileReadPromises).then((fileDataArray) => {
+      const updatedFileProps = {
+        files: filesArray.map((file, index) => ({
+          filename: file.name,
+          size: getFileSize(file.size),
+          fileType: file.type,
+          fileData: fileDataArray[index],
+        })),
+      };
+      setFileProps(updatedFileProps);
+    });
   };
 
   const dragOver = (event: any) => {
