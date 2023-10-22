@@ -40,7 +40,7 @@ export const MainPage: React.FC = () => {
         filename: '',
         size: '',
         fileType: '',
-        fileData: '',
+        fileData: null,
       },
     ],
   });
@@ -54,28 +54,16 @@ export const MainPage: React.FC = () => {
     event.preventDefault();
     const filesArray = Array.from(event.target.files);
 
-    const fileReadPromises = filesArray.map((file: File) => {
-      return new Promise<string>((resolve) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const fileData = e.target?.result as string;
-          resolve(fileData);
-        };
-        reader.readAsText(file);
-      });
-    });
+    const updatedFileProps = {
+      files: filesArray.map((file: File) => ({
+        filename: file.name,
+        size: getFileSize(file.size),
+        fileType: file.type,
+        fileData: file,
+      })),
+    };
 
-    Promise.all(fileReadPromises).then((fileDataArray) => {
-      const updatedFileProps = {
-        files: filesArray.map((file, index) => ({
-          filename: file.name,
-          size: getFileSize(file.size),
-          fileType: file.type,
-          fileData: fileDataArray[index],
-        })),
-      };
-      setFileProps(updatedFileProps);
-    });
+    setFileProps(updatedFileProps);
   };
 
   const dragOver = (event: any) => {
