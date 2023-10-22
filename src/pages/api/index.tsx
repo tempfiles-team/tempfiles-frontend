@@ -63,6 +63,9 @@ export const ApiPage: React.FC = () => {
                     <SkeletonUIApiBox
                       randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 4)]}
                     />
+                    <SkeletonUIApiBox
+                      randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 4)]}
+                    />
                   </>
                 )}
               </S.ApiListSection>

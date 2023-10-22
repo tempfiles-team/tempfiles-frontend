@@ -36,6 +36,7 @@ export const FileFind: React.FC<FileFindProps> = ({
     <input
       id="input-file-upload"
       type={'file'}
+      multiple={true}
       style={{ display: 'none' }}
       onChange={handleChangeFile}
     />

@@ -35,10 +35,14 @@ export const MainPage: React.FC = () => {
   const [password, setPassword] = useState('');
 
   const [fileProps, setFileProps] = useState({
-    filename: '',
-    size: '',
-    fileType: '',
-    fileData: '',
+    files: [
+      {
+        filename: '',
+        size: '',
+        fileType: '',
+        fileData: '',
+      },
+    ],
   });
 
   const navigate = useNavigate();
@@ -48,26 +52,18 @@ export const MainPage: React.FC = () => {
 
   const handleChangeFile = (event: any) => {
     event.preventDefault();
-    setFileProps({
-      filename: event.target.files[0].name,
-      size: getFileSize(event.target.files[0].size),
-      fileType:
-        event.target.files[0].type === '' ? 'application/actet-stream' : event.target.files[0].type,
-      fileData: event.target.files[0],
-    });
-  };
+    const filesArray = Array.from(event.target.files);
 
-  const handleDrop = function (event: any) {
-    event.preventDefault();
-    setFileProps({
-      filename: event.dataTransfer.files[0].name,
-      size: getFileSize(event.dataTransfer.files[0].size),
-      fileType:
-        event.dataTransfer.files[0].type === ''
-          ? 'application/actet-stream'
-          : event.dataTransfer.files[0].type,
-      fileData: event.dataTransfer.files[0],
-    });
+    const updatedFileProps = {
+      files: filesArray.map((file) => ({
+        filename: file.name,
+        size: getFileSize(file.size),
+        fileType: file.type === '' ? 'application/octet-stream' : file.type,
+        fileData: file,
+      })),
+    };
+
+    setFileProps(updatedFileProps);
   };
 
   const dragOver = (event: any) => {
@@ -75,13 +71,17 @@ export const MainPage: React.FC = () => {
   };
 
   const UpLoad = async () => {
-    if (fileProps.filename != '' && fileProps.size != '') {
+    if (fileProps.files[0].filename !== '') {
       const formdata = new FormData();
-      formdata.append('file', fileProps.fileData);
+      fileProps.files.map((file) => {
+        formdata.append('file', file.fileData);
+      });
+
       await axios({
         method: 'post',
-        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/upload${passwordBoolean && password != '' && password != undefined ? `?pw=${password}` : ''
-          }`,
+        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/upload${
+          passwordBoolean && password != '' && password != undefined ? `?pw=${password}` : ''
+        }`,
         data: formdata,
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -103,11 +103,11 @@ export const MainPage: React.FC = () => {
             icon: '🎉',
           });
           SetDownloadFileProps({
-            fileId: res.data.fileId,
+            folderId: res.data.folderId,
             token: res.data.isEncrypted ? res.data.token : null,
             isEncrypted: res.data.isEncrypted,
           });
-          navigate(`/dl/${res.data.fileId}`);
+          navigate(`/dl/${res.data.folderId}`);
         })
         .catch(() => {
           toast.error('업로드 실패..', {
@@ -185,8 +185,8 @@ export const MainPage: React.FC = () => {
             />
           )}
           <FileFind
-            handleDrop={handleDrop}
             handleDragOver={dragOver}
+            handleDrop={handleChangeFile}
             handleChangeFile={handleChangeFile}
             fileProps={fileProps}
           />
@@ -195,7 +195,7 @@ export const MainPage: React.FC = () => {
       ) : (
         <Progress
           value={progressValue}
-          fileName={fileProps.filename}
+          fileName="개쩌는 파일"
           typing={typingText[typingCount]}
           stateText={progressStateText}
         />

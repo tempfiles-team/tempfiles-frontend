@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import toast from 'react-hot-toast';
-import { FileListBox, SkeletonUIBox } from '../../components';
+import { FolderListBox, SkeletonUIBox } from '../../components';
 import { actionCreators } from '../../state';
-import { getFileSize, getDate } from '../../utils';
+import { getDate } from '../../utils';
 import * as S from './styled';
 
 export const FileListPage: React.FC = () => {
@@ -49,23 +49,22 @@ export const FileListPage: React.FC = () => {
             {!listZero ? (
               <>
                 {fileList?.map((item, index) => (
-                  <FileListBox
+                  <FolderListBox
                     key={index}
-                    filename={item.filename}
-                    fileId={item.fileId}
-                    size={getFileSize(item.size)}
+                    folderId={item.folderId}
+                    fileCount={item.fileCount}
                     uploadDate={getDate(item.uploadDate)}
                     isEncrypted={item.isEncrypted}
                     click={() => {
                       if (item.isEncrypted) {
-                        navigate(`/check/${item.fileId}`);
+                        navigate(`/check/${item.folderId}`);
                       } else {
                         SetDownloadFileProps({
-                          fileId: item.fileId,
+                          folderId: item.folderId,
                           isEncrypted: item.isEncrypted,
                           token: null,
                         });
-                        navigate(`/dl/${item.fileId}`);
+                        navigate(`/dl/${item.folderId}`);
                       }
                     }}
                   />

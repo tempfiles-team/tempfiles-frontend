@@ -10,56 +10,61 @@ import { getDate, getFileSize, getExpireTime } from '../../utils';
 import * as S from './styled';
 
 export const DownloadPage: React.FC = () => {
-  const navigate = useNavigate();
-  const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
+  // const navigate = useNavigate();
+  // const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
   const [loading, setLoading] = useState(true);
-  const { fileid } = useParams<{ fileid: string }>();
+  const { folderid } = useParams<{ folderid: string }>();
   const [fileProps, setFileProps] = useState({
-    filename: '',
-    // fileId: '',
-    size: '',
+    files: [
+      {
+        filename: '',
+        size: '',
+        downloadUrl: '',
+        deleteUrl: '',
+      },
+    ],
     uploadDate: '',
-    download_url: '',
-    delete_url: '',
     isEncrypted: false,
     downloadCount: 0,
-    expireTime: { day: 0, hour: 0, minute: 0 },
+    expireTime: {
+      day: 0,
+      hour: 0,
+      minute: 0,
+    },
   });
-  const [move] = useDeletePageNavigator(
-    fileProps.delete_url,
-    fileProps.isEncrypted,
-    downloadFileProps.token
-  );
+  // const [move] = useDeletePageNavigator(
+  //   // todo fix it
+  //   fileProps.files[0].deleteUrl,
+  //   fileProps.isEncrypted,
+  //   downloadFileProps.token
+  // );
 
-  //https://github.com/facebook/react/issues/14920
   useEffect(() => {
     const getFileProps = async () => {
       await axios({
         method: 'get',
-        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${fileid}${downloadFileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
-          }`,
+        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${folderid}`,
       })
         .then((res) => {
           setLoading(false);
-          if (res.data.isEncrypted && !res.data.provide_token) {
-            navigate(`/check/${fileid}`);
-          } else {
-            setFileProps({
-              filename: res.data.filename,
-              // fileId: res.data.fileId,
-              size: getFileSize(res.data.size),
-              uploadDate: getDate(res.data.uploadDate),
-              download_url: res.data.download_url,
-              delete_url: res.data.delete_url,
-              isEncrypted: res.data.isEncrypted,
-              downloadCount: res.data.downloadLimit - res.data.downloadCount,
-              expireTime: getExpireTime(res.data.expireTime),
-            });
-          }
+          const updatedFileProps = {
+            files: res.data.files.map((file: any) => ({
+              filename: file.fileName,
+              size: getFileSize(file.fileSize),
+              downloadUrl: file.downloadUrl,
+              deleteUrl: file.deleteUrl,
+            })),
+            uploadDate: getDate(res.data.uploadDate),
+            isEncrypted: res.data.isEncrypted,
+            downloadCount: res.data.downloadLimit - res.data.downloadCount,
+            expireTime: getExpireTime(res.data.expireTime),
+          };
+
+          setFileProps(updatedFileProps);
         })
         .catch((err) => {
-          navigate('/');
-          if (err.response.status != 401) {
+          // navigate('/');
+          if (err.response.status !== 401) {
             toast.error(`error 문의해주세요. ${err.response.status}`, {
               duration: 3000,
               icon: '🔥',
@@ -73,36 +78,39 @@ export const DownloadPage: React.FC = () => {
         });
     };
     getFileProps();
-  }, [downloadFileProps, navigate, fileid]);
+  }, []);
+
   return (
     <S.DownloadPageContainer>
       {!loading ? (
         <>
-          <FileListBox
-            key={fileProps.filename}
-            filename={fileProps.filename}
-            size={fileProps.size}
-            uploadDate={fileProps.uploadDate}
-            fileId=""
-            isEncrypted={false}
-            click={() => { }}
-          />
+          {fileProps.files.map((file, index) => (
+            <div key={index}>
+              <FileListBox filename={file.filename} size={file.size} />
+            </div>
+          ))}
 
           <S.DownloadFileStatusText>
-            만료까지 {fileProps.expireTime.day}일 {fileProps.expireTime.hour}시간{' '}
-            {fileProps.expireTime.minute}분 / {fileProps.downloadCount}회 남았습니다.
+            {/* 만료까지 {file.expireTime.day}일 {file.expireTime.hour}시간 {file.expireTime.minute}
+                분 / {file.downloadCount}회 남았습니다. */}
+            만료까지 XX일 XX시간 XX분 / XX회 남았습니다.
           </S.DownloadFileStatusText>
           <S.DownloadPageButtonSection>
             <a
-              href={`${fileProps.download_url}${fileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
-                }`}
+            // href={`${file.download_url}${
+            //   file.isEncrypted ? `?token=${downloadFileProps.token}` : ''
+            // }`}
             >
-              <Button click={() => { }} bgColor="var(--color-button-primary)" label="다운로드" />
+              <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
             </a>
             <Button
               click={async () => {
                 try {
-                  await navigator.clipboard.writeText(window.location.href);
+                  // await navigator.clipboard.writeText(
+                  //   // `${file.download_url}${
+                  //   //   file.isEncrypted ? `?token=${downloadFileProps.token}` : ''
+                  //   // }`
+                  // );
                   toast.success('복사 완료', {
                     duration: 3000,
                     icon: '🎉',
@@ -119,7 +127,7 @@ export const DownloadPage: React.FC = () => {
             />
             <Button
               click={() => {
-                move();
+                // move();
               }}
               bgColor="var(--color-button-secondary)"
               label="파일삭제"

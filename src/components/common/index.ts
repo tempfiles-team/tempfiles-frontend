@@ -6,6 +6,7 @@ export * from './DownLoadCountSlider';
 export * from './Navbar';
 export * from './Button';
 export * from './FileListBox';
+export * from './FolderListBox';
 export * from './Progress';
 export * from './SkeletonUIBox';
 export * from './ExpireTime';
