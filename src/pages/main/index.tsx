@@ -66,6 +66,22 @@ export const MainPage: React.FC = () => {
     setFileProps(updatedFileProps);
   };
 
+  const handleDrop = (event: React.DragEvent<HTMLLabelElement>) => {
+    event.preventDefault();
+    const filesArray = Array.from(event.dataTransfer.files);
+
+    const updatedFileProps = {
+      files: filesArray.map((file: File) => ({
+        filename: file.name,
+        size: getFileSize(file.size),
+        fileType: file.type,
+        fileData: file,
+      })),
+    };
+
+    setFileProps(updatedFileProps);
+  };
+
   const dragOver = (event: any) => {
     event.preventDefault();
   };
@@ -186,7 +202,7 @@ export const MainPage: React.FC = () => {
           )}
           <FileFind
             handleDragOver={dragOver}
-            handleDrop={handleChangeFile}
+            handleDrop={handleDrop}
             handleChangeFile={handleChangeFile}
             fileProps={fileProps}
           />

@@ -7,17 +7,20 @@ type FileFindProps = {
   handleDrop: React.DragEventHandler<HTMLLabelElement>;
   handleDragOver: React.DragEventHandler<HTMLLabelElement>;
   fileProps: {
-    filename: string;
-    size: string;
-    fileType: string;
+    files: {
+      filename: string;
+      size: string;
+      fileType: string;
+      fileData: any;
+    }[];
   };
 };
 
 export const FileFind: React.FC<FileFindProps> = ({
   handleChangeFile,
-  fileProps,
   handleDrop,
   handleDragOver,
+  fileProps,
 }) => (
   <S.FileFindContainer>
     <S.FileFindLabelBox

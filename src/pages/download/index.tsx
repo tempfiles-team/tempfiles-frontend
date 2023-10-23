@@ -16,14 +16,7 @@ export const DownloadPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const { folderid } = useParams<{ folderid: string }>();
   const [fileProps, setFileProps] = useState({
-    files: [
-      {
-        filename: '',
-        size: '',
-        downloadUrl: '',
-        deleteUrl: '',
-      },
-    ],
+    files: null,
     uploadDate: '',
     isEncrypted: false,
     downloadCount: 0,
@@ -36,6 +29,7 @@ export const DownloadPage: React.FC = () => {
   // const [move] = useDeletePageNavigator(
   //   // todo fix it
   //   fileProps.files[0].deleteUrl,
+
   //   fileProps.isEncrypted,
   //   downloadFileProps.token
   // );
@@ -85,11 +79,25 @@ export const DownloadPage: React.FC = () => {
     <S.DownloadPageContainer>
       {!loading ? (
         <>
-          {fileProps.files.map((file, index) => (
-            <div key={index}>
-              <FileListBox filename={file.filename} size={file.size} />
-            </div>
-          ))}
+          {fileProps.files.map(
+            (
+              file: {
+                filename: string;
+                size: string;
+                downloadUrl: string;
+                deleteUrl: string;
+              },
+              index: number
+            ) => (
+              <div key={index}>
+                <FileListBox
+                  filename={file.filename}
+                  size={file.size}
+                  downloadUrl={file.downloadUrl}
+                />
+              </div>
+            )
+          )}
 
           <S.DownloadFileStatusText>
             {/* 만료까지 {file.expireTime.day}일 {file.expireTime.hour}시간 {file.expireTime.minute}
@@ -97,21 +105,19 @@ export const DownloadPage: React.FC = () => {
             만료까지 XX일 XX시간 XX분 / XX회 남았습니다.
           </S.DownloadFileStatusText>
           <S.DownloadPageButtonSection>
-            <a
-            // href={`${file.download_url}${
-            //   file.isEncrypted ? `?token=${downloadFileProps.token}` : ''
-            // }`}
-            >
-              <Button click={() => {}} bgColor="var(--color-button-primary)" label="다운로드" />
-            </a>
+            <Button
+              click={() => {
+                for (let i = 0; i < fileProps.files.length; i++) {
+                  window.open(fileProps.files[i].downloadUrl, '_blank', 'noopener');
+                }
+              }}
+              bgColor="var(--color-button-primary)"
+              label="전체 다운로드"
+            />
             <Button
               click={async () => {
                 try {
-                  // await navigator.clipboard.writeText(
-                  //   // `${file.download_url}${
-                  //   //   file.isEncrypted ? `?token=${downloadFileProps.token}` : ''
-                  //   // }`
-                  // );
+                  await navigator.clipboard.writeText(window.location.href);
                   toast.success('복사 완료', {
                     duration: 3000,
                     icon: '🎉',
@@ -124,14 +130,14 @@ export const DownloadPage: React.FC = () => {
                 }
               }}
               bgColor="var(--color-button-primary)"
-              label="링크복사"
+              label="링크 복사"
             />
             <Button
               click={() => {
                 // move();
               }}
               bgColor="var(--color-button-secondary)"
-              label="파일삭제"
+              label="폴더 삭제"
             />
           </S.DownloadPageButtonSection>
         </>

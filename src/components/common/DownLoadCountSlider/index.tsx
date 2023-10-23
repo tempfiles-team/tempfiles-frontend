@@ -5,7 +5,7 @@ import * as S from './styled';
 
 type DownloadCountSliderProps = {
   downloadCount: number;
-  setDownloadCount: React.Dispatch<React.SetStateAction<string>>;
+  setDownloadCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const DownloadCountSlider: React.FC<DownloadCountSliderProps> = ({
@@ -18,7 +18,7 @@ export const DownloadCountSlider: React.FC<DownloadCountSliderProps> = ({
       min={1}
       max={100}
       defaultValue={1}
-      onChange={(event) => setDownloadCount(event.target.value)}
+      onChange={(event) => setDownloadCount(Number(event.target.value))}
       step={1}
     />
   </S.DownloadCountContainer>

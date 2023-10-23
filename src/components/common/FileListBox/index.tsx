@@ -4,9 +4,10 @@ import * as S from './styled';
 type FileListBoxProps = {
   filename: string;
   size: string;
+  downloadUrl: string;
 };
 
-export const FileListBox: React.FC<FileListBoxProps> = ({ filename, size }) => (
+export const FileListBox: React.FC<FileListBoxProps> = ({ filename, size, downloadUrl }) => (
   <S.FileListBoxContainer>
     {/* <div className="long">
       {isEncrypted ? '🔐' : ''} {folderId != '' ? folderId + ' / ' : ''} {filename} / {size} /{' '}
@@ -27,7 +28,7 @@ export const FileListBox: React.FC<FileListBoxProps> = ({ filename, size }) => (
       <p>{getShortFileName(filename)}</p>
     </div> */}
 
-    <div>
+    <div onClick={() => window.open(downloadUrl, '_blank', 'noopener')}>
       {filename} / {size}
     </div>
   </S.FileListBoxContainer>

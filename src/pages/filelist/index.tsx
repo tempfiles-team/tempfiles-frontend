@@ -18,8 +18,8 @@ export const FileListPage: React.FC = () => {
   const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
   const [fileList, setFileList] = useState<
     {
-      filename: string;
-      fileId: string;
+      fileCount: string;
+      folderId: string;
       size: number;
       uploadDate: string;
       isEncrypted: boolean;
@@ -57,7 +57,7 @@ export const FileListPage: React.FC = () => {
           <S.FileListPageContainer>
             {!listZero ? (
               <>
-                {fileList?.map((item, index) => (
+                {fileList?.map((item, index: number) => (
                   <FolderListBox
                     key={index}
                     folderId={item.folderId}
