@@ -11,7 +11,7 @@ type FileFindProps = {
       filename: string;
       size: string;
       fileType: string;
-      fileData: any;
+      fileData: Blob;
     }[];
   };
 };

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import { useNavigate, useParams } from 'react-router-dom';
@@ -43,12 +43,19 @@ export function DownloadPage() {
         .then((res) => {
           setLoading(false);
           const updatedFileProps = {
-            files: res.data.files.map((file: any) => ({
-              filename: file.fileName,
-              size: getFileSize(file.fileSize),
-              downloadUrl: file.downloadUrl,
-              deleteUrl: file.deleteUrl,
-            })),
+            files: res.data.files.map(
+              (file: {
+                fileName: string;
+                fileSize: number;
+                downloadUrl: string;
+                deleteUrl: string;
+              }) => ({
+                filename: file.fileName,
+                size: getFileSize(file.fileSize),
+                downloadUrl: file.downloadUrl,
+                deleteUrl: file.deleteUrl,
+              })
+            ),
             uploadDate: getDate(res.data.uploadDate),
             isEncrypted: res.data.isEncrypted,
             downloadCount: res.data.downloadLimit - res.data.downloadCount,

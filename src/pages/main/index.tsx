@@ -82,7 +82,7 @@ export function MainPage() {
     setFileProps(updatedFileProps);
   };
 
-  const dragOver = (event: any) => {
+  const dragOver = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
   };
 
