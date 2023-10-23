@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
@@ -8,9 +8,9 @@ import { Button } from '../../components';
 import { RootState } from '../../state/reducers';
 import * as S from './styled';
 
-export const DeletePage: React.FC = () => {
+export function DeletePage() {
   const navigate = useNavigate();
-  const DeleteFileProps = useSelector((state: RootState) => state.DeleteFileName);
+  const DeleteFileProps = useSelector((state: RootState) => state.deleteFile);
   useEffect(() => {
     if (DeleteFileProps.filename === null) {
       navigate(-1);
@@ -48,4 +48,4 @@ export const DeletePage: React.FC = () => {
       </S.DeletePageButtonSection>
     </S.DeletePageContainer>
   );
-};
+}

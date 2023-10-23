@@ -18,7 +18,7 @@ import { actionCreators } from '../../state';
 import { getFileSize, getTime } from '../../utils';
 import * as S from './styled';
 
-export const MainPage: React.FC = () => {
+export function MainPage() {
   const typingText = ['.', '..', '...'];
   const [typingCount, setTypingCount] = useState(0);
   const [uploading, setUploading] = useState(true);
@@ -218,4 +218,4 @@ export const MainPage: React.FC = () => {
       )}
     </S.MainPageContainer>
   );
-};
+}

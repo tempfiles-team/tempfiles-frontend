@@ -10,7 +10,7 @@ import { FileListBox, Button, SkeletonUI } from '../../components';
 import { getDate, getFileSize, getExpireTime } from '../../utils';
 import * as S from './styled';
 
-export const DownloadPage: React.FC = () => {
+export function DownloadPage() {
   // const navigate = useNavigate();
   // const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
   const [loading, setLoading] = useState(true);
@@ -149,4 +149,4 @@ export const DownloadPage: React.FC = () => {
       )}
     </S.DownloadPageContainer>
   );
-};
+}

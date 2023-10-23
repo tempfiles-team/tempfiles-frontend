@@ -1,13 +1,10 @@
 import { combineReducers } from 'redux';
+import deleteFileReducer from './DeleteFileProps';
+import downloadFileReducer from './DownloadFileProps';
 
-import DeleteFileName from './DeleteFileProps';
-import DownloadFileProps from './DownloadFileProps';
-
-const reducers = combineReducers({
-  DeleteFileName: DeleteFileName,
-  DownloadFileProps: DownloadFileProps,
+export const rootReducer = combineReducers({
+  deleteFile: deleteFileReducer,
+  downloadFile: downloadFileReducer,
 });
 
-export default reducers;
-
-export type RootState = ReturnType<typeof reducers>;
+export type RootState = ReturnType<typeof rootReducer>;

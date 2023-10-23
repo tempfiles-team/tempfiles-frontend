@@ -9,7 +9,7 @@ import { actionCreators } from '../../state';
 import { getDate } from '../../utils';
 import * as S from './styled';
 
-export const FileListPage: React.FC = () => {
+export function FileListPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [listZero, setListZero] = useState(false); //test: true
@@ -99,4 +99,4 @@ export const FileListPage: React.FC = () => {
       )}
     </>
   );
-};
+}

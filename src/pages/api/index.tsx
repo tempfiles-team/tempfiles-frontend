@@ -1,12 +1,12 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { SkeletonUIApiBox } from '../../components';
 import { ApiPostPage } from '../postApi';
 import * as S from './styled';
 
-export const ApiPage: React.FC = () => {
+export function ApiPage() {
   const [loading, setLoading] = useState(false);
   const [apiInfo, setApiInfo] = useState<
     {
@@ -85,4 +85,4 @@ export const ApiPage: React.FC = () => {
       </Routes>
     </S.ApiPageContainer>
   );
-};
+}

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
@@ -9,7 +9,7 @@ import { actionCreators } from '../../state';
 import { getDate } from '../../utils';
 import * as S from './styled';
 
-export const CheckPasswordPage: React.FC = () => {
+export function CheckPasswordPage() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(true);
   const [passwordFilter, setPasswordFilter] = useState(true);
@@ -117,4 +117,4 @@ export const CheckPasswordPage: React.FC = () => {
       )}
     </S.CheckPasswordPageContainer>
   );
-};
+}

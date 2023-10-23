@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { Button, SkeletonUI } from '../../components';
 import * as S from './styled';
 
-export const ApiPostPage: React.FC = () => {
+export function ApiPostPage() {
   const [apiInfo, setApiInfo] = useState<{
     apiName: string;
     apiUrl: string;
@@ -80,4 +80,4 @@ export const ApiPostPage: React.FC = () => {
       )}
     </>
   );
-};
+}
