@@ -7,6 +7,13 @@ export const FileFindContainer = styled.div`
   margin-top: 2rem;
 `;
 
+export const FileFindText = styled.p`
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-right: 1.2rem;
+`;
+
 export const FileFindLabelBox = styled.label`
   border: 0.4rem solid var(--color-border);
   border-radius: 1rem;

@@ -22,14 +22,16 @@ export const FileFind: React.FC<FileFindProps> = ({
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      {fileProps.filename != '' && fileProps.size != '' && fileProps.fileType != ''
-        ? '이름:' +
-          fileProps.filename +
-          ' / 크기:' +
-          fileProps.size +
-          ' / 타입:' +
-          fileProps.fileType
-        : '업로드 할 파일을 선택해주세요....'}
+      {fileProps.files.length === 0 ? (
+        <>
+          <S.FileFindText>파일을 드래그하거나</S.FileFindText>
+          <S.FileFindText>클릭하여 파일을 선택해주세요.</S.FileFindText>
+        </>
+      ) : (
+        <>
+          <S.FileFindText>{fileProps.files.length}개의 파일이 선택되었습니다.</S.FileFindText>
+        </>
+      )}
     </S.FileFindLabelBox>
 
     <S.FileFindButton htmlFor="input-file-upload">찾아보기</S.FileFindButton>
