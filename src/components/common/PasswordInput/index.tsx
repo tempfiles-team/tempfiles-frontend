@@ -10,6 +10,7 @@ interface PasswordInputProps {
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   setPasswordFilter: React.Dispatch<React.SetStateAction<boolean>>;
   placeholder: string;
+  action?: () => void;
 }
 
 export const PasswordInput: React.FC<PasswordInputProps> = ({
@@ -18,12 +19,18 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
   placeholder,
   setPasswordFilter,
   isFillter,
+  action,
 }) => (
   <S.PasswordInputContainer>
     <S.Input
       type={type}
-      onChange={(text) => {
-        setPassword(text.target.value.replace(/(\s*)/g, ''));
+      onChange={(e) => {
+        setPassword(e.target.value.replace(/(\s*)/g, ''));
+      }}
+      onKeyDown={(e) => {
+        if (e.code === 'Enter') {
+          action();
+        }
       }}
       placeholder={placeholder}
     />

@@ -4,20 +4,20 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { bindActionCreators } from 'redux';
-import { FileListBox, Button, SkeletonUI, PasswordInput } from '../../components';
+import { FolderListBox, Button, SkeletonUI, PasswordInput } from '../../components';
 import { actionCreators } from '../../state';
-import { getDate, getFileSize } from '../../utils';
+import { getDate } from '../../utils';
 import * as S from './styled';
 
 export const CheckPasswordPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(true);
   const [passwordFilter, setPasswordFilter] = useState(true);
-  const { checkfileid } = useParams<{ checkfileid: string }>();
-  const [fileProps, setFileProps] = useState({
-    filename: '',
-    size: '',
-    uploadDate: { year: 0, month: 0, day: 0 },
+  const { checkfolderid } = useParams<{ checkfolderid: string }>();
+  const [folderProps, setFolderProps] = useState({
+    folderId: '',
+    fileCount: '',
+    uploadDate: '',
   });
 
   const dispatch = useDispatch();
@@ -34,13 +34,13 @@ export const CheckPasswordPage: React.FC = () => {
     } else {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/checkpw/${checkfileid}?pw=${password}`
+          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/checkpw/${checkfolderid}?pw=${password}`
         );
         SetDownloadFileProps({
           isEncrypted: true,
           token: res.data.token,
         });
-        navigate(`/dl/${checkfileid}`);
+        navigate(`/dl/${checkfolderid}`);
         toast.success('통과!', {
           duration: 3000,
           icon: '🎉',
@@ -56,15 +56,15 @@ export const CheckPasswordPage: React.FC = () => {
   };
 
   useEffect(() => {
-    const getFileProps = async () => {
+    const getFolderProps = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${checkfileid}`
+          `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${checkfolderid}`
         );
         setLoading(false);
-        setFileProps({
-          filename: res.data.filename,
-          size: getFileSize(res.data.size),
+        setFolderProps({
+          folderId: res.data.folderId,
+          fileCount: res.data.fileCount,
           uploadDate: getDate(res.data.uploadDate),
         });
       } catch (err) {
@@ -75,19 +75,18 @@ export const CheckPasswordPage: React.FC = () => {
         });
       }
     };
-    getFileProps();
-  }, [checkfileid, navigate]);
+    getFolderProps();
+  }, [checkfolderid, navigate]);
 
   return (
     <S.CheckPasswordPageContainer>
       {!loading ? (
         <>
-          <FileListBox
-            key={fileProps.filename}
-            filename={fileProps.filename}
-            size={fileProps.size}
-            uploadDate={fileProps.uploadDate}
-            fileId=""
+          <FolderListBox
+            key={folderProps.folderId}
+            folderId={folderProps.folderId}
+            fileCount={folderProps.fileCount}
+            uploadDate={getDate(folderProps.uploadDate)}
             isEncrypted={true}
             click={() => {}}
           />
@@ -98,6 +97,7 @@ export const CheckPasswordPage: React.FC = () => {
               setPasswordFilter={setPasswordFilter}
               placeholder="비밀번호를 입력해주세요."
               isFillter={passwordFilter}
+              action={passwordCheck}
             />
 
             <Button

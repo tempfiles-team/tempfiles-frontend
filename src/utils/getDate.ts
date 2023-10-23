@@ -1,8 +1,7 @@
 const today = new Date();
 
 export const getDate = (date: string) => {
-  const NewDate = date.split('T')[0].split('-');
-  return { year: Number(NewDate[0]), month: Number(NewDate[1]), day: Number(NewDate[2]) };
+  return date.split('T')[0];
 };
 
 export const getExpireTime = (date: string) => {

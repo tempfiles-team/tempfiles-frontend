@@ -44,11 +44,11 @@ export const App: React.FC = () => (
         }
       >
         <Route index element={<MainPage />} />
-        <Route path="/dl/:fileid" element={<DownloadPage />} />
+        <Route path="/dl/:folderid" element={<DownloadPage />} />
         <Route path="/del" element={<DeletePage />} />
         <Route path="/list" element={<FileListPage />} />
         <Route path="/api/*" element={<ApiPage />} />
-        <Route path="/check/:checkfileid" element={<CheckPasswordPage />} />
+        <Route path="/check/:checkfolderid" element={<CheckPasswordPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
