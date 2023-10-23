@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 // import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { FileListBox, Button, SkeletonUI } from '../../components';
-// import { useDeletePageNavigator } from '../../hooks';
-// import { RootState } from '../../state/reducers';
+import { useDeletePageNavigator } from '../../hooks';
+import { RootState } from '../../state/reducers';
 import { getDate, getFileSize, getExpireTime } from '../../utils';
 import * as S from './styled';
 
 export function DownloadPage() {
   // const navigate = useNavigate();
-  // const downloadFileProps: any = useSelector((state: RootState) => state.DownloadFileProps);
+  const downloadFileProps: any = useSelector((state: RootState) => state.downloadFile);
   const [loading, setLoading] = useState(true);
   const { folderid } = useParams<{ folderid: string }>();
   const [fileProps, setFileProps] = useState({
@@ -20,19 +20,18 @@ export function DownloadPage() {
     uploadDate: '',
     isEncrypted: false,
     downloadCount: 0,
+    deleteUrl: '',
     expireTime: {
       day: 0,
       hour: 0,
       minute: 0,
     },
   });
-  // const [move] = useDeletePageNavigator(
-  //   // todo fix it
-  //   fileProps.files[0].deleteUrl,
-
-  //   fileProps.isEncrypted,
-  //   downloadFileProps.token
-  // );
+  const [move] = useDeletePageNavigator(
+    fileProps.deleteUrl,
+    fileProps.isEncrypted,
+    downloadFileProps.token
+  );
 
   useEffect(() => {
     const getFileProps = async () => {
@@ -44,18 +43,13 @@ export function DownloadPage() {
           setLoading(false);
           const updatedFileProps = {
             files: res.data.files.map(
-              (file: {
-                fileName: string;
-                fileSize: number;
-                downloadUrl: string;
-                deleteUrl: string;
-              }) => ({
+              (file: { fileName: string; fileSize: number; downloadUrl: string }) => ({
                 filename: file.fileName,
                 size: getFileSize(file.fileSize),
                 downloadUrl: file.downloadUrl,
-                deleteUrl: file.deleteUrl,
               })
             ),
+            deleteUrl: res.data.deleteUrl,
             uploadDate: getDate(res.data.uploadDate),
             isEncrypted: res.data.isEncrypted,
             downloadCount: res.data.downloadLimit - res.data.downloadCount,
@@ -92,7 +86,6 @@ export function DownloadPage() {
                 filename: string;
                 size: string;
                 downloadUrl: string;
-                deleteUrl: string;
               },
               index: number
             ) => (
@@ -141,7 +134,7 @@ export function DownloadPage() {
             />
             <Button
               click={() => {
-                // move();
+                move();
               }}
               bgColor="var(--color-button-secondary)"
               label="폴더 삭제"
