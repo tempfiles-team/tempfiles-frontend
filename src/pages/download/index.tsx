@@ -12,7 +12,10 @@ import * as S from './styled';
 
 export function DownloadPage() {
   // const navigate = useNavigate();
-  const downloadFileProps: any = useSelector((state: RootState) => state.downloadFile);
+  const downloadFileProps: {
+    token: string | null;
+    isEncrypted: boolean | null;
+  } = useSelector((state: RootState) => state.downloadFile);
   const [loading, setLoading] = useState(true);
   const { folderid } = useParams<{ folderid: string }>();
   const [fileProps, setFileProps] = useState({

@@ -17,8 +17,10 @@ export function FolderListBox({
 }: FolderListBoxProps) {
   return (
     <S.FolderListBoxContainer onClick={click}>
-      {isEncrypted ? '🔒' : '🔓'} <div className="folderid">{folderId}</div>에 {fileCount}개의 파일{' '}
-      {uploadDate}에 업로드 됨
+      <div className="folderid">
+        {isEncrypted ? '🔒' : ''} {folderId}
+      </div>
+      {fileCount}개의 파일 {uploadDate}에 업로드 됨
     </S.FolderListBoxContainer>
   );
 }

@@ -64,7 +64,7 @@ export function CheckPasswordPage() {
         setLoading(false);
         setFolderProps({
           folderId: res.data.folderId,
-          fileCount: res.data.fileCount,
+          fileCount: res.data.files.length,
           uploadDate: getDate(res.data.uploadDate),
         });
       } catch (err) {
