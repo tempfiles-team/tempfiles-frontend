@@ -30,7 +30,7 @@ export function FileFind({
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
-        {fileProps.files.length === 0 ? (
+        {fileProps.files[0].fileData === null ? (
           <>
             <S.FileFindText>파일을 드래그하거나</S.FileFindText>
             <S.FileFindText>클릭하여 파일을 선택해주세요.</S.FileFindText>

@@ -24,11 +24,7 @@ export function DownloadPage() {
     isEncrypted: false,
     downloadCount: 0,
     deleteUrl: '',
-    expireTime: {
-      day: 0,
-      hour: 0,
-      minute: 0,
-    },
+    expireTime: '',
   });
   const [move] = useDeletePageNavigator(
     fileProps.deleteUrl,
@@ -43,7 +39,6 @@ export function DownloadPage() {
         url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${folderid}`,
       })
         .then((res) => {
-          setLoading(false);
           const updatedFileProps = {
             files: res.data.files.map(
               (file: { fileName: string; fileSize: number; downloadUrl: string }) => ({
@@ -59,6 +54,7 @@ export function DownloadPage() {
             expireTime: getExpireTime(res.data.expireTime),
           };
 
+          setLoading(false);
           setFileProps(updatedFileProps);
         })
         .catch((err) => {
@@ -83,29 +79,29 @@ export function DownloadPage() {
     <S.DownloadPageContainer>
       {!loading ? (
         <>
-          {fileProps.files.map(
-            (
-              file: {
-                filename: string;
-                size: string;
-                downloadUrl: string;
-              },
-              index: number
-            ) => (
-              <div key={index}>
-                <FileListBox
-                  filename={file.filename}
-                  size={file.size}
-                  downloadUrl={file.downloadUrl}
-                />
-              </div>
-            )
-          )}
+          <S.DownloadFileListBoxContainer>
+            {fileProps.files.map(
+              (
+                file: {
+                  filename: string;
+                  size: string;
+                  downloadUrl: string;
+                },
+                index: number
+              ) => (
+                <div key={index}>
+                  <FileListBox
+                    filename={file.filename}
+                    size={file.size}
+                    downloadUrl={file.downloadUrl}
+                  />
+                </div>
+              )
+            )}
+          </S.DownloadFileListBoxContainer>
 
           <S.DownloadFileStatusText>
-            {/* 만료까지 {file.expireTime.day}일 {file.expireTime.hour}시간 {file.expireTime.minute}
-                분 / {file.downloadCount}회 남았습니다. */}
-            만료까지 XX일 XX시간 XX분 / XX회 남았습니다.
+            만료까지 {fileProps.expireTime} / {fileProps.downloadCount}회 남았습니다.
           </S.DownloadFileStatusText>
           <S.DownloadPageButtonSection>
             <Button

@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { bindActionCreators } from 'redux';
 import { FolderListBox, Button, SkeletonUI, PasswordInput } from '../../components';
 import { actionCreators } from '../../state';
-import { getDate } from '../../utils';
+import { getElapsed } from '../../utils';
 import * as S from './styled';
 
 export function CheckPasswordPage() {
@@ -17,7 +17,7 @@ export function CheckPasswordPage() {
   const [folderProps, setFolderProps] = useState({
     folderId: '',
     fileCount: '',
-    uploadDate: '',
+    uploadElapsed: '',
   });
 
   const dispatch = useDispatch();
@@ -65,7 +65,7 @@ export function CheckPasswordPage() {
         setFolderProps({
           folderId: res.data.folderId,
           fileCount: res.data.files.length,
-          uploadDate: getDate(res.data.uploadDate),
+          uploadElapsed: getElapsed(res.data.uploadDate),
         });
       } catch (err) {
         navigate('/');
@@ -86,7 +86,7 @@ export function CheckPasswordPage() {
             key={folderProps.folderId}
             folderId={folderProps.folderId}
             fileCount={folderProps.fileCount}
-            uploadDate={getDate(folderProps.uploadDate)}
+            uploadElapsed={getElapsed(folderProps.uploadElapsed)}
             isEncrypted={true}
             click={() => {}}
           />

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import toast from 'react-hot-toast';
 import { FolderListBox, SkeletonUIBox } from '../../components';
 import { actionCreators } from '../../state';
-import { getDate } from '../../utils';
+import { getElapsed } from '../../utils';
 import * as S from './styled';
 
 export function FileListPage() {
@@ -62,7 +62,7 @@ export function FileListPage() {
                     key={index}
                     folderId={item.folderId}
                     fileCount={item.fileCount}
-                    uploadDate={getDate(item.uploadDate)}
+                    uploadElapsed={getElapsed(item.uploadDate)}
                     isEncrypted={item.isEncrypted}
                     click={() => {
                       if (item.isEncrypted) {

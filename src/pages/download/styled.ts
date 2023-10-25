@@ -7,6 +7,17 @@ export const DownloadPageContainer = styled.div`
   width: 100%;
 `;
 
+export const DownloadFileListBoxContainer = styled.div`
+  max-height: 50dvh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 export const DownloadPageButtonSection = styled.div`
   display: flex;
   width: 100%;

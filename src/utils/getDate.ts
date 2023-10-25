@@ -4,30 +4,44 @@ export const getDate = (date: string) => {
   return date.split('T')[0];
 };
 
+export const getElapsed = (date: string) => {
+  const createdTime = new Date(date);
+  const differenceTime = today.getTime() - createdTime.getTime();
+
+  const minute = Math.floor(differenceTime / 1000 / 60);
+  const { day, hour, minute: min } = getTime(minute);
+
+  if (day >= 7) {
+    return `${Math.floor(day / 7)}주 전`;
+  } else if (day >= 1) {
+    return `${day}일 전`;
+  } else if (hour >= 1) {
+    return `${hour}시간 전`;
+  } else if (min < 1) {
+    return '방금 전';
+  } else {
+    return `${min}분 전`;
+  }
+};
+
 export const getExpireTime = (date: string) => {
   const expireTime = new Date(date);
   const differenceTime = expireTime.getTime() - today.getTime();
-  const differenceTimeDay =
-    differenceTime / (1000 * 60 * 60 * 24) >= 0 ? differenceTime / (1000 * 60 * 60 * 24) : 0;
 
-  let differenceTimeHour = differenceTime / (1000 * 60 * 60);
-  let differenceTimeMinute = differenceTime / (1000 * 60);
-  const condition = true;
-  while (condition) {
-    differenceTimeHour %= 24;
-    if (differenceTimeHour <= 24) {
-      break;
-    }
-    differenceTimeMinute %= 60;
-    if (differenceTimeMinute <= 60) {
-      break;
-    }
+  const minute = Math.floor(differenceTime / 1000 / 60);
+  const { day, hour, minute: min } = getTime(minute);
+
+  if (day >= 7) {
+    return `${Math.floor(day / 7)}주 ${day % 7}일`;
+  } else if (day >= 1) {
+    return `${day}일 ${hour}시간`;
+  } else if (hour >= 1) {
+    return `${hour}시간 ${min}분`;
+  } else if (min < 1) {
+    return '시간이 안남았고';
+  } else {
+    return `${min}분`;
   }
-  return {
-    day: Math.floor(differenceTimeDay),
-    hour: Math.floor(differenceTimeHour),
-    minute: Math.floor(differenceTimeMinute),
-  };
 };
 
 export const getTime = (minute: number) => ({
