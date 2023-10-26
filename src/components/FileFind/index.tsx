@@ -14,6 +14,7 @@ type FileFindProps = {
       fileData: Blob;
     }[];
   };
+  hideBoolean: boolean;
 };
 
 export function FileFind({
@@ -21,6 +22,7 @@ export function FileFind({
   handleDrop,
   handleDragOver,
   fileProps,
+  hideBoolean,
 }: FileFindProps) {
   return (
     <S.FileFindContainer>
@@ -31,14 +33,11 @@ export function FileFind({
         onDragOver={handleDragOver}
       >
         {fileProps.files[0].fileData === null ? (
-          <>
-            <S.FileFindText>파일을 드래그하거나</S.FileFindText>
-            <S.FileFindText>클릭하여 파일을 선택해주세요.</S.FileFindText>
-          </>
+          <S.FileFindText>
+            {hideBoolean ? '🔒️\u00a0' : ''}파일을 드래그하거나 클릭하여 파일을 선택해주세요.
+          </S.FileFindText>
         ) : (
-          <>
-            <S.FileFindText>{fileProps.files.length}개의 파일이 선택되었습니다.</S.FileFindText>
-          </>
+          <S.FileFindText>{fileProps.files.length}개의 파일이 선택되었습니다.</S.FileFindText>
         )}
       </S.FileFindLabelBox>
 

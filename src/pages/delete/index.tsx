@@ -1,28 +1,18 @@
 import axios from 'axios';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-
 import { Button } from '../../components';
-import { RootState } from '../../state/reducers';
 import * as S from './styled';
 
 export function DeletePage() {
   const navigate = useNavigate();
-  const DeleteFileProps = useSelector((state: RootState) => state.deleteFile);
-  useEffect(() => {
-    if (DeleteFileProps.filename === null) {
-      navigate(-1);
-    }
-  });
+
+  const { folderid } = useParams<{ folderid: string }>();
 
   const deleteFile = async () => {
     await axios({
       method: 'delete',
-      url: `${DeleteFileProps.delete_url}${
-        DeleteFileProps.isEncrypted ? `?token=${DeleteFileProps.token}` : ''
-      }`,
+      url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/del/${folderid}`,
     })
       .then(() => {
         navigate('/');

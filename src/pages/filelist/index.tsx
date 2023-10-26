@@ -1,28 +1,23 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
 import toast from 'react-hot-toast';
 import { FolderListBox, SkeletonUIBox } from '../../components';
-import { actionCreators } from '../../state';
 import { getElapsed } from '../../utils';
 import * as S from './styled';
 
 export function FileListPage() {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [listZero, setListZero] = useState(false); //test: true
   const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
-  const dispatch = useDispatch();
-  const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
+
+  const navigate = useNavigate();
   const [fileList, setFileList] = useState<
     {
       fileCount: string;
       folderId: string;
-      size: number;
       uploadDate: string;
-      isEncrypted: boolean;
+      isHidden: boolean;
     }[]
   >();
 
@@ -33,7 +28,8 @@ export function FileListPage() {
     })
       .then((res) => {
         setFileList(res.data.list); //파일리스트 요소 갯수에 따른 핸들링 추가예정
-        if (res.data.numberOfList === 0) {
+
+        if (res.data.list === null) {
           setListZero(true);
         }
         setTimeout(() => {
@@ -63,18 +59,16 @@ export function FileListPage() {
                     folderId={item.folderId}
                     fileCount={item.fileCount}
                     uploadElapsed={getElapsed(item.uploadDate)}
-                    isEncrypted={item.isEncrypted}
+                    isHidden={item.isHidden}
                     click={() => {
-                      if (item.isEncrypted) {
-                        navigate(`/check/${item.folderId}`);
-                      } else {
-                        SetDownloadFileProps({
-                          folderId: item.folderId,
-                          isEncrypted: item.isEncrypted,
-                          token: null,
-                        });
-                        navigate(`/dl/${item.folderId}`);
-                      }
+                      // if (item.isHidden) {
+                      //   navigate(`/check/${item.folderId}`);
+                      // } else {
+                      // SetDownloadFileProps({
+                      //   folderId: item.folderId,
+                      // });
+                      navigate(`/dl/${item.folderId}`);
+                      // }
                     }}
                   />
                 ))}

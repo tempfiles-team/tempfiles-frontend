@@ -1,20 +1,16 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { bindActionCreators } from 'redux';
 
 import {
   CheckBox,
-  PasswordInput,
   UpLoadButton,
   FileFind,
   Progress,
   DownloadCountSlider,
   ExpireTime,
 } from '../../components';
-import { actionCreators } from '../../state';
 import { getFileSize, getTime } from '../../utils';
 import * as S from './styled';
 
@@ -27,12 +23,10 @@ export function MainPage() {
 
   const [expireTimeBoolean, setExpireTimeBoolean] = useState(false);
   const [downloadCountBoolean, setDownloadCountBoolean] = useState(false);
-  const [passwordBoolean, setPasswordBoolean] = useState(false);
-  const [passwordFilter, setPasswordFilter] = useState(true);
+  const [hideBoolean, sethideBoolean] = useState(false);
 
   const [expireTime, setExpireTime] = useState(1);
   const [downloadCount, setDownloadCount] = useState(100);
-  const [password, setPassword] = useState('');
 
   const [fileProps, setFileProps] = useState({
     files: [
@@ -46,9 +40,6 @@ export function MainPage() {
   });
 
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-  const { SetDownloadFileProps } = bindActionCreators(actionCreators, dispatch);
 
   const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -95,14 +86,13 @@ export function MainPage() {
 
       await axios({
         method: 'post',
-        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/upload${
-          passwordBoolean && password != '' && password != undefined ? `?pw=${password}` : ''
-        }`,
+        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/upload`,
         data: formdata,
         headers: {
           'Content-Type': 'multipart/form-data',
           'X-Download-Limit': downloadCountBoolean ? downloadCount : 100,
           'X-Time-Limit': expireTimeBoolean ? expireTime : 180,
+          'X-Hidden': hideBoolean,
         },
         onUploadProgress(progress) {
           setUploading(false);
@@ -117,11 +107,6 @@ export function MainPage() {
           toast.success('업로드 성공!', {
             duration: 3000,
             icon: '🎉',
-          });
-          SetDownloadFileProps({
-            folderId: res.data.folderId,
-            token: res.data.isEncrypted ? res.data.token : null,
-            isEncrypted: res.data.isEncrypted,
           });
           navigate(`/dl/${res.data.folderId}`);
         })
@@ -157,6 +142,11 @@ export function MainPage() {
         <>
           <S.MainPageCheckBoxSection>
             <CheckBox
+              click={() => sethideBoolean(!hideBoolean)}
+              isCheck={hideBoolean}
+              label={'숨기기'}
+            />
+            <CheckBox
               click={() => {
                 setExpireTimeBoolean(!expireTimeBoolean);
               }}
@@ -170,11 +160,6 @@ export function MainPage() {
               }}
               isCheck={downloadCountBoolean}
               label={'다운로드 횟수'}
-            />
-            <CheckBox
-              click={() => setPasswordBoolean(!passwordBoolean)}
-              isCheck={passwordBoolean}
-              label={'비밀번호'}
             />
           </S.MainPageCheckBoxSection>
           {expireTimeBoolean && (
@@ -191,27 +176,19 @@ export function MainPage() {
               setDownloadCount={setDownloadCount}
             />
           )}
-          {passwordBoolean && (
-            <PasswordInput
-              type={passwordFilter ? 'password' : 'text'}
-              isFillter={passwordFilter}
-              setPassword={setPassword}
-              setPasswordFilter={setPasswordFilter}
-              placeholder="비밀번호를 입력해주세요."
-            />
-          )}
           <FileFind
             handleDragOver={dragOver}
             handleDrop={handleDrop}
             handleChangeFile={handleChangeFile}
             fileProps={fileProps}
+            hideBoolean={hideBoolean}
           />
           <UpLoadButton type={'button'} value={'업로드'} onClick={UpLoad} />
         </>
       ) : (
         <Progress
           value={progressValue}
-          fileName="개쩌는 파일"
+          files={fileProps.files}
           typing={typingText[typingCount]}
           stateText={progressStateText}
         />
