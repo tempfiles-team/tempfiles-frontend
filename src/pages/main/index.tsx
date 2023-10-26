@@ -156,7 +156,7 @@ export function MainPage() {
             <CheckBox
               click={() => {
                 setDownloadCountBoolean(!downloadCountBoolean);
-                setDownloadCount(1);
+                setDownloadCount(50);
               }}
               isCheck={downloadCountBoolean}
               label={'다운로드 횟수'}

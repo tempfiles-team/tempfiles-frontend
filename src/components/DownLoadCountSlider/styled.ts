@@ -9,6 +9,8 @@ export const DownloadCountContainer = styled.div`
 
 export const SectionText = styled.div`
   color: var(--color-text-primary);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  margin-left: 3rem;
 `;
