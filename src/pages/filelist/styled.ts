@@ -1,13 +1,36 @@
 import styled from '@emotion/styled';
 
-export const FileListPageContainer = styled.div`
+export const FileListContainer = styled.div`
   max-height: 70dvh;
   overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const FileListPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  &::-webkit-scrollbar {
-    display: none;
+  width: 100%;
+`;
+
+export const HideFileIdInput = styled.input`
+  padding: 1.4rem;
+  border: 0.4rem solid var(--color-border);
+  background-color: var(--color-backgorund-black);
+  color: var(--color-text-placeholder);
+  border-radius: 1rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+
+  width: 70%;
+
+  text-align: center;
+
+  &::-webkit-input-placeholder {
+    color: var(--color-text-placeholder);
   }
 `;
 

@@ -8,7 +8,7 @@ import * as S from './styled';
 
 export function FileListPage() {
   const [loading, setLoading] = useState(false);
-  const [listZero, setListZero] = useState(false); //test: true
+  const [listZero, setListZero] = useState(false);
   const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
 
   const navigate = useNavigate();
@@ -49,8 +49,18 @@ export function FileListPage() {
   return (
     <>
       {loading ? (
-        <>
-          <S.FileListPageContainer>
+        <S.FileListPageContainer>
+          <S.HideFileIdInput
+            type="text"
+            placeholder="숨겨진 파일의 ID를 입력하세요"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                navigate(`/dl/${e.currentTarget.value}`);
+              }
+            }}
+          />
+
+          <S.FileListContainer>
             {!listZero ? (
               <>
                 {fileList?.map((item, index: number) => (
@@ -61,14 +71,7 @@ export function FileListPage() {
                     uploadElapsed={getElapsed(item.uploadDate)}
                     isHidden={item.isHidden}
                     click={() => {
-                      // if (item.isHidden) {
-                      //   navigate(`/check/${item.folderId}`);
-                      // } else {
-                      // SetDownloadFileProps({
-                      //   folderId: item.folderId,
-                      // });
                       navigate(`/dl/${item.folderId}`);
-                      // }
                     }}
                   />
                 ))}
@@ -76,8 +79,8 @@ export function FileListPage() {
             ) : (
               <S.FileListZero>업로드된 파일이 없습니다.</S.FileListZero>
             )}
-          </S.FileListPageContainer>
-        </>
+          </S.FileListContainer>
+        </S.FileListPageContainer>
       ) : (
         <>
           <S.FileListPageContainer>

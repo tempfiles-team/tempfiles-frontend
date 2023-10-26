@@ -1,4 +1,4 @@
-import { Outlet, Route, Routes, Link } from 'react-router-dom';
+import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { Navbar } from './components';
 import * as S from './styles/app';
@@ -6,6 +6,7 @@ import * as S from './styles/app';
 import { MainPage, DownloadPage, DeletePage, FileListPage, ApiPage, NotFoundPage } from './pages';
 
 export default function App() {
+  const navigate = useNavigate();
   return (
     <Routes>
       <Route
@@ -23,10 +24,17 @@ export default function App() {
               />
             </div>
             <div className="RootWrapper">
-              <Link className="LinkBox" to="/">
+              <a
+                className="LinkBox"
+                onClick={() => {
+                  if (window.location.pathname !== '/') {
+                    navigate(-1);
+                  }
+                }}
+              >
                 <div className="Text">TEMPFILES</div>
                 <div className="SubText">간단한 파일 공유 서비스</div>
-              </Link>
+              </a>
               <Outlet />
             </div>
             <Navbar />

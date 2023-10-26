@@ -47,19 +47,15 @@ export function DownloadPage() {
           setLoading(false);
           setFileProps(updatedFileProps);
         })
-        .catch((err) => {
-          // navigate('/');
-          if (err.response.status !== 401) {
-            toast.error(`error 문의해주세요. ${err.response.status}`, {
-              duration: 3000,
-              icon: '🔥',
-            });
-          } else {
-            toast.error('잘못된 링크입니다', {
-              duration: 3000,
-              icon: '🔥',
-            });
-          }
+        // .catch((err) => {
+        // if (err.response.status !== 401) {
+        .catch(() => {
+          toast.error('ID를 다시 확인해주세요.', {
+            duration: 3000,
+            icon: '🔥',
+          });
+
+          navigate(-1);
         });
     };
     getFileProps();
