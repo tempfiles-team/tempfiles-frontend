@@ -22,6 +22,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_APP_BACKEND_BASEURL: https://api.tmpf.me
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
