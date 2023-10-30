@@ -110,12 +110,19 @@ export function MainPage() {
           });
           navigate(`/dl/${res.data.folderId}`);
         })
-        .catch(() => {
-          toast.error('업로드 실패..', {
-            duration: 3000,
-            icon: '🔥',
-          });
+        .catch((err) => {
           setUploading(true);
+          if (err.response.status === 413) {
+            toast.error('파일 용량이 너무 큽니다.', {
+              duration: 3000,
+              icon: '🔥',
+            });
+          } else {
+            toast.error('업로드 실패!', {
+              duration: 3000,
+              icon: '🔥',
+            });
+          }
         });
     } else {
       toast.error('파일을 선택해주세요!', {
