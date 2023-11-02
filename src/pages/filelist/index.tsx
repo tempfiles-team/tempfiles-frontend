@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 
 import { FileListBox, SkeletonUIBox } from '../../components';
 import { actionCreators } from '../../state';
-import { getFileSize, getShortFileName, getDate } from '../../utils';
+import { getFileSize, getShortName, getDate } from '../../utils';
 import * as S from './styled';
 
 export const FileListPage: React.FC = () => {
@@ -48,7 +48,7 @@ export const FileListPage: React.FC = () => {
                 {fileList?.map((item, index) => (
                   <FileListBox
                     key={index}
-                    filename={getShortFileName(item.filename)}
+                    filename={getShortName(item.filename)}
                     fileId={item.fileId}
                     size={getFileSize(item.size)}
                     uploadDate={getDate(item.uploadDate)}
@@ -77,13 +77,13 @@ export const FileListPage: React.FC = () => {
       ) : (
         <>
           <S.FileListPageContainer>
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWidth={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWidth={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWidth={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWidth={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWidth={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWidth={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
+            <SkeletonUIBox randomWidth={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
           </S.FileListPageContainer>
           <S.FileListPageBoxShoadow />
         </>

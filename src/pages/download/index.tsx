@@ -91,7 +91,7 @@ export const DownloadPage: React.FC = () => {
           </S.DownloadFileStatusText>
           <S.DownloadPageButtonSection>
             <a
-              href={`${process.env.REACT_APP_BACKEND_BASEURL}${fileProps.download_url}${
+              href={`${fileProps.download_url}${
                 fileProps.isEncrypted ? `?token=${downloadFileProps.token}` : ''
               }`}
             >

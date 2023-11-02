@@ -7,7 +7,7 @@ export const FileFindContainer = styled.div`
   margin-top: 2rem;
 `;
 
-export const FileFindTextBox = styled.div`
+export const FileFindLabelBox = styled.label`
   border: 0.4rem solid var(--color-border);
   border-radius: 1rem;
   width: 45rem;

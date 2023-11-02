@@ -9,7 +9,8 @@ export const getExpireTime = (date: string) => {
   const expireTime = new Date(date);
   const differenceTime = expireTime.getTime() - today.getTime();
   const differenceTimeDay =
-    differenceTime / (1000 * 60 * 60 * 24) <= 0 ? differenceTime / (1000 * 60 * 60 * 24) : 0;
+    differenceTime / (1000 * 60 * 60 * 24) >= 0 ? differenceTime / (1000 * 60 * 60 * 24) : 0;
+
   let differenceTimeHour = differenceTime / (1000 * 60 * 60);
   while (true) {
     differenceTimeHour %= 24;

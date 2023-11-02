@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 export const NavbarContainer = styled.nav`
-  width: 32rem;
+  width: 42rem;
   min-width: 250px;
-  margin: 3rem auto 3rem auto;
+  margin: 3rem auto;
   display: flex;
   justify-content: space-between;
   z-index: 99;

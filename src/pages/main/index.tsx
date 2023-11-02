@@ -1,25 +1,12 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { bindActionCreators } from 'redux';
+import { useRecoilState } from 'recoil';
 
-import {
-  CheckBox,
-  PasswordInput,
-  UpLoadButton,
-  FileFind,
-  Progress,
-  DownloadCountSlider,
-  ExpireTime,
-} from '../../components';
-import { actionCreators } from '../../state';
-import { getFileSize, getTime } from '../../utils';
+import { uploadState } from '../../atom';
+import { FileUpLoad, TextUpLoad, UpLoadButton } from '../../components';
 import * as S from './styled';
 
 export const MainPage: React.FC = () => {
-  const typingText = ['.', '..', '...'];
+  const [upload, setUpload] = useRecoilState(uploadState);
   const [typingCount, setTypingCount] = useState(0);
   const [uploading, setUploading] = useState(true);
   const [progressValue, setProgressValue] = useState(0);
@@ -105,7 +92,7 @@ export const MainPage: React.FC = () => {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
     }
-  };
+  }
   useEffect(() => {
     const typingInterval = setInterval(() => {
       setTypingCount(typingCount + 1);
@@ -119,62 +106,25 @@ export const MainPage: React.FC = () => {
   }, [typingCount]);
   return (
     <S.MainPageContainer>
-      {uploading ? (
-        <>
-          <S.MainPageCheckBoxSection>
-            <CheckBox
-              click={() => {
-                setExpireTimeBoolean(!expireTimeBoolean);
-              }}
-              isCheck={expireTimeBoolean}
-              label={'유지기간'}
-            />
-            <CheckBox
-              click={() => {
-                setDownloadCountBoolean(!downloadCountBoolean);
-                setDownloadCount(1);
-              }}
-              isCheck={downloadCountBoolean}
-              label={'다운로드 횟수'}
-            />
-            <CheckBox
-              click={() => setPasswordBoolean(!passwordBoolean)}
-              isCheck={passwordBoolean}
-              label={'비밀번호'}
-            />
-          </S.MainPageCheckBoxSection>
-          {expireTimeBoolean && (
-            <ExpireTime
-              expireTime={Number(expireTime)}
-              setExpireTime={setExpireTime}
-              expireTimePlusButton={['1분', '10분', '1시간', '1일']}
-              time={getTime(Number(expireTime))}
-            />
-          )}
-          {downloadCountBoolean && (
-            <DownloadCountSlider
-              downloadCount={downloadCount}
-              setDownloadCount={setDownloadCount}
-            />
-          )}
-          {passwordBoolean && (
-            <PasswordInput
-              onChange={(text) => {
-                setPassword(text.target.value.replace(/(\s*)/g, ''));
-              }}
-              placeholder="비밀번호를 입력해주세요."
-            />
-          )}
-          <FileFind handleChangeFile={handleChangeFile} fileProps={fileProps} />
-          <UpLoadButton type={'button'} value={'업로드'} onClick={UpLoad} />
-        </>
+      {upload.file ? (
+        <FileUpLoad />
+      ) : !upload.text && !upload.file ? (
+        <S.MainPageButtonContainer>
+          <UpLoadButton
+            type={'button'}
+            value={`파일 업로드`}
+            onClick={() => setUpload({ file: true, text: false })}
+            mainPage={true}
+          />
+          <UpLoadButton
+            type={'button'}
+            value={`텍스트 업로드`}
+            onClick={() => setUpload({ file: false, text: true })}
+            mainPage={true}
+          />
+        </S.MainPageButtonContainer>
       ) : (
-        <Progress
-          value={progressValue}
-          fileName={fileProps.filename}
-          typing={typingText[typingCount]}
-          stateText={progressStateText}
-        />
+        <TextUpLoad />
       )}
     </S.MainPageContainer>
   );

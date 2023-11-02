@@ -50,6 +50,7 @@ export const CheckPasswordPage: React.FC = () => {
         })
         .catch((err) => {
           console.log(err);
+          setPassword('');
           toast.error('비밀번호를 다시 확인해주세요...', {
             autoClose: 1000,
             position: toast.POSITION.BOTTOM_RIGHT,
@@ -93,6 +94,7 @@ export const CheckPasswordPage: React.FC = () => {
           </FileBox>
           <S.PasswordInputSection>
             <S.CheckPasswordInput
+              value={password}
               onKeyPress={(e: any) => {
                 if (e.key === 'Enter') {
                   passwordCheck();

@@ -1,4 +1,4 @@
-const getFileFullName = (fileName: string) => {
+const getFullName = (fileName: string) => {
   var lastDot = fileName.lastIndexOf('.');
   if (lastDot === -1) {
     lastDot = fileName.length;
@@ -17,8 +17,8 @@ const getFileExtension = (fileName: string) => {
   return '.' + fileExtension;
 };
 
-export const getShortFileName = (fileName: string) => {
-  const fileFullName = getFileFullName(fileName);
+export const getShortName = (fileName: string) => {
+  const fileFullName = getFullName(fileName);
   if (fileFullName.length >= 9) {
     return fileFullName.substring(0, 10) + '(...)' + getFileExtension(fileName);
   }
