@@ -1,13 +1,40 @@
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Navbar } from './components';
 import * as S from './styles/app';
 import { Analytics } from '@vercel/analytics/react';
+import axios from 'axios';
 
 import { MainPage, DownloadPage, DeletePage, FileListPage, ApiPage, NotFoundPage } from './pages';
 
+async function checkServerStatus() {
+  return await axios({
+    method: 'get',
+    url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}`,
+  });
+}
+
 export default function App() {
   const navigate = useNavigate();
+  const [serverDown, setServerDown] = useState(false);
+
+  useEffect(() => {
+    // Replace this with a function that checks the status of the server
+    checkServerStatus()
+      .then(() => setServerDown(false))
+      .catch(() => setServerDown(true));
+  }, []);
+
+  if (serverDown) {
+    return (
+      <S.InfoText>
+        🛠️ 서버 점검 중
+        <br />
+        잠시만 기다려주세요.
+      </S.InfoText>
+    );
+  }
   return (
     <>
       <Routes>

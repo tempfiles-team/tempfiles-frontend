@@ -34,3 +34,11 @@ export const RootLayout = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
+
+export const InfoText = styled.div`
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 3.5rem;
+  color: var(--color-text-primary);
+  margin-top: 45dvh;
+`;
