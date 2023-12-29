@@ -1,6 +1,6 @@
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { Navbar } from './components';
 import * as S from './styles/app';
 import { Analytics } from '@vercel/analytics/react';
@@ -14,7 +14,7 @@ async function checkServerStatus() {
     url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}`,
   });
 }
-
+const TOAST_LIMIT = 2;
 export default function App() {
   const navigate = useNavigate();
   const [serverDown, setServerDown] = useState(false);
@@ -35,6 +35,15 @@ export default function App() {
       </S.InfoText>
     );
   }
+
+  const { toasts } = useToasterStore();
+ useEffect(() => {
+    toasts
+      .filter((t) => t.visible) // Only consider visible toasts
+      .filter((_, i) => i >= TOAST_LIMIT) // Is toast index over limit
+      .forEach((t) => toast.dismiss(t.id)); // Dismiss – Use toast.remove(t.id) removal without animation
+  }, [toasts]);
+
   return (
     <>
       <Routes>
