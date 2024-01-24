@@ -1,6 +1,6 @@
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import toast, { Toaster, useToasterStore } from "react-hot-toast";
+import toast, { Toaster, useToasterStore } from 'react-hot-toast';
 import { Navbar } from './components';
 import * as S from './styles/app';
 import { Analytics } from '@vercel/analytics/react';
@@ -37,7 +37,7 @@ export default function App() {
   }
 
   const { toasts } = useToasterStore();
- useEffect(() => {
+  useEffect(() => {
     toasts
       .filter((t) => t.visible) // Only consider visible toasts
       .filter((_, i) => i >= TOAST_LIMIT) // Is toast index over limit
