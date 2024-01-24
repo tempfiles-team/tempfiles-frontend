@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import toast, { Toaster, useToasterStore } from 'react-hot-toast';
 import { Navbar } from './components';
 import * as S from './styles/app';
-import { Analytics } from '@vercel/analytics/react';
 import axios from 'axios';
 
 import { MainPage, DownloadPage, DeletePage, FileListPage, ApiPage, NotFoundPage } from './pages';
@@ -87,7 +86,6 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
-      <Analytics />
     </>
   );
 }
