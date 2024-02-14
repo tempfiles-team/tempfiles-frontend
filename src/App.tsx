@@ -25,6 +25,14 @@ export default function App() {
       .catch(() => setServerDown(true));
   }, []);
 
+  const { toasts } = useToasterStore();
+  useEffect(() => {
+    toasts
+      .filter((t) => t.visible) // Only consider visible toasts
+      .filter((_, i) => i >= TOAST_LIMIT) // Is toast index over limit
+      .forEach((t) => toast.dismiss(t.id)); // Dismiss – Use toast.remove(t.id) removal without animation
+  }, [toasts]);
+
   if (serverDown) {
     return (
       <S.InfoText>
@@ -34,14 +42,6 @@ export default function App() {
       </S.InfoText>
     );
   }
-
-  const { toasts } = useToasterStore();
-  useEffect(() => {
-    toasts
-      .filter((t) => t.visible) // Only consider visible toasts
-      .filter((_, i) => i >= TOAST_LIMIT) // Is toast index over limit
-      .forEach((t) => toast.dismiss(t.id)); // Dismiss – Use toast.remove(t.id) removal without animation
-  }, [toasts]);
 
   return (
     <>
