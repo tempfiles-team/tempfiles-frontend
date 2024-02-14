@@ -8,10 +8,7 @@ import axios from 'axios';
 import { MainPage, DownloadPage, DeletePage, FileListPage, ApiPage, NotFoundPage } from './pages';
 
 async function checkServerStatus() {
-  return await axios({
-    method: 'get',
-    url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}`,
-  });
+  return await axios.get(import.meta.env.VITE_APP_BACKEND_BASEURL);
 }
 const TOAST_LIMIT = 2;
 export default function App() {
