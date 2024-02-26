@@ -2,14 +2,17 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { FolderListBox, SkeletonUIBox } from '../../components';
+import { FolderListBox } from '../../components';
 import { getElapsed } from '../../utils';
-import * as S from './styled';
+
+import { Skeleton } from '@/components/ui/skeleton';
+import { ScrollArea } from '@/components/ui/scroll-area';
+
+import { Input } from '@/components/ui/input';
 
 export function FileListPage() {
   const [loading, setLoading] = useState(false);
   const [listZero, setListZero] = useState(false);
-  const SkeletonUIRandomWidth = ['50', '55', '60', '65', '70', '75', '80'];
 
   const navigate = useNavigate();
   const [fileList, setFileList] = useState<
@@ -47,53 +50,44 @@ export function FileListPage() {
     getFileList();
   }, []);
   return (
-    <>
-      {loading ? (
-        <S.FileListPageContainer>
-          <S.HideFileIdInput
-            type="text"
-            placeholder="숨겨진 파일의 ID를 입력하세요"
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                navigate(`/dl/${e.currentTarget.value}`);
-              }
-            }}
-          />
+    <div className="flex flex-col items-center justify-center gap-4">
+      <Input
+        type="text"
+        placeholder="숨겨진 파일의 ID를 입력하세요"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            navigate(`/dl/${e.currentTarget.value}`);
+          }
+        }}
+        className="w-96"
+      />
 
-          <S.FileListContainer>
-            {!listZero ? (
-              <>
-                {fileList?.map((item, index: number) => (
-                  <FolderListBox
-                    key={index}
-                    folderId={item.folderId}
-                    fileCount={item.fileCount}
-                    uploadElapsed={getElapsed(item.uploadDate)}
-                    isHidden={item.isHidden}
-                    click={() => {
-                      navigate(`/dl/${item.folderId}`);
-                    }}
-                  />
-                ))}
-              </>
+      <ScrollArea className="max-h-96 w-fit">
+        <div className="flex flex-col gap-2 justify-center items-center">
+          {loading ? (
+            listZero ? (
+              <div>업로드된 파일이 없습니다.</div>
             ) : (
-              <S.FileListZero>업로드된 파일이 없습니다.</S.FileListZero>
-            )}
-          </S.FileListContainer>
-        </S.FileListPageContainer>
-      ) : (
-        <>
-          <S.FileListPageContainer>
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-            <SkeletonUIBox randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 6)]} />
-          </S.FileListPageContainer>
-        </>
-      )}
-    </>
+              fileList?.map((item, index: number) => (
+                <FolderListBox
+                  key={index}
+                  folderId={item.folderId}
+                  fileCount={item.fileCount}
+                  uploadElapsed={getElapsed(item.uploadDate)}
+                  isHidden={item.isHidden}
+                  click={() => {
+                    navigate(`/dl/${item.folderId}`);
+                  }}
+                />
+              ))
+            )
+          ) : (
+            Array.from({ length: 10 }).map((_, index) => (
+              <Skeleton key={index} className="w-[300px] h-[48px]" />
+            ))
+          )}
+        </div>
+      </ScrollArea>
+    </div>
   );
 }

@@ -42,7 +42,11 @@ export function FileFind({
         onDragOver={handleDragOver}
         onDragEnterCapture={() => setDropReady(true)}
         onDragLeaveCapture={() => setDropReady(false)}
-        className={cn('border border-gray-300 border-dashed rounded-md', 'block py-10 px-12')}
+        className={cn(
+          'border border-gray-300 border-dashed rounded-md',
+          'block py-14 px-10',
+          'w-[26rem] text-center'
+        )}
       >
         {hideBoolean ? `🔒️${' '}` : ''}
         {fileProps.files[0].fileData === null

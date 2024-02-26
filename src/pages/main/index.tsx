@@ -156,6 +156,7 @@ export function MainPage() {
               click={() => {
                 setExpireTimeBoolean(!expireTimeBoolean);
               }}
+              disabled
               isCheck={expireTimeBoolean}
               label={'유지기간'}
             />
@@ -164,6 +165,7 @@ export function MainPage() {
                 setDownloadCountBoolean(!downloadCountBoolean);
                 setDownloadCount(50);
               }}
+              disabled
               isCheck={downloadCountBoolean}
               label={'다운로드 횟수'}
             />
@@ -189,8 +191,8 @@ export function MainPage() {
             fileProps={fileProps}
             hideBoolean={hideBoolean}
           />
-          <Button onClick={UpLoad} className="w-1/4 mx-auto">
-            업로드
+          <Button onClick={UpLoad} className="w-24 mx-auto">
+            upload
           </Button>
         </div>
       ) : (
