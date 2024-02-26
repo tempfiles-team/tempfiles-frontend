@@ -1,11 +1,22 @@
 import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import toast, { Toaster, useToasterStore } from 'react-hot-toast';
+
 import { Navbar } from './components';
 import * as S from './styles/app';
 import axios from 'axios';
 
 import { MainPage, DownloadPage, DeletePage, FileListPage, ApiPage, NotFoundPage } from './pages';
+import { Button } from './components/ui/button';
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 async function checkServerStatus() {
   return await axios.get(import.meta.env.VITE_APP_BACKEND_BASEURL);
@@ -66,8 +77,22 @@ export default function App() {
                     }
                   }}
                 >
+                  <Button>홈</Button>
                   <div className="Text">TEMPFILES</div>
                   <div className="SubText">간단한 파일 공유 서비스</div>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Card Title</CardTitle>
+                      <CardDescription>Card Description</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p>Card Content</p>
+                    </CardContent>
+                    <CardFooter>
+                      <p>Card Footer</p>
+                    </CardFooter>
+                  </Card>
                 </a>
                 <Outlet />
               </div>

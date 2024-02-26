@@ -1,11 +1,15 @@
-import { Global } from '@emotion/react';
+// import { Global } from '@emotion/react';
+// import { globalStyle } from './styles';
+
 import { BrowserRouter } from 'react-router-dom';
-import { globalStyle } from './styles';
 import { createRoot } from 'react-dom/client';
+import { ThemeProvider } from '@/components/theme-provider';
 
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import App from './App';
+
+import './globals.css';
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development') {
@@ -19,12 +23,15 @@ async function enableMocking() {
 const root = createRoot(document.getElementById('root') as HTMLElement);
 enableMocking().then(() => {
   root.render(
-    <BrowserRouter>
-      <Global styles={globalStyle} />
-      <App />
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <BrowserRouter>
+        {/* <Global styles={globalStyle} /> */}
 
-      <Analytics />
-      <SpeedInsights />
-    </BrowserRouter>
+        <App />
+
+        <Analytics />
+        <SpeedInsights />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 });

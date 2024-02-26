@@ -2,6 +2,7 @@ import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
+import path from 'path';
 
 export default defineConfig({
   base: '/',
@@ -25,6 +26,11 @@ export default defineConfig({
           vendor: ['lodash', 'moment'],
         },
       },
+    },
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
   },
 });
