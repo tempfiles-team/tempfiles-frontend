@@ -4,6 +4,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Toaster } from '@/components/ui/toaster';
 
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -25,10 +26,9 @@ enableMocking().then(() => {
   root.render(
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <BrowserRouter>
-        {/* <Global styles={globalStyle} /> */}
-
         <App />
 
+        <Toaster />
         <Analytics />
         <SpeedInsights />
       </BrowserRouter>

@@ -63,7 +63,7 @@ export function FileListPage() {
       />
 
       <ScrollArea className="h-[300px] w-fit">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mr-4">
           {loading ? (
             listZero ? (
               <div>업로드된 파일이 없습니다.</div>

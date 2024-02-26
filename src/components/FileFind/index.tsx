@@ -44,8 +44,8 @@ export function FileFind({
         onDragLeaveCapture={() => setDropReady(false)}
         className={cn(
           'border border-gray-300 border-dashed rounded-md',
-          'block py-14 px-10',
-          'w-[26rem] text-center'
+          'block py-14',
+          'w-[22rem] text-center'
         )}
       >
         {hideBoolean ? `🔒️${' '}` : ''}

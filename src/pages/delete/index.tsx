@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { Button } from '../../components';
-import * as S from './styled';
+import { Button } from '@/components/ui/button';
 
 export function DeletePage() {
   const navigate = useNavigate();
@@ -30,12 +29,14 @@ export function DeletePage() {
   };
 
   return (
-    <S.DeletePageContainer>
-      <S.DeletePagePageLabel>업로드된 파일을 서버에서 삭제하시겠습니까?</S.DeletePagePageLabel>
-      <S.DeletePageButtonSection>
-        <Button bgColor="var(--color-button-primary)" label="확인" click={deleteFile} />
-        <Button bgColor="var(--color-button-primary)" label="취소" click={() => navigate(-1)} />
-      </S.DeletePageButtonSection>
-    </S.DeletePageContainer>
+    <div className="flex flex-col items-center justify-center gap-4">
+      <p>업로드된 파일을 서버에서 삭제하시겠습니까?</p>
+      <div className="flex flex-row items-center justify-center gap-1">
+        <Button onClick={deleteFile} className="bg-red-700">
+          삭제
+        </Button>
+        <Button onClick={() => navigate(-1)}>취소</Button>
+      </div>
+    </div>
   );
 }

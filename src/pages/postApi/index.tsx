@@ -2,8 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { Button, SkeletonUI } from '../../components';
-import * as S from './styled';
+import { Button } from '@/components/ui/button';
 
 export function ApiPostPage() {
   const [apiInfo, setApiInfo] = useState<{
@@ -45,14 +44,15 @@ export function ApiPostPage() {
   return (
     <>
       {loading ? (
-        <>
-          <S.ApiBox>
+        <div className="flex flex-col items-center justify-center gap-4">
+          sh
+          <div>
             {apiInfo?.apiName} / method: {apiInfo?.method}
-          </S.ApiBox>
-          <S.ApiDescText>{apiInfo?.desc}</S.ApiDescText>
-          <S.ApiCommandBox>{apiInfo?.command}</S.ApiCommandBox>
+          </div>
+          <p>{apiInfo?.desc}</p>
+          <code>{apiInfo?.command}</code>
           <Button
-            click={async () => {
+            onClick={async () => {
               try {
                 await navigator.clipboard.writeText(apiInfo?.command);
                 toast.success('복사 완료', {
@@ -66,17 +66,12 @@ export function ApiPostPage() {
                 });
               }
             }}
-            bgColor="var(--color-button-primary)"
-            label="명령어 복사"
-          />
-        </>
+          >
+            명령어 복사
+          </Button>
+        </div>
       ) : (
-        <>
-          <SkeletonUI width="30.8rem" height="6.2rem" margin="1rem" />
-          <SkeletonUI width="38rem" height="2.6rem" margin="1.5rem 1rem 2rem 1rem" />
-          <SkeletonUI width="74rem" height="12rem" margin="1rem 1rem 3rem 1rem" />
-          <SkeletonUI width="14rem" height="6rem" margin="0px" />
-        </>
+        <>loading...</>
       )}
     </>
   );
