@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { useToast } from '@/components/ui/use-toast';
 import { SkeletonUIApiBox } from '../../components';
 import { ApiPostPage } from '../postApi';
 import * as S from './styled';
@@ -18,6 +18,7 @@ export function ApiPage() {
       command: string;
     }[]
   >();
+  const { toast } = useToast();
   const SkeletonUIRandomWidth = ['40', '50', '55', '45'];
   const getApiInfo = async () => {
     await axios({
@@ -31,9 +32,14 @@ export function ApiPage() {
         }, 1200);
       })
       .catch((err) => {
-        toast.error(`API 정보를 불러오는데 실패했습니다. ${err.response.status}`, {
+        // toast.error(`API 정보를 불러오는데 실패했습니다. ${err.response.status}`, {
+        //   duration: 3000,
+        //   icon: '❌',
+        // });
+        toast({
+          title: 'API 정보를 불러오는데 실패했습니다.',
+          description: `${err.response.status}`,
           duration: 3000,
-          icon: '❌',
         });
       });
   };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
+import { useToast } from '@/components/ui/use-toast';
 
 import {
   CheckBox,
@@ -40,6 +40,8 @@ export function MainPage() {
   });
 
   const navigate = useNavigate();
+
+  const { toast } = useToast();
 
   const handleChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -104,30 +106,50 @@ export function MainPage() {
       })
         .then(async (res) => {
           setUploading(true);
-          toast.success('업로드 성공!', {
+          // toast.success('업로드 성공!', {
+          //   duration: 3000,
+          //   icon: '🎉',
+          // });
+          toast({
+            title: '업로드 성공!',
+            description: '파일이 업로드 되었습니다.',
             duration: 3000,
-            icon: '🎉',
           });
           navigate(`/dl/${res.data.folderId}`);
         })
         .catch((err) => {
           setUploading(true);
           if (err.response.status === 413) {
-            toast.error('파일 용량이 너무 큽니다.', {
+            // toast.error('파일 용량이 너무 큽니다.', {
+            //   duration: 3000,
+            //   icon: '🔥',
+            // });
+            toast({
+              title: '파일 용량이 너무 큽니다.',
+              description: '파일 용량이 너무 큽니다.',
               duration: 3000,
-              icon: '🔥',
             });
           } else {
-            toast.error('업로드 실패!', {
+            // toast.error('업로드 실패!', {
+            //   duration: 3000,
+            //   icon: '🔥',
+            // });
+            toast({
+              title: '업로드 실패!',
+              description: '업로드 실패!',
               duration: 3000,
-              icon: '🔥',
             });
           }
         });
     } else {
-      toast.error('파일을 선택해주세요!', {
+      // toast.error('파일을 선택해주세요!', {
+      //   duration: 3000,
+      //   icon: '🔥',
+      // });
+      toast({
+        title: '파일을 선택해주세요!',
+        description: '파일을 선택해주세요!',
         duration: 3000,
-        icon: '🔥',
       });
     }
   };
