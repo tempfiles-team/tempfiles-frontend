@@ -3,16 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/components/ui/use-toast';
 
-import {
-  CheckBox,
-  UpLoadButton,
-  FileFind,
-  Progress,
-  DownloadCountSlider,
-  ExpireTime,
-} from '../../components';
+import { CheckBox, FileFind, Progress, DownloadCountSlider, ExpireTime } from '../../components';
 import { getFileSize, getTime } from '../../utils';
-import * as S from './styled';
+import { Button } from '@/components/ui/button';
 
 export function MainPage() {
   const typingText = ['.', '..', '...'];
@@ -106,10 +99,6 @@ export function MainPage() {
       })
         .then(async (res) => {
           setUploading(true);
-          // toast.success('업로드 성공!', {
-          //   duration: 3000,
-          //   icon: '🎉',
-          // });
           toast({
             title: '업로드 성공!',
             description: '파일이 업로드 되었습니다.',
@@ -120,20 +109,12 @@ export function MainPage() {
         .catch((err) => {
           setUploading(true);
           if (err.response.status === 413) {
-            // toast.error('파일 용량이 너무 큽니다.', {
-            //   duration: 3000,
-            //   icon: '🔥',
-            // });
             toast({
               title: '파일 용량이 너무 큽니다.',
               description: '파일 용량이 너무 큽니다.',
               duration: 3000,
             });
           } else {
-            // toast.error('업로드 실패!', {
-            //   duration: 3000,
-            //   icon: '🔥',
-            // });
             toast({
               title: '업로드 실패!',
               description: '업로드 실패!',
@@ -142,10 +123,6 @@ export function MainPage() {
           }
         });
     } else {
-      // toast.error('파일을 선택해주세요!', {
-      //   duration: 3000,
-      //   icon: '🔥',
-      // });
       toast({
         title: '파일을 선택해주세요!',
         description: '파일을 선택해주세요!',
@@ -166,10 +143,10 @@ export function MainPage() {
     };
   }, [typingCount]);
   return (
-    <S.MainPageContainer>
+    <div>
       {uploading ? (
-        <>
-          <S.MainPageCheckBoxSection>
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex gap-4">
             <CheckBox
               click={() => sethideBoolean(!hideBoolean)}
               isCheck={hideBoolean}
@@ -190,7 +167,7 @@ export function MainPage() {
               isCheck={downloadCountBoolean}
               label={'다운로드 횟수'}
             />
-          </S.MainPageCheckBoxSection>
+          </div>
           {expireTimeBoolean && (
             <ExpireTime
               expireTime={Number(expireTime)}
@@ -212,8 +189,10 @@ export function MainPage() {
             fileProps={fileProps}
             hideBoolean={hideBoolean}
           />
-          <UpLoadButton type={'button'} value={'업로드'} onClick={UpLoad} />
-        </>
+          <Button onClick={UpLoad} className="w-1/4 mx-auto">
+            업로드
+          </Button>
+        </div>
       ) : (
         <Progress
           value={progressValue}
@@ -222,6 +201,6 @@ export function MainPage() {
           stateText={progressStateText}
         />
       )}
-    </S.MainPageContainer>
+    </div>
   );
 }

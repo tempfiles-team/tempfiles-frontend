@@ -1,6 +1,7 @@
 import React from 'react';
 
-import * as S from './styled';
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
 type FileFindProps = {
   handleChangeFile: React.ChangeEventHandler<HTMLInputElement>;
@@ -24,31 +25,32 @@ export function FileFind({
   fileProps,
   hideBoolean,
 }: FileFindProps) {
+  const [dropReady, setDropReady] = React.useState(false);
+
   return (
-    <S.FileFindContainer>
-      <S.FileFindLabelBox
-        id="label-file-upload"
+    <>
+      <Input
+        type="file"
+        id="input-file-upload"
+        multiple={true}
+        className="hidden"
+        onChange={handleChangeFile}
+      />
+      <label
         htmlFor="input-file-upload"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
+        onDragEnterCapture={() => setDropReady(true)}
+        onDragLeaveCapture={() => setDropReady(false)}
+        className={cn('border border-gray-300 border-dashed rounded-md', 'block py-10 px-12')}
       >
-        {fileProps.files[0].fileData === null ? (
-          <S.FileFindText>
-            {hideBoolean ? '🔒️\u00a0' : ''}파일을 드래그하거나 클릭하여 파일을 선택해주세요.
-          </S.FileFindText>
-        ) : (
-          <S.FileFindText>{fileProps.files.length}개의 파일이 선택되었습니다.</S.FileFindText>
-        )}
-      </S.FileFindLabelBox>
-
-      <S.FileFindButton htmlFor="input-file-upload">찾아보기</S.FileFindButton>
-      <input
-        id="input-file-upload"
-        type={'file'}
-        multiple={true}
-        style={{ display: 'none' }}
-        onChange={handleChangeFile}
-      />
-    </S.FileFindContainer>
+        {hideBoolean ? `🔒️${' '}` : ''}
+        {fileProps.files[0].fileData === null
+          ? dropReady
+            ? '파일을 놓아주세요.'
+            : '파일을 드롭하거나 클릭하여 파일을 선택해주세요.'
+          : fileProps.files.length + '개의 파일이 선택되었습니다.'}
+      </label>
+    </>
   );
 }

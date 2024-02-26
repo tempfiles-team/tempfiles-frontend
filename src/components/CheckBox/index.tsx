@@ -1,5 +1,6 @@
-import CheckIcon from '../../assets/CheckIcon.svg';
-import * as S from './styled';
+// import CheckIcon from '../../assets/CheckIcon.svg';
+
+import { Checkbox } from '@/components/ui/checkbox';
 
 type CheckBoxProps = {
   click: React.MouseEventHandler<HTMLDivElement>;
@@ -9,11 +10,11 @@ type CheckBoxProps = {
 
 export function CheckBox({ click, isCheck, label }: CheckBoxProps) {
   return (
-    <S.CheckBoxContainer>
-      <S.CheckBoxObject onClick={click} isCheck={isCheck}>
-        <img src={CheckIcon} alt="check icon" />
-      </S.CheckBoxObject>
-      <S.CheckBoxText>{label}</S.CheckBoxText>
-    </S.CheckBoxContainer>
+    <div className="items-top flex space-x-2" onClick={click}>
+      <Checkbox checked={isCheck} />
+      <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+        {label}
+      </label>
+    </div>
   );
 }
