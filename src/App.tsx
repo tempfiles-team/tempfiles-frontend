@@ -42,10 +42,6 @@ export default function App() {
                 <h1 className="scroll-m-20 text-2xl font-semibold">TEMPFILES</h1>
                 <p className="text-sm text-muted-foreground">간단한 파일 공유 서비스</p>
               </a>
-              {/* <ScrollArea className="h-fit w-fit">
-                <Outlet />
-              </ScrollArea> */}
-
               <Outlet />
 
               <div className="flex flex-row items-center justify-center w-full h-20 text-center">

@@ -2,9 +2,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { FileListBox, Button, SkeletonUI } from '../../components';
+import { FileListBox, SkeletonUI } from '../../components';
+import { Button } from '@/components/ui/button';
 import { getDate, getFileSize, getExpireTime } from '../../utils';
-import * as S from './styled';
 
 export function DownloadPage() {
   const [loading, setLoading] = useState(true);
@@ -62,13 +62,13 @@ export function DownloadPage() {
   }, []);
 
   return (
-    <S.DownloadPageContainer>
+    <div className="flex flex-col items-center gap-4">
       {!loading ? (
         <>
-          <S.IdBox>
+          <div>
             {fileProps.isHidden ? '비공개 파일' : '공개 파일'} / {fileProps.folderId}
-          </S.IdBox>
-          <S.DownloadFileListBoxContainer>
+          </div>
+          <div>
             {fileProps.files.map(
               (
                 file: {
@@ -87,23 +87,23 @@ export function DownloadPage() {
                 </div>
               )
             )}
-          </S.DownloadFileListBoxContainer>
+          </div>
 
-          <S.DownloadFileStatusText>
+          <div>
             만료까지 {fileProps.expireTime} / {fileProps.downloadCount}회 남았습니다.
-          </S.DownloadFileStatusText>
-          <S.DownloadPageButtonSection>
+          </div>
+          <div className="flex gap-1">
             <Button
-              click={() => {
+              onClick={() => {
                 for (let i = 0; i < fileProps.files.length; i++) {
                   window.open(fileProps.files[i].downloadUrl, '_blank', 'noopener');
                 }
               }}
-              bgColor="var(--color-button-primary)"
-              label="전체 다운로드"
-            />
+            >
+              전체 다운로드
+            </Button>
             <Button
-              click={async () => {
+              onClick={async () => {
                 try {
                   await navigator.clipboard.writeText(window.location.href);
                   toast.success('복사 완료', {
@@ -117,17 +117,17 @@ export function DownloadPage() {
                   });
                 }
               }}
-              bgColor="var(--color-button-primary)"
-              label="링크 복사"
-            />
+            >
+              링크 복사
+            </Button>
             <Button
-              click={() => {
+              onClick={() => {
                 navigate('/del/' + fileProps.folderId);
               }}
-              bgColor="var(--color-button-secondary)"
-              label="폴더 삭제"
-            />
-          </S.DownloadPageButtonSection>
+            >
+              폴더 삭제
+            </Button>
+          </div>
         </>
       ) : (
         <>
@@ -135,6 +135,6 @@ export function DownloadPage() {
           <SkeletonUI width="64rem" height="6rem" margin="3rem 0px 0px 0px" />
         </>
       )}
-    </S.DownloadPageContainer>
+    </div>
   );
 }

@@ -4,7 +4,6 @@ import { Route, Routes, Link } from 'react-router-dom';
 import { useToast } from '@/components/ui/use-toast';
 import { SkeletonUIApiBox } from '../../components';
 import { ApiPostPage } from '../postApi';
-import * as S from './styled';
 
 export function ApiPage() {
   const [loading, setLoading] = useState(false);
@@ -49,18 +48,18 @@ export function ApiPage() {
   }, []);
 
   return (
-    <S.ApiPageContainer>
+    <div>
       <Routes>
         <Route
           path="/"
           element={
             <>
-              <S.ApiListSection>
+              <div>
                 {loading ? (
                   <>
                     {apiInfo?.map((item, index) => (
                       <Link key={index} to={item.apiHandler} style={{ textDecoration: 'none' }}>
-                        <S.ApiListBox>{item.apiUrl}</S.ApiListBox>
+                        <div>{item.apiUrl}</div>
                       </Link>
                     ))}
                   </>
@@ -75,20 +74,14 @@ export function ApiPage() {
                     <SkeletonUIApiBox
                       randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 4)]}
                     />
-                    <SkeletonUIApiBox
-                      randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 4)]}
-                    />
-                    <SkeletonUIApiBox
-                      randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 4)]}
-                    />
                   </>
                 )}
-              </S.ApiListSection>
+              </div>
             </>
           }
         />
         <Route path=":urlApi" element={<ApiPostPage />} />
       </Routes>
-    </S.ApiPageContainer>
+    </div>
   );
 }
