@@ -64,11 +64,11 @@ export function DownloadPage() {
   return (
     <div className="flex flex-col items-center gap-4">
       {!loading ? (
-        <>
+        <div className="px-2 flex flex-col gap-4 items-center">
           <div>
             {fileProps.isHidden ? '비공개 파일' : '공개 파일'} / {fileProps.folderId}
           </div>
-          <div>
+          <div className="flex flex-col gap-2">
             {fileProps.files.map(
               (
                 file: {
@@ -78,13 +78,12 @@ export function DownloadPage() {
                 },
                 index: number
               ) => (
-                <div key={index}>
-                  <FileListBox
-                    filename={file.filename}
-                    size={file.size}
-                    downloadUrl={file.downloadUrl}
-                  />
-                </div>
+                <FileListBox
+                  key={index}
+                  filename={file.filename}
+                  size={file.size}
+                  downloadUrl={file.downloadUrl}
+                />
               )
             )}
           </div>
@@ -128,7 +127,7 @@ export function DownloadPage() {
               폴더 삭제
             </Button>
           </div>
-        </>
+        </div>
       ) : (
         <>
           <SkeletonUI width="80rem" height="4.6rem" margin="0" />

@@ -1,3 +1,6 @@
+import { Card } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+
 type FolderListBoxProps = {
   folderId: string;
   fileCount: string;
@@ -14,11 +17,8 @@ export function FolderListBox({
   click,
 }: FolderListBoxProps) {
   return (
-    <div
-      onClick={click}
-      className="flex flex-col items-center gap-2 p-4 border border-gray-200 rounded-md cursor-pointer"
-    >
+    <Card onClick={click} className={cn('cursor-pointer py-4 px-6')}>
       {isHidden ? '🔒' : ''} {folderId} {fileCount}개의 파일 / {uploadElapsed}에 업로드 됨
-    </div>
+    </Card>
   );
 }

@@ -59,7 +59,7 @@ export function FileListPage() {
             navigate(`/dl/${e.currentTarget.value}`);
           }
         }}
-        className="w-96"
+        className="mt-2 max-w-[300px] md:w-96"
       />
 
       <ScrollArea className="h-[300px] w-fit">
