@@ -2,12 +2,7 @@ import { Outlet, Route, Routes, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Toaster } from '@/components/ui/toaster';
 
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
+import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
 
 import axios from 'axios';
 
@@ -44,34 +39,24 @@ export default function App() {
                 onClick={() => window.location.pathname !== '/' && navigate(-1)}
                 className="cursor-pointer flex flex-col items-center justify-center w-full h-20 text-center"
               >
-                <h1 className="scroll-m-20 text-3xl font-semibold">TEMPFILES</h1>
+                <h1 className="scroll-m-20 text-2xl font-semibold">TEMPFILES</h1>
                 <p className="text-sm text-muted-foreground">간단한 파일 공유 서비스</p>
               </a>
-              <ScrollArea className="h-full w-[768px] rounded-md border p-4">
+              <ScrollArea className="h-fit w-[768px] rounded-lg border p-2">
                 <Outlet />
               </ScrollArea>
 
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <Link to="/" className={navigationMenuTriggerStyle()}>
-                      Upload
-                    </Link>
-                  </NavigationMenuItem>
-
-                  <NavigationMenuItem>
-                    <Link to="/api" className={navigationMenuTriggerStyle()}>
-                      API
-                    </Link>
-                  </NavigationMenuItem>
-
-                  <NavigationMenuItem>
-                    <Link to="/list" className={navigationMenuTriggerStyle()}>
-                      File list
-                    </Link>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
+              <div className="flex flex-row items-center justify-center w-full h-20 text-center">
+                <Link to="/" className={navigationMenuTriggerStyle()}>
+                  Upload
+                </Link>
+                <Link to="/api" className={navigationMenuTriggerStyle()}>
+                  API
+                </Link>
+                <Link to="/list" className={navigationMenuTriggerStyle()}>
+                  File list
+                </Link>
+              </div>
 
               <Toaster />
             </div>
