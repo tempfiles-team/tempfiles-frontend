@@ -30,7 +30,7 @@ export function FileListPage() {
       url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/list`,
     })
       .then((res) => {
-        setFileList(res.data.list); //파일리스트 요소 갯수에 따른 핸들링 추가예정
+        setFileList(res.data.data); //파일리스트 요소 갯수에 따른 핸들링 추가예정
 
         if (res.data.list === null) {
           setListZero(true);

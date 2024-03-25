@@ -29,19 +29,19 @@ export function DownloadPage() {
       })
         .then((res) => {
           const updatedFileProps = {
-            files: res.data.files.map(
+            files: res.data.data.files.map(
               (file: { fileName: string; fileSize: number; downloadUrl: string }) => ({
                 filename: file.fileName,
                 size: getFileSize(file.fileSize),
                 downloadUrl: file.downloadUrl,
               })
             ),
-            folderId: res.data.folderId,
-            deleteUrl: res.data.deleteUrl,
-            uploadDate: getDate(res.data.uploadDate),
-            isHidden: res.data.isHidden,
-            downloadCount: res.data.downloadLimit - res.data.downloadCount,
-            expireTime: getExpireTime(res.data.expireTime),
+            folderId: res.data.data.folderId,
+            deleteUrl: res.data.data.deleteUrl,
+            uploadDate: getDate(res.data.data.uploadDate),
+            isHidden: res.data.data.isHidden,
+            downloadCount: res.data.data.downloadLimit - res.data.data.downloadCount,
+            expireTime: getExpireTime(res.data.data.expireTime),
           };
 
           setLoading(false);
@@ -95,7 +95,9 @@ export function DownloadPage() {
             <Button
               onClick={() => {
                 for (let i = 0; i < fileProps.files.length; i++) {
-                  window.open(fileProps.files[i].downloadUrl, '_blank', 'noopener');
+                  const durl =
+                    import.meta.env.VITE_APP_BACKEND_BASEURL + fileProps.files[i].downloadUrl;
+                  window.open(durl, '_blank', 'noopener');
                 }
               }}
             >

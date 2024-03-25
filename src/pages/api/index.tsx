@@ -1,87 +1,18 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { Route, Routes, Link } from 'react-router-dom';
-import { useToast } from '@/components/ui/use-toast';
-import { SkeletonUIApiBox } from '../../components';
-import { ApiPostPage } from '../postApi';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 export function ApiPage() {
-  const [loading, setLoading] = useState(false);
-  const [apiInfo, setApiInfo] = useState<
-    {
-      apiName: string;
-      apiUrl: string;
-      apiHandler: string;
-      method: string;
-      desc: string;
-      command: string;
-    }[]
-  >();
-  const { toast } = useToast();
-  const SkeletonUIRandomWidth = ['40', '50', '55', '45'];
-  const getApiInfo = async () => {
-    await axios({
-      method: 'get',
-      url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/info`,
-    })
-      .then((res) => {
-        setApiInfo(res.data);
-        setTimeout(() => {
-          setLoading(true); //loading 확인하고싶으면 false로 바꿔주세요.
-        }, 1200);
-      })
-      .catch((err) => {
-        // toast.error(`API 정보를 불러오는데 실패했습니다. ${err.response.status}`, {
-        //   duration: 3000,
-        //   icon: '❌',
-        // });
-        toast({
-          title: 'API 정보를 불러오는데 실패했습니다.',
-          description: `${err.response.status}`,
-          duration: 3000,
-        });
-      });
-  };
-
-  useEffect(() => {
-    getApiInfo();
-  }, []);
-
   return (
-    <div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <div>
-                {loading ? (
-                  <>
-                    {apiInfo?.map((item, index) => (
-                      <Link key={index} to={item.apiHandler} style={{ textDecoration: 'none' }}>
-                        <div>{item.apiUrl}</div>
-                      </Link>
-                    ))}
-                  </>
-                ) : (
-                  <>
-                    <SkeletonUIApiBox
-                      randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 4)]}
-                    />
-                    <SkeletonUIApiBox
-                      randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 4)]}
-                    />
-                    <SkeletonUIApiBox
-                      randomWitdh={SkeletonUIRandomWidth[Math.floor(Math.random() * 4)]}
-                    />
-                  </>
-                )}
-              </div>
-            </>
-          }
-        />
-        <Route path=":urlApi" element={<ApiPostPage />} />
-      </Routes>
+    <div className="flex flex-col items-center gap-4">
+      <h1>backend swagger ui로 이동</h1>
+      <Link
+        to={import.meta.env.VITE_APP_BACKEND_BASEURL + '/swagger/index.html'}
+        target="_blank"
+        className={cn(buttonVariants())}
+      >
+        {import.meta.env.VITE_APP_BACKEND_BASEURL + '/swagger/index.html'}
+      </Link>
     </div>
   );
 }
