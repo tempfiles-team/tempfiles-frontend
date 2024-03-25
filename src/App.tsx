@@ -2,14 +2,10 @@ import { Outlet, Route, Routes, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
 
-import axios from 'axios';
+import axiosInstance from './lib/axios';
 
 import { MainPage, DownloadPage, DeletePage, FileListPage, ApiPage, NotFoundPage } from './pages';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
-async function checkServerStatus() {
-  return await axios.get(import.meta.env.VITE_APP_BACKEND_BASEURL);
-}
 
 export default function App() {
   const navigate = useNavigate();
@@ -17,7 +13,8 @@ export default function App() {
 
   useEffect(() => {
     // Replace this with a function that checks the status of the server
-    checkServerStatus()
+    axiosInstance
+      .get('/')
       .then(() => setServerDown(false))
       .catch(() => setServerDown(true));
   }, []);
