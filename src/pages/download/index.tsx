@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axiosInstance, { downloadFile } from '@/lib/axios';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
+import { useToast } from '@/components/ui/use-toast';
 import { FileListBox, SkeletonUI } from '../../components';
 import { Button } from '@/components/ui/button';
 import { getDate, getFileSize, getExpireTime } from '../../utils';
@@ -21,12 +21,12 @@ export function DownloadPage() {
 
   const navigate = useNavigate();
 
+  const { toast } = useToast();
+
   useEffect(() => {
     const getFileProps = async () => {
-      await axios({
-        method: 'get',
-        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${folderid}`,
-      })
+      await axiosInstance
+        .get(`/file/${folderid}`)
         .then((res) => {
           const updatedFileProps = {
             files: res.data.data.files.map(
@@ -50,9 +50,15 @@ export function DownloadPage() {
         // .catch((err) => {
         // if (err.response.status !== 401) {
         .catch(() => {
-          toast.error('ID를 다시 확인해주세요.', {
+          // toast('ID를 다시 확인해주세요.', {
+          //   duration: 3000,
+          //   icon: '🔥',
+          // });
+
+          toast({
+            title: 'ID를 다시 확인해주세요.',
+            description: 'ID를 다시 확인해주세요.',
             duration: 3000,
-            icon: '🔥',
           });
 
           navigate(-1);
@@ -93,11 +99,9 @@ export function DownloadPage() {
           </div>
           <div className="flex gap-1">
             <Button
-              onClick={() => {
+              onClick={async () => {
                 for (let i = 0; i < fileProps.files.length; i++) {
-                  const durl =
-                    import.meta.env.VITE_APP_BACKEND_BASEURL + fileProps.files[i].downloadUrl;
-                  window.open(durl, '_blank', 'noopener');
+                  await downloadFile(fileProps.files[i].downloadUrl, fileProps.files[i].filename);
                 }
               }}
             >
@@ -105,18 +109,20 @@ export function DownloadPage() {
             </Button>
             <Button
               onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(window.location.href);
-                  toast.success('복사 완료', {
-                    duration: 3000,
-                    icon: '🎉',
+                await navigator.clipboard
+                  .writeText(window.location.href)
+                  .then(() => {
+                    toast({
+                      title: '링크 복사 성공',
+                      duration: 3000,
+                    });
+                  })
+                  .catch(() => {
+                    toast({
+                      title: '링크 복사 실패',
+                      duration: 3000,
+                    });
                   });
-                } catch (err) {
-                  toast.error('복사 실패', {
-                    duration: 3000,
-                    icon: '❌',
-                  });
-                }
               }}
             >
               링크 복사

@@ -1,5 +1,5 @@
 import { Card } from '@/components/ui/card';
-import axios from 'axios';
+import { downloadFile } from '@/lib/axios';
 import { useState } from 'react';
 
 type FileListBoxProps = {
@@ -11,27 +11,12 @@ type FileListBoxProps = {
 export function FileListBox({ filename, size, downloadUrl }: FileListBoxProps) {
   const [isDownloading, setIsDownloading] = useState(false);
 
-  const handleFileDownload = () => {
+  const handleFileDownload = async () => {
     setIsDownloading(true);
-    const fileUrl = import.meta.env.VITE_APP_BACKEND_BASEURL + downloadUrl;
 
-    axios
-      .get(fileUrl, { responseType: 'blob' })
-      .then((response) => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-        setIsDownloading(false);
-      })
-      .catch((error) => {
-        console.error('파일 다운로드 오류:', error);
-        setIsDownloading(false);
-      });
+    await downloadFile(downloadUrl, filename);
+
+    setIsDownloading(false);
   };
 
   return (

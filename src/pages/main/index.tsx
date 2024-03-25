@@ -104,7 +104,7 @@ export function MainPage() {
             description: '파일이 업로드 되었습니다.',
             duration: 3000,
           });
-          navigate(`/dl/${res.data.folderId}`);
+          navigate(`/dl/${res.data.data.folderId}`);
         })
         .catch((err) => {
           setUploading(true);
