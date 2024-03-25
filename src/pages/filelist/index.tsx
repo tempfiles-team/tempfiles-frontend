@@ -62,7 +62,7 @@ export function FileListPage() {
         className="mt-2 max-w-[300px] md:w-96"
       />
 
-      <ScrollArea className="h-[300px] w-fit">
+      <ScrollArea className="h-fit w-fit max-h-[285px]">
         <div className="flex flex-col gap-2 mr-4">
           {loading ? (
             listZero ? (

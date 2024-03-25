@@ -75,7 +75,7 @@ export function DownloadPage() {
           <div>
             {fileProps.isHidden ? '비공개 파일' : '공개 파일'} / {fileProps.folderId}
           </div>
-          <ScrollArea className="w-fit h-fit max-h-64">
+          <ScrollArea className="w-fit h-fit max-h-48">
             <div className="flex flex-col gap-2">
               {fileProps.files.map(
                 (

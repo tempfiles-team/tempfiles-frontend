@@ -44,7 +44,7 @@ export default function App() {
         path="/"
         element={
           <div className="flex flex-col items-center justify-center h-screen py-4">
-            <div className="flex flex-col gap-6 mb-10">
+            <div className="flex flex-col gap-6 mb-10 h-1/2">
               <a
                 onClick={() => window.location.pathname !== '/' && navigate(-1)}
                 className="cursor-pointer flex flex-col items-center justify-center w-full text-center"
