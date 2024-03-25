@@ -1,4 +1,4 @@
-import * as S from './styled';
+import { Progress } from '@/components/ui/progress';
 
 type ProgressBarProps = {
   value: number;
@@ -12,17 +12,17 @@ type ProgressBarProps = {
   stateText: string;
 };
 
-export function Progress({ value, files, typing, stateText }: ProgressBarProps) {
+export function ProgressA({ value, files, typing, stateText }: ProgressBarProps) {
   return (
-    <S.ProgressContainer>
-      <S.ProgressBar width={value} />
-      <S.ProgressText>
+    <div className="flex flex-col items-center justify-center gap-4">
+      <Progress value={value} />
+      <p>
         {files[0].filename}
         {files.length > 1 ? ` 외 ${files.length - 1}개` : ''}
         &nbsp;
         {stateText}
         {typing}
-      </S.ProgressText>
-    </S.ProgressContainer>
+      </p>
+    </div>
   );
 }

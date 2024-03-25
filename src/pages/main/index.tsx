@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/components/ui/use-toast';
 
-import { CheckBox, FileFind, Progress, DownloadCountSlider, ExpireTime } from '../../components';
+import { CheckBox, FileFind, ProgressA, DownloadCountSlider, ExpireTime } from '../../components';
 import { getFileSize, getTime } from '../../utils';
 import { Button } from '@/components/ui/button';
 
@@ -196,7 +196,7 @@ export function MainPage() {
           </Button>
         </div>
       ) : (
-        <Progress
+        <ProgressA
           value={progressValue}
           files={fileProps.files}
           typing={typingText[typingCount]}
