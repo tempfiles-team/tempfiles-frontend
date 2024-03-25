@@ -1,4 +1,4 @@
-import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link, Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import toast, { Toaster, useToasterStore } from 'react-hot-toast';
 import { Navbar } from './components';
@@ -47,6 +47,9 @@ export default function App() {
           path="/"
           element={
             <S.RootLayout>
+              <Link className="BetaBanner" to="https://beta.tmpf.me/" target="_blank">
+                베타버전이 출시되었습니다. beta.tmpf.me에서 베타 버전을 체험해보세요!
+              </Link>
               <div>
                 <Toaster
                   toastOptions={{

@@ -1,9 +1,21 @@
 import styled from '@emotion/styled';
 
 export const RootLayout = styled.div`
+  .BetaBanner {
+    width: 100vw;
+    padding: 2rem;
+    background-color: #757bab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
   .RootWrapper {
     width: 100%;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .Text {
