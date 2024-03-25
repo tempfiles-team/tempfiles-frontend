@@ -13,12 +13,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Button } from '@/components/ui/button';
 
 import axiosInstance from './lib/axios';
 
 import { MainPage, DownloadPage, DeletePage, FileListPage, NotFoundPage } from './pages';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function App() {
   const navigate = useNavigate();
@@ -46,7 +44,7 @@ export default function App() {
         path="/"
         element={
           <div className="flex flex-col items-center justify-center h-screen py-4">
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 mb-10">
               <a
                 onClick={() => window.location.pathname !== '/' && navigate(-1)}
                 className="cursor-pointer flex flex-col items-center justify-center w-full text-center"
@@ -54,10 +52,7 @@ export default function App() {
                 <h1 className="scroll-m-20 text-4xl font-semibold">TEMPFILES</h1>
                 <p className="text-sm text-muted-foreground">간단한 파일 공유 서비스</p>
               </a>
-
-              <ScrollArea className="w-full h-96">
-                <Outlet />
-              </ScrollArea>
+              <Outlet />
             </div>
 
             <div className="flex flex-row gap-1">

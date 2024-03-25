@@ -5,6 +5,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { FileListBox, SkeletonUI } from '../../components';
 import { Button } from '@/components/ui/button';
 import { getDate, getFileSize, getExpireTime } from '../../utils';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export function DownloadPage() {
   const [loading, setLoading] = useState(true);
@@ -74,25 +75,27 @@ export function DownloadPage() {
           <div>
             {fileProps.isHidden ? '비공개 파일' : '공개 파일'} / {fileProps.folderId}
           </div>
-          <div className="flex flex-col gap-2">
-            {fileProps.files.map(
-              (
-                file: {
-                  filename: string;
-                  size: string;
-                  downloadUrl: string;
-                },
-                index: number
-              ) => (
-                <FileListBox
-                  key={index}
-                  filename={file.filename}
-                  size={file.size}
-                  downloadUrl={file.downloadUrl}
-                />
-              )
-            )}
-          </div>
+          <ScrollArea className="w-fit h-fit max-h-64">
+            <div className="flex flex-col gap-2">
+              {fileProps.files.map(
+                (
+                  file: {
+                    filename: string;
+                    size: string;
+                    downloadUrl: string;
+                  },
+                  index: number
+                ) => (
+                  <FileListBox
+                    key={index}
+                    filename={file.filename}
+                    size={file.size}
+                    downloadUrl={file.downloadUrl}
+                  />
+                )
+              )}
+            </div>
+          </ScrollArea>
 
           <div>
             만료까지 {fileProps.expireTime} / {fileProps.downloadCount}회 남았습니다.
