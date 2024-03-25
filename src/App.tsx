@@ -2,9 +2,22 @@ import { Outlet, Route, Routes, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/button';
+
 import axiosInstance from './lib/axios';
 
-import { MainPage, DownloadPage, DeletePage, FileListPage, ApiPage, NotFoundPage } from './pages';
+import { MainPage, DownloadPage, DeletePage, FileListPage, NotFoundPage } from './pages';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function App() {
@@ -51,12 +64,36 @@ export default function App() {
               <Link to="/" className={navigationMenuTriggerStyle()}>
                 Upload
               </Link>
-              <Link to="/api" className={navigationMenuTriggerStyle()}>
-                API
-              </Link>
+
               <Link to="/list" className={navigationMenuTriggerStyle()}>
-                File list
+                List
               </Link>
+
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <div className={navigationMenuTriggerStyle()}>API</div>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>API 문서로 이동하시곘습니까?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      {import.meta.env.VITE_APP_BACKEND_BASEURL}/swagger로 이동됩니다.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>취소</AlertDialogCancel>
+                    <AlertDialogAction>
+                      <a
+                        href={`${import.meta.env.VITE_APP_BACKEND_BASEURL}/swagger`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        계속하기
+                      </a>
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
           </div>
         }
@@ -65,7 +102,6 @@ export default function App() {
         <Route path="/dl/:folderid" element={<DownloadPage />} />
         <Route path="/del/:folderid" element={<DeletePage />} />
         <Route path="/list" element={<FileListPage />} />
-        <Route path="/api/*" element={<ApiPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
