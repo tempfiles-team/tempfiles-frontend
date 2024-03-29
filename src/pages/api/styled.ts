@@ -4,29 +4,56 @@ export const ApiPageContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-`;
+  width: 100dvw;
 
-export const ApiListSection = styled.div`
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-height: 40rem;
-  &::-webkit-scrollbar {
-    display: none;
+  .swagger-ui {
+    width: 100%;
+    margin-top: 2rem;
+
+    * {
+      color: white;
+
+      p {
+        color: var(--color-text-tertiary);
+      }
+
+      input,
+      select.content-type {
+        background-color: var(--color-backgorund-filelistbox);
+        color: var(--color-text-tertiary);
+      }
+    }
+
+    .title {
+      color: white;
+    }
+
+    .opblock-summary-description {
+      color: var(--color-text-tertiary);
+    }
+
+    .opblock-section-header {
+      background-color: var(--color-backgorund-filelistbox);
+      color: var(--color-text-tertiary);
+      font-size: 2.2rem;
+      font-weight: 700;
+
+      h4 {
+        color: var(--color-text-tertiary);
+      }
+    }
   }
 `;
 
-export const ApiListBox = styled.div`
-  background-color: var(--color-backgorund-filelistbox);
-  color: var(--color-text-tertiary);
-  border-radius: 1rem;
-  padding: 2rem 1.4rem 2rem 1.4rem;
-  margin: 1rem;
+export const ScrollBox = styled.div`
+  overflow-y: auto;
+  max-height: 70vh;
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 2.2rem;
-  font-weight: 700;
-  cursor: pointer;
+  justify-content: center;
+
+  /* 스크롤바 숨기기 */
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
