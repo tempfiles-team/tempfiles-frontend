@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import toast, { Toaster, useToasterStore } from 'react-hot-toast';
 import { Navbar } from './components';
 import * as S from './styles/app';
-import axios from 'axios';
 
 import { MainPage, DownloadPage, DeletePage, FileListPage, ApiPage, NotFoundPage } from './pages';
+import axiosInstance from './utils/axios';
 
 async function checkServerStatus() {
-  return await axios.get(import.meta.env.VITE_APP_BACKEND_BASEURL);
+  return await axiosInstance.get('/');
 }
 const TOAST_LIMIT = 2;
 export default function App() {

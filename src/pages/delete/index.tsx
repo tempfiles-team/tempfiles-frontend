@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { Button } from '../../components';
 import * as S from './styled';
+import axiosInstance from '../../utils/axios';
 
 export function DeletePage() {
   const navigate = useNavigate();
@@ -10,12 +10,10 @@ export function DeletePage() {
   const { folderid } = useParams<{ folderid: string }>();
 
   const deleteFile = async () => {
-    await axios({
-      method: 'delete',
-      url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/del/${folderid}`,
-    })
+    await axiosInstance
+      .delete(`/del/${folderid}`)
       .then(() => {
-        navigate('/');
+        navigate('/list');
         toast.success('삭제 완료', {
           duration: 3000,
           icon: '🗑️',

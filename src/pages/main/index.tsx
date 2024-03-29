@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../../utils/axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
@@ -84,9 +84,9 @@ export function MainPage() {
         formdata.append('file', file.fileData);
       });
 
-      await axios({
+      await axiosInstance({
         method: 'post',
-        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/upload`,
+        url: '/upload',
         data: formdata,
         headers: {
           'Content-Type': 'multipart/form-data',

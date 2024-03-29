@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../../utils/axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -22,10 +22,8 @@ export function FileListPage() {
   >();
 
   const getFileList = async () => {
-    await axios({
-      method: 'get',
-      url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/list`,
-    })
+    await axiosInstance
+      .get('/list')
       .then((res) => {
         setFileList(res.data.list); //파일리스트 요소 갯수에 따른 핸들링 추가예정
 

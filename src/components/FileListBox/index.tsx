@@ -1,3 +1,4 @@
+import { downloadFile } from '../../utils/axios';
 import * as S from './styled';
 
 type FileListBoxProps = {
@@ -9,7 +10,11 @@ type FileListBoxProps = {
 export function FileListBox({ filename, size, downloadUrl }: FileListBoxProps) {
   return (
     <S.FileListBoxContainer>
-      <div onClick={() => window.open(downloadUrl, '_blank', 'noopener')}>
+      <div
+        onClick={async () => {
+          await downloadFile(downloadUrl, filename);
+        }}
+      >
         {filename} / {size}
       </div>
     </S.FileListBoxContainer>

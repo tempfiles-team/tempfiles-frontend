@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { FileListBox, Button, SkeletonUI } from '../../components';
 import { getDate, getFileSize, getExpireTime } from '../../utils';
 import * as S from './styled';
+import axiosInstance, { downloadFile } from '../../utils/axios';
 
 export function DownloadPage() {
   const [loading, setLoading] = useState(true);
@@ -23,10 +23,8 @@ export function DownloadPage() {
 
   useEffect(() => {
     const getFileProps = async () => {
-      await axios({
-        method: 'get',
-        url: `${import.meta.env.VITE_APP_BACKEND_BASEURL}/file/${folderid}`,
-      })
+      await axiosInstance
+        .get('/file/' + folderid)
         .then((res) => {
           const updatedFileProps = {
             files: res.data.files.map(
@@ -94,9 +92,9 @@ export function DownloadPage() {
           </S.DownloadFileStatusText>
           <S.DownloadPageButtonSection>
             <Button
-              click={() => {
+              click={async () => {
                 for (let i = 0; i < fileProps.files.length; i++) {
-                  window.open(fileProps.files[i].downloadUrl, '_blank', 'noopener');
+                  await downloadFile(fileProps.files[i].downloadUrl, fileProps.files[i].filename);
                 }
               }}
               bgColor="var(--color-button-primary)"
