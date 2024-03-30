@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const DownloadCountContainer = styled.div`
   width: 70%;
+  max-width: 70rem;
   display: flex;
   flex-direction: column;
   margin-top: 2rem;

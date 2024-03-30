@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const ExpireTimeContainer = styled.div`
   width: 70%;
+  max-width: 70rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
