@@ -4,7 +4,8 @@ export const FileFindContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  margin-top: 2rem;
+  justify-content: center;
+  margin: 2rem 2rem 0 2rem;
 `;
 
 export const FileFindText = styled.p`

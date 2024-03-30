@@ -15,7 +15,7 @@ export const ButtonContainer = styled.input<{ bgColor: string }>`
   border-radius: 0.8rem;
 
   margin: 0 1rem 0 1rem;
-  padding: 0.8rem 1.2rem;
+  padding: 0 3rem;
 `;
 
 ButtonContainer.defaultProps = { type: 'button' };

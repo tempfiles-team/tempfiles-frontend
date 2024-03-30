@@ -4,15 +4,16 @@ export const ProgressContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
 export const ProgressBar = styled.div<{ width: number }>`
   display: flex;
-  min-width: 70rem;
-  min-height: 5.6rem;
   background: var(--color-backgorund-progressbar);
-  border-radius: 1.5rem;
-  overflow: hidden;
+  border-radius: 0.5rem;
+  width: 90%;
+  height: 3rem;
+
   &::before {
     content: ' ';
     transition: all 1s;
@@ -27,11 +28,4 @@ export const ProgressText = styled.div`
   font-size: 2rem;
   font-weight: 700;
   margin-top: 2rem;
-`;
-
-export const ProgressAnimationBox = styled.div`
-  width: 20rem;
-  height: 20rem;
-  overflow: hidden;
-  margin-bottom: 1rem;
 `;

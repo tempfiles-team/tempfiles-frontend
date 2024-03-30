@@ -17,7 +17,7 @@ import * as S from './styled';
 export function MainPage() {
   const typingText = ['.', '..', '...'];
   const [typingCount, setTypingCount] = useState(0);
-  const [uploading, setUploading] = useState(true);
+  const [uploading, setUploading] = useState(false);
   const [progressValue, setProgressValue] = useState(0);
   const [progressStateText, setProgressStateText] = useState('uploading');
 
@@ -145,8 +145,8 @@ export function MainPage() {
   }, [typingCount]);
   return (
     <S.MainPageContainer>
-      {uploading ? (
-        <>
+      {!uploading ? (
+        <S.MainControlledSection>
           <S.MainPageCheckBoxSection>
             <CheckBox
               click={() => sethideBoolean(!hideBoolean)}
@@ -191,7 +191,7 @@ export function MainPage() {
             hideBoolean={hideBoolean}
           />
           <UpLoadButton type={'button'} value={'업로드'} onClick={UpLoad} />
-        </>
+        </S.MainControlledSection>
       ) : (
         <Progress
           value={progressValue}
