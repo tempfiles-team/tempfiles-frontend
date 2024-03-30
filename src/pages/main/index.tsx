@@ -25,7 +25,7 @@ export function MainPage() {
   const [downloadCountBoolean, setDownloadCountBoolean] = useState(false);
   const [hideBoolean, sethideBoolean] = useState(false);
 
-  const [expireTime, setExpireTime] = useState(1);
+  const [expireTime, setExpireTime] = useState(60);
   const [downloadCount, setDownloadCount] = useState(100);
 
   const [fileProps, setFileProps] = useState({

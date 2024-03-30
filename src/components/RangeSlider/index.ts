@@ -4,7 +4,7 @@ export const RangeSlider = styled.input`
   -webkit-appearance: none;
   width: 100%;
   height: 4rem;
-  border-radius: 8px;
+  border-radius: 0.4rem;
   background: var(--color-backgorund-black);
   outline: none;
   &::-webkit-slider-thumb {

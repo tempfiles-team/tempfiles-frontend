@@ -45,6 +45,6 @@ export const FileFindButton = styled.label`
   color: var(--color-text-primary);
   font-size: 2rem;
   font-weight: 700;
-  border-radius: 10px;
+  border-radius: 1rem;
   margin-left: 10px;
 `;
