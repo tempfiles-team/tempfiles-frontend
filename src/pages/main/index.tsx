@@ -79,6 +79,9 @@ export function MainPage() {
 
   const UpLoad = async () => {
     if (fileProps.files[0].filename !== '') {
+      setProgressValue(0);
+      setUploading(true);
+
       const formdata = new FormData();
       fileProps.files.map((file) => {
         formdata.append('file', file.fileData);
@@ -94,8 +97,7 @@ export function MainPage() {
           'X-Time-Limit': expireTimeBoolean ? expireTime : 180,
           'X-Hidden': hideBoolean,
         },
-        onUploadProgress(progress) {
-          setUploading(false);
+        onUploadProgress: (progress) => {
           setProgressValue(Math.floor((progress.loaded / progress.total) * 100));
           if (Math.floor((progress.loaded / progress.total) * 100) === 100) {
             setProgressStateText('백엔드 처리중');
@@ -103,7 +105,6 @@ export function MainPage() {
         },
       })
         .then(async (res) => {
-          setUploading(true);
           toast.success('업로드 성공!', {
             duration: 3000,
             icon: '🎉',
@@ -111,7 +112,6 @@ export function MainPage() {
           navigate(`/dl/${res.data.folderId}`);
         })
         .catch((err) => {
-          setUploading(true);
           if (err.response.status === 413) {
             toast.error('파일 용량이 너무 큽니다.', {
               duration: 3000,
@@ -130,6 +130,8 @@ export function MainPage() {
         icon: '🔥',
       });
     }
+
+    setUploading(false);
   };
 
   useEffect(() => {
