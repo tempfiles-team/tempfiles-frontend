@@ -12,10 +12,12 @@ export const RootLayout = styled.div`
   }
   .RootWrapper {
     width: 100%;
+    flex-grow: 2;
     height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   .Text {
@@ -42,6 +44,7 @@ export const RootLayout = styled.div`
   }
 
   height: 100dvh;
+  width: 100dvw;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -1,16 +1,21 @@
 import styled from '@emotion/styled';
 
 export const ButtonContainer = styled.input<{ bgColor: string }>`
-  background-color: ${(props) => props.bgColor};
-  border-radius: 0.8rem;
-  outline: none;
   font-size: 2rem;
   font-weight: 700;
-  width: 14rem;
-  height: 6rem;
-  border: 0;
+
   color: var(--color-text-primary);
-  margin: 0px 1rem 0px 1rem;
+  background-color: ${(props) => props.bgColor};
+
+  width: fit-content;
+  height: 6rem;
+
+  border: 0;
+  outline: none;
+  border-radius: 0.8rem;
+
+  margin: 0 1rem 0 1rem;
+  padding: 0.8rem 1.2rem;
 `;
 
 ButtonContainer.defaultProps = { type: 'button' };

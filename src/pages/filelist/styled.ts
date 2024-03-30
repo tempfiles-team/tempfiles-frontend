@@ -16,7 +16,7 @@ export const FileListPageContainer = styled.div`
 `;
 
 export const HideFileIdInput = styled.input`
-  padding: 1.4rem;
+  padding: 0.8rem 1.2rem;
   border: 0.4rem solid var(--color-border);
   background-color: var(--color-backgorund-black);
   color: var(--color-text-placeholder);
@@ -25,7 +25,7 @@ export const HideFileIdInput = styled.input`
   font-weight: 700;
   margin-bottom: 3rem;
 
-  width: 70%;
+  width: fit-content;
 
   text-align: center;
 

@@ -47,16 +47,6 @@ export default function App() {
           path="/"
           element={
             <S.RootLayout>
-              <div>
-                <Toaster
-                  toastOptions={{
-                    style: {
-                      backgroundColor: '#757BAB',
-                      color: '#FFFFFF',
-                    },
-                  }}
-                />
-              </div>
               <div className="RootWrapper">
                 <a
                   className="LinkBox"
@@ -83,6 +73,15 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
+
+      <Toaster
+        toastOptions={{
+          style: {
+            backgroundColor: '#757BAB',
+            color: '#FFFFFF',
+          },
+        }}
+      />
     </>
   );
 }
