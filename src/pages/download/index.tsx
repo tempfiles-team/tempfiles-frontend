@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { FileListBox, Button, SkeletonUI } from '../../components';
-import { getDate, getFileSize, getExpireTime } from '../../utils';
+import { FileListBox, Button, SkeletonUI, type FileListBoxProps } from '../../components';
+import { getDate, getExpireTime } from '../../utils';
 import * as S from './styled';
 import axiosInstance, { downloadFile } from '../../utils/axios';
 
 export function DownloadPage() {
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(true);
   const { folderid } = useParams<{ folderid: string }>();
   const [fileProps, setFileProps] = useState({
@@ -19,7 +21,7 @@ export function DownloadPage() {
     folderId: '',
   });
 
-  const navigate = useNavigate();
+  const [itemDownloading, setItemDownloading] = useState<boolean[]>([]);
 
   useEffect(() => {
     const getFileProps = async () => {
@@ -30,7 +32,7 @@ export function DownloadPage() {
             files: res.data.files.map(
               (file: { fileName: string; fileSize: number; downloadUrl: string }) => ({
                 filename: file.fileName,
-                size: getFileSize(file.fileSize),
+                size: file.fileSize,
                 downloadUrl: file.downloadUrl,
               })
             ),
@@ -44,9 +46,9 @@ export function DownloadPage() {
 
           setLoading(false);
           setFileProps(updatedFileProps);
+
+          setItemDownloading(new Array(updatedFileProps.files.length).fill(false));
         })
-        // .catch((err) => {
-        // if (err.response.status !== 401) {
         .catch(() => {
           toast.error('ID를 다시 확인해주세요.', {
             duration: 3000,
@@ -67,24 +69,23 @@ export function DownloadPage() {
             {fileProps.isHidden ? '비공개 파일' : '공개 파일'} / {fileProps.folderId}
           </S.IdBox>
           <S.DownloadFileListBoxContainer>
-            {fileProps.files.map(
-              (
-                file: {
-                  filename: string;
-                  size: string;
-                  downloadUrl: string;
-                },
-                index: number
-              ) => (
-                <div key={index}>
-                  <FileListBox
-                    filename={file.filename}
-                    size={file.size}
-                    downloadUrl={file.downloadUrl}
-                  />
-                </div>
-              )
-            )}
+            {fileProps.files.map((file: FileListBoxProps, index: number) => (
+              <div key={index}>
+                <FileListBox
+                  filename={file.filename}
+                  size={file.size}
+                  downloadUrl={file.downloadUrl}
+                  downloading={itemDownloading[index]}
+                  setDownloading={(downloading: boolean) => {
+                    const updatedItemDownloading = [...itemDownloading];
+                    updatedItemDownloading[index] = downloading;
+                    setItemDownloading(updatedItemDownloading);
+
+                    return downloading;
+                  }}
+                />
+              </div>
+            ))}
           </S.DownloadFileListBoxContainer>
 
           <S.DownloadFileStatusText>
@@ -94,7 +95,22 @@ export function DownloadPage() {
             <Button
               click={async () => {
                 for (let i = 0; i < fileProps.files.length; i++) {
-                  await downloadFile(fileProps.files[i].downloadUrl, fileProps.files[i].filename);
+                  setItemDownloading((prev) => {
+                    const updatedItemDownloading = [...prev];
+                    updatedItemDownloading[i] = true;
+                    return updatedItemDownloading;
+                  });
+
+                  await downloadFile(
+                    fileProps.files[i].downloadUrl,
+                    fileProps.files[i].filename
+                  ).then(() => {
+                    setItemDownloading((prev) => {
+                      const updatedItemDownloading = [...prev];
+                      updatedItemDownloading[i] = false;
+                      return updatedItemDownloading;
+                    });
+                  });
                 }
               }}
               bgColor="var(--color-button-primary)"
