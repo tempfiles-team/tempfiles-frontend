@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const FileListContainer = styled.div`
-  max-height: 70dvh;
+  max-height: calc(60svh - 4rem);
   overflow: auto;
   &::-webkit-scrollbar {
     display: none;

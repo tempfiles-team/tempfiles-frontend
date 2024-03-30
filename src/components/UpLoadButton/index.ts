@@ -1,15 +1,17 @@
 import styled from '@emotion/styled';
 
-export const UpLoadButton = styled.input`
-  outline: none;
-  border-radius: 1.5rem;
-  border: 0;
-  width: 15rem;
-  height: 6rem;
-  font-size: 2rem;
-  font-weight: 900;
+export const UpLoadButton = styled.label`
   background-color: var(--color-background-secondary);
-  margin-top: 3rem;
+  width: 12rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--color-text-primary);
-  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  border-radius: 1rem;
+  margin-top: 2rem;
+
+  color: var(--color-text-primary);
 `;

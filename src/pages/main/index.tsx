@@ -3,14 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 
-import {
-  CheckBox,
-  UpLoadButton,
-  FileFind,
-  Progress,
-  DownloadCountSlider,
-  ExpireTime,
-} from '../../components';
+import { CheckBox, FileFind, Progress, DownloadCountSlider, ExpireTime } from '../../components';
 import { getFileSize, getTime } from '../../utils';
 import * as S from './styled';
 
@@ -191,8 +184,8 @@ export function MainPage() {
             handleChangeFile={handleChangeFile}
             fileProps={fileProps}
             hideBoolean={hideBoolean}
+            UploadAction={UpLoad}
           />
-          <UpLoadButton type={'button'} value={'업로드'} onClick={UpLoad} />
         </S.MainControlledSection>
       ) : (
         <Progress
