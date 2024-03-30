@@ -1,5 +1,18 @@
 import styled from '@emotion/styled';
 
+export const ScrollBox = styled.div`
+  overflow-y: auto;
+  width: 100%;
+  height: 60svh;
+  display: flex;
+  justify-content: center;
+
+  /* 스크롤바 숨기기 */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 export const ApiPageContainer = styled.div`
   display: flex;
   align-items: center;
@@ -8,7 +21,6 @@ export const ApiPageContainer = styled.div`
 
   .swagger-ui {
     width: 100%;
-    margin-top: 2rem;
 
     * {
       color: white;
@@ -22,6 +34,10 @@ export const ApiPageContainer = styled.div`
         background-color: var(--color-backgorund-filelistbox);
         color: var(--color-text-tertiary);
       }
+    }
+
+    .info {
+      margin-top: 0;
     }
 
     .title {
@@ -42,18 +58,5 @@ export const ApiPageContainer = styled.div`
         color: var(--color-text-tertiary);
       }
     }
-  }
-`;
-
-export const ScrollBox = styled.div`
-  overflow-y: auto;
-  max-height: 70vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-
-  /* 스크롤바 숨기기 */
-  &::-webkit-scrollbar {
-    display: none;
   }
 `;

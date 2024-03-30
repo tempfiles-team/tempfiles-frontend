@@ -9,6 +9,7 @@ import * as S from './styled';
 export function FileListPage() {
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(true);
   const [listZero, setListZero] = useState(false);
   const [fileList, setFileList] = useState<
     {
@@ -36,6 +37,8 @@ export function FileListPage() {
             icon: '❌',
           });
         });
+
+      setLoading(false);
     };
 
     getFileList();
@@ -54,23 +57,27 @@ export function FileListPage() {
       />
 
       <S.FileListContainer>
-        {!listZero ? (
-          <>
-            {fileList?.map((item, index: number) => (
-              <FolderListBox
-                key={index}
-                folderId={item.folderId}
-                fileCount={item.fileCount}
-                uploadElapsed={getElapsed(item.uploadDate)}
-                isHidden={item.isHidden}
-                click={() => {
-                  navigate(`/dl/${item.folderId}`);
-                }}
-              />
-            ))}
-          </>
+        {!loading ? (
+          !listZero ? (
+            <>
+              {fileList?.map((item, index: number) => (
+                <FolderListBox
+                  key={index}
+                  folderId={item.folderId}
+                  fileCount={item.fileCount}
+                  uploadElapsed={getElapsed(item.uploadDate)}
+                  isHidden={item.isHidden}
+                  click={() => {
+                    navigate(`/dl/${item.folderId}`);
+                  }}
+                />
+              ))}
+            </>
+          ) : (
+            <S.FileListZero>업로드된 파일이 없습니다.</S.FileListZero>
+          )
         ) : (
-          <S.FileListZero>업로드된 파일이 없습니다.</S.FileListZero>
+          <S.FileListZero>파일 리스트를 불러오는 중입니다...</S.FileListZero>
         )}
       </S.FileListContainer>
     </S.FileListPageContainer>

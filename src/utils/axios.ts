@@ -7,6 +7,10 @@ const axiosInstance = axios.create({
   },
 });
 
+export function Backend(path: string) {
+  return import.meta.env.VITE_APP_BACKEND_BASEURL + path;
+}
+
 export async function downloadFile(fileUrl: string, filename: string) {
   await axiosInstance
     .get(fileUrl, { responseType: 'blob' })

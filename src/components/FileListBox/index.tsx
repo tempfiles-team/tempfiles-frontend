@@ -1,5 +1,5 @@
 import { getFileSize } from '../../utils';
-import { downloadFile } from '../../utils/axios';
+import { Backend, downloadFile } from '../../utils/axios';
 import * as S from './styled';
 
 export type FileListBoxProps = {
@@ -19,8 +19,11 @@ export function FileListBox({
 }: FileListBoxProps) {
   return (
     <S.FileListBoxContainer>
-      <div
-        onClick={async () => {
+      <a
+        style={{ color: 'inherit', textDecoration: 'none' }}
+        href={Backend(downloadUrl)}
+        onClick={async (e) => {
+          e.preventDefault();
           setDownloading(true);
           await downloadFile(downloadUrl, filename);
           setDownloading(false);
@@ -28,7 +31,7 @@ export function FileListBox({
       >
         {filename} / {getFileSize(size)}
         {downloading && size >= 2000_000 ? ' / 다운로드 중...' : ''}
-      </div>
+      </a>
     </S.FileListBoxContainer>
   );
 }
