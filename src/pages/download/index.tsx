@@ -74,6 +74,7 @@ export function DownloadPage() {
                 <FileListBox
                   filename={file.filename}
                   size={file.size}
+                  folderId={fileProps.folderId}
                   downloadUrl={file.downloadUrl}
                   downloading={itemDownloading[index]}
                   setDownloading={(downloading: boolean) => {
