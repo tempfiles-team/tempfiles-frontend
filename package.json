@@ -2,9 +2,10 @@
   "name": "tempfiles-frontend",
   "private": true,
   "scripts": {
-    "dev": "chmod +x ./env-creator.sh && ./env-creator.sh && cp env-config.js ./public/ && rm env-config.js && vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
+    "checkenv": "chmod +x ./env-creator.sh && ./env-creator.sh && cp env-config.js ./public/ && rm env-config.js",
+    "dev": "pnpm run checkenv && vite",
+    "build": "pnpm run checkenv && tsc && vite build",
+    "preview": "pnpm run checkenv && vite preview",
     "format": "prettier --write --cache .",
     "lint": "eslint src/**/*.{ts,tsx} --fix"
   },
