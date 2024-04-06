@@ -1,6 +1,18 @@
 {
   "name": "tempfiles-frontend",
   "private": true,
+  "scripts": {
+    "dev": "chmod +x ./env-creator.sh && ./env-creator.sh && cp env-config.js ./public/ && rm env-config.js && vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "format": "prettier --write --cache .",
+    "lint": "eslint src/**/*.{ts,tsx} --fix"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -24,13 +36,6 @@
     "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.3.2"
   },
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "format": "prettier --write --cache .",
-    "lint": "eslint src/**/*.{ts,tsx} --fix"
-  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
@@ -45,10 +50,5 @@
     "moment": "^2.30.1",
     "msw": "^2.2.13",
     "prettier": "^3.2.5"
-  },
-  "msw": {
-    "workerDirectory": [
-      "public"
-    ]
   }
 }
