@@ -1,14 +1,23 @@
 import axios from 'axios';
 
+declare global {
+  interface Window {
+    _env_: {
+      VITE_APP_BACKEND_BASEURL: string;
+    };
+  }
+}
+
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_APP_BACKEND_BASEURL,
+  baseURL: window._env_.VITE_APP_BACKEND_BASEURL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 export function Backend(path: string) {
-  return import.meta.env.VITE_APP_BACKEND_BASEURL + path;
+  // return import.meta.env.VITE_APP_BACKEND_BASEURL + path;
+  return window._env_.VITE_APP_BACKEND_BASEURL + path;
 }
 
 export async function downloadFile(fileUrl: string, filename: string) {
