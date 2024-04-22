@@ -25,10 +25,9 @@ export const getElapsed = (date: string) => {
 };
 
 export const getExpireTime = (date: string) => {
-  const expireTime = new Date(date);
-  const differenceTime = expireTime.getTime() - today.getTime();
+  const differenceTime = parseInt(date) - Math.floor(today.getTime() / 1000);
 
-  const minute = Math.floor(differenceTime / 1000 / 60);
+  const minute = Math.floor(differenceTime / 60);
   const { day, hour, minute: min } = getTime(minute);
 
   if (day >= 7) {
