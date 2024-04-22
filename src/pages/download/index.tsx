@@ -70,21 +70,20 @@ export function DownloadPage() {
           </S.IdBox>
           <S.DownloadFileListBoxContainer>
             {fileProps.files.map((file: FileListBoxProps, index: number) => (
-              <div key={index}>
-                <FileListBox
-                  filename={file.filename}
-                  size={file.size}
-                  downloadUrl={file.downloadUrl}
-                  downloading={itemDownloading[index]}
-                  setDownloading={(downloading: boolean) => {
-                    const updatedItemDownloading = [...itemDownloading];
-                    updatedItemDownloading[index] = downloading;
-                    setItemDownloading(updatedItemDownloading);
+              <FileListBox
+                key={index}
+                filename={file.filename}
+                size={file.size}
+                downloadUrl={file.downloadUrl}
+                downloading={itemDownloading[index]}
+                setDownloading={(downloading: boolean) => {
+                  const updatedItemDownloading = [...itemDownloading];
+                  updatedItemDownloading[index] = downloading;
+                  setItemDownloading(updatedItemDownloading);
 
-                    return downloading;
-                  }}
-                />
-              </div>
+                  return downloading;
+                }}
+              />
             ))}
           </S.DownloadFileListBoxContainer>
 

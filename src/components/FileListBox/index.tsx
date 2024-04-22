@@ -18,20 +18,18 @@ export function FileListBox({
   setDownloading,
 }: FileListBoxProps) {
   return (
-    <S.FileListBoxContainer>
-      <a
-        style={{ color: 'inherit', textDecoration: 'none' }}
-        href={Backend(downloadUrl)}
-        onClick={async (e) => {
-          e.preventDefault();
-          setDownloading(true);
-          await downloadFile(downloadUrl, filename);
-          setDownloading(false);
-        }}
-      >
-        {filename} / {getFileSize(size)}
-        {downloading && size >= 2000_000 ? ' / 다운로드 중...' : ''}
-      </a>
+    <S.FileListBoxContainer
+      style={{ color: 'inherit', textDecoration: 'none' }}
+      href={Backend(downloadUrl)}
+      onClick={async (e) => {
+        e.preventDefault();
+        setDownloading(true);
+        await downloadFile(downloadUrl, filename);
+        setDownloading(false);
+      }}
+    >
+      {filename} / {getFileSize(size)}
+      {downloading && size >= 2000_000 ? ' / 다운로드 중...' : ''}
     </S.FileListBoxContainer>
   );
 }
